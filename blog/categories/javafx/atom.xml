@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[...and they shall know me by my speling errors.]]></title>
-  <link href="http://shemnon.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: JavaFX | ...and they shall know me by my speling errors.]]></title>
+  <link href="http://shemnon.github.com/blog/categories/javafx/atom.xml" rel="self"/>
   <link href="http://shemnon.github.com/"/>
   <updated>2012-10-09T12:19:19-06:00</updated>
   <id>http://shemnon.github.com/</id>
@@ -18,7 +18,7 @@
     <link href="http://shemnon.github.com/blog/2012/10/09/mirroring-the-javafx-mecurial-repositiroes/"/>
     <updated>2012-10-09T12:16:00-06:00</updated>
     <id>http://shemnon.github.com/blog/2012/10/09/mirroring-the-javafx-mecurial-repositiroes</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve begun mirroring the OpenJFX repositories over on (bitbucket)[http://bitbucket.org].</p>
+    <content type="html"><![CDATA[<p>I've begun mirroring the OpenJFX repositories over on (bitbucket)[http://bitbucket.org].</p>
 ]]></content>
   </entry>
   
