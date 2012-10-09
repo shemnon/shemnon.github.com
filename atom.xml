@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://shemnon.github.com/atom.xml" rel="self"/>
   <link href="http://shemnon.github.com/"/>
-  <updated>2012-10-09T12:19:19-06:00</updated>
+  <updated>2012-10-09T12:23:16-06:00</updated>
   <id>http://shemnon.github.com/</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -18,7 +18,7 @@
     <link href="http://shemnon.github.com/blog/2012/10/09/mirroring-the-javafx-mecurial-repositiroes/"/>
     <updated>2012-10-09T12:16:00-06:00</updated>
     <id>http://shemnon.github.com/blog/2012/10/09/mirroring-the-javafx-mecurial-repositiroes</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve begun mirroring the OpenJFX repositories over on (bitbucket)[http://bitbucket.org].</p>
+    <content type="html"><![CDATA[<p>I&#8217;ve begun mirroring the OpenJFX repositories over on <a href="http://bitbucket.org">bitbucket</a>.</p>
 ]]></content>
   </entry>
   
