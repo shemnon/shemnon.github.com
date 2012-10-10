@@ -101,7 +101,7 @@
 
 <p>This last point is the most recent one.  You can comment on commits and comment at specific lines in the commit.  Useful when you have to send a pull request back.</p>
 
-<h2>Repos</h2>
+<p><strong>Repos</strong></p>
 
 <p>As for the repositories I have four repos right now.</p>
 
@@ -123,7 +123,7 @@
 
 <p>This is also the repo where I do my hacks.  Look for the stray tips.</p>
 
-<h2>Builds</h2>
+<p><strong>Builds</strong></p>
 
 <p>Also, as best as I can tell the open source build is currently broken.  The instructions pre-date the JRE integration of JavaFX, and also predate the addition of some of the more interesting sub projects, like FXML.  So to fix that I threw together some Gradle builds <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/46b2f08c0a3cb40c12a1e67184ba0b05c70d5596">here</a> and <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/a5a78c8ed2c4f287d2525ddf2231ea05f3659a99">here</a> that will compile the code and the tests.  Some of the tests even run. To completion. Successfully.  But it doesn&#8217;t create a usable <code>jfxrt.jar</code> at the end.  Until the while kit and caboodle is released I don&#8217;t think it&#8217;s worth going that far.  i.e. not fit for production use.  But perfect for casual hacking.</p>
 
@@ -137,7 +137,7 @@
 
 <p>Then do something like <code>gradle assemble</code>, <code>gradle test</code>, <code>gradle compileJava</code>, <code>gradle compileTest</code>.  Be careful with the <code>test</code> task, it will go into an infinite loop in <code>javafx-concurrent</code>, I&#8217;m sure I don&#8217;t have something set up right.</p>
 
-<h2>Casual Hacking</h2>
+<p><strong>Casual Hacking</strong></p>
 
 <p>I did this to aid my casual hacking, or as I like to call it &#8220;random acts of coding.&#8221;  You will note that I hooked up the JIRA bugs to the <a href="http://javafx-jira.kenai.com/">OpenJFX bug database</a>, and that <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/ab6e4c5150e45a92391bd2bf4c6a78255c283535">my first random act of code</a> is hooked up to the <a href="http://javafx-jira.kenai.com/browse/RT-25559">associated JIRA</a>.  It is a feature request I tweeted to Jonathan Giles several months ago, and was too lazy to write up a JIRA specifying what I want. The problem was that it seemed like a long loop of (a) landing in someone&#8217;s bug queue then (b) they have the bandwidth to do it and (c) that they do it the way I intended it to work.  If (c) fails it is another giant loop with the jiras to iterate (a), (b), and (c) again.  That and I&#8217;ve always been the type of person who would rather jump in and do it. I do have to say thug, that this has been quite a bit of yak shaving for 10 lines of code. And my <a href="http://preshavedyak.com/">pre shaved yak hoodie</a> I got at JavaOne only helps me with web apps.</p>
 
