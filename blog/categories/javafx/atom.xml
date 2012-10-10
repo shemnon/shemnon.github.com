@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaFX | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/javafx/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-10-10T04:39:52-06:00</updated>
+  <updated>2012-10-10T05:01:48-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -72,6 +72,281 @@
 <p>If we want to make OpenJFX more accessible to casual hacking then some of the barriers need to be removed.  A 'blessed' repo on BitBucket would make sandbox hacking more accessible.  A build that requires nothing more that a current Java 8 build and the build tool installed would be another great step.  With this casual hackers could push changes and a quick yes/no/maybe on the hack could be said in the pull queue before they fire up a JIRA and make sure their contributor paperwork is in order. In my opinion a hack then shave the yak ordering will get a lot more interest than a shave the yak then hack ordering.</p>
 
 <p>But all of this only holds for the Java portions of the build.  When it comes to the native libraries I really don't think you can wander too far from your yak shaving shears.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/"/>
+    <updated>2012-09-13T08:02:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</id>
+    <content type="html"><![CDATA[<p>JavaFX is finally delivering on it's promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
+
+
+<p>One of the questions I had was how the CSS styles are used in a Node. And after looking at some of the innards I realized that I didn't really care how JavaFX does it, I care about how I can get my control stylized like the built in controls. To demonstrate the CSS stylings, I created <code>DemoTwo</code> in my <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project, allowing you to customize the control via CSS. Only the shelf variants in this demo use the custom properties, the others are just using the built in <code>-fx-skin</code> style to do the switching.</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<p><strong>A Word of Warning</strong></p>
+
+
+<p>These are all internal APIs, the kind that the java compiler ought to warn you about but doesn't. These APIs will change before JavaFX 8 is released in some fashion (assuming that they can keep the schedule and get these APIs exposed properly). These changes may be as minor as package names but are likely to change in more substantive ways. So before you read further I want you to raise your right hand, place your left hand behind your back, cross your fingers, and swear to me that you will not whine, complain, or moan when Oracle changes things and ruins all your fun. Now pinky swear on it. Ok, now we can begin.</p>
+
+
+<p><strong>Make Your Property Styleable</strong></p>
+
+
+<p>First, you have to make the properties use the styleable types. The types you will want to use are the  <code>com.sun.javafx.css.Styleable&lt;Foo&gt;Property</code> classes. It's not a find-and-replace option, you will need to use an inner class of some sort.The classes are abstract and three methods are not implemented: <code>getStyleableProperty()</code>, <code>getBean()</code>, and <code>getName()</code>. The first method <code>getStyleableProperty()</code> returns an instance of <code>StyleableProperty</code> that describes this property. We will discuss this more in the next section. The other two methods (<code>getBean()</code> and <code>getName()</code>) actually come from the <code>javafx.beans.properties.ReadOnlyProperties</code> interface, so their role is already a known quantity. You may also want to overload the <code>invalidated()</code> method, which at this point provides less overhead than attaching an invalidated listener.</p>
+
+
+<p>There are also some stylistic concerns with extending the property. You may want to use some lazy loading of the property to make overriding easier to detect. You can also return a default value from the getter if the property is null, and only initialize the getter in the property method. Here is an example from my Deck class of the styleable property.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty1.java'></script>
+<noscript><pre><code>    public final void setBackScale(double value) {
+        backScaleProperty().set(value);
+    }
+    public final double getBackScale() {
+        return backScale == null ? 0.7 : backScale.get();
+    }
+
+    public final DoubleProperty backScaleProperty() {
+        if (backScale == null) {
+            backScale = new StyleableDoubleProperty(0.7) {
+
+                @Override
+                protected void invalidated() {
+                    styleablePropertyInvalidated();
+                }
+
+                @Override
+                public StyleableProperty getStyleableProperty() {
+                    return BACK_SCALE;
+                }
+
+                @Override
+                public Object getBean() {
+                    return ShelfDeckSkin.this;
+                }
+
+                @Override
+                public String getName() {
+                    return &quot;backScale&quot;;
+                }
+            };
+        }
+        return backScale;
+    }
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Describe Your Styleable Property</strong></p>
+
+
+<p>The next step is to describe your styleable property. It's kind of chicken and egg with the property instance itself since you have to reference the description in the property and the description needs to know how to get the property.</p>
+
+
+<p>All of these descriptions are of type <code>com.sun.javafx.css.StyleableProperty</code> and this class is (you guessed it) abstract. All of the concrete version of this class in the codebase I can find are all anonymous or implementation details.</p>
+
+
+<p>The class is generically typed, with the first type <code>N</code> being the type of the <code>Node</code> you are creating the styleable property for, and the second type <code>V</code> being the type of the property in the Java code, such as Number or Boolean.</p>
+
+
+<p>Since this is an abstract class and not an interface we have to deal with the parent constructor. The two required variables are the CSS name of the property and an object responsible for the conversions of the CSS strings to the real type. Do yourself a favor and just use one of the converters in <code>com.sun.javafx.css.convrrters</code>. There are constructors with more parameters, such as a default value, CSS inheritance flags, and information for marking the property as one that can be composed by other properties (such as font handling).  I would anticipate that the two or three argument constructors being the most useful ones.</p>
+
+
+<p>The two methods you have to implement are <code>isSettable(N)</code> and <code>getWritableValue(N)</code>. The first method returns a boolean flag that tells the CSS engine if it should try and set the property from CSS or not. If you don't want to set the property under some circumstances, like it is bound to some other properties value, you will return false. This is where the first type parameter comes into play, it doesn't have to exactly be your type, but it will be the type of the parameter of this and the next method. The second method is where you return your property object from the previous section.  Since the declaration is shared among multiple controls, the particular instance is passed in as a parameter.</p>
+
+
+<p>Remember, this object is more of a type declaration than the actual value of the property. We are telling the engine about the property and not becoming the property itself, that is what the previous section was about.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty2.java'></script>
+<noscript><pre><code>    private static final StyleableProperty&lt;ShelfDeckSkin,Number&gt; BACK_SCALE =
+            new StyleableProperty&lt;ShelfDeckSkin,Number&gt;(&quot;-x-back-scale&quot;,
+                    SizeConverter.getInstance(), 0.7) {
+
+                @Override
+                public boolean isSettable(ShelfDeckSkin deck) {
+                    return deck.backScale == null || !deck.backScale.isBound();
+                }
+
+                @Override
+                public WritableValue&lt;Number&gt; getWritableValue(ShelfDeckSkin deck) {
+                    return deck.backScaleProperty();
+                }
+            };
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Enumerate Your Styleable Property</strong></p>
+
+
+<p>Finally we have to let the engine know about our CSS properties. The magic incantation in this case is to add a method <code>public List&lt;StyleableProperty&gt; impl_getStyleableProperties()</code> to your control class. Note that this method is marked as deprecated and starts with <code>impl_</code>. The combination of these two markings are how the JavaFX team tells us that this method will change and break in unexpected ways. But I think we are safe for JavaFX 2.2.x.</p>
+
+
+<p>In this method simply return all of the <code>StyleableProperty</code> objects that you want the CSS engine to set and alter. Remember, this is all of the properties, including the properties of the parent class. So be sure you return those (unless you explicitly want to hide them). You can be a good software engineer and use a lazy cache if you like. It will perform (slightly) better.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty3.java'></script>
+<noscript><pre><code>    private static List&lt;StyleableProperty&gt; STYLEABLES;
+
+    @Override
+    @Deprecated
+    public List&lt;StyleableProperty&gt; impl_getStyleableProperties() {
+        if (STYLEABLES == null) {
+            final List&lt;StyleableProperty&gt; styleables = new ArrayList&lt;StyleableProperty&gt;(super.impl_getStyleableProperties());
+            Collections.addAll(styleables,
+                    BACK_ANGLE,
+                    BACK_OFFSET,
+                    BACK_SCALE,
+                    BACK_SPACING);
+            STYLEABLES = Collections.unmodifiableList(styleables);
+        }
+        return STYLEABLES;    //To change body of overridden methods use File | Settings | File Templates.
+    }
+</code></pre></noscript></div>
+</p>
+
+<p><strong>The Proof is in the Pudding</strong></p>
+
+
+<p>I am sure I violated some coding standards the JavaFX team uses to create their CSS properties, but at the end of the day the code works. I do have to say, there is quite a bit of Yak Shaving that goes on. Hopefully in JavaFX 8 they will come up with some amazingly simple means to mark properties as styleable (I have <a href="https://gist.github.com/3711882">some ideas</a>). But until that future day, you can do CSS styling on your custom controls now.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JavaFX, Groovy, and Griffon]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/"/>
+    <updated>2012-09-04T07:24:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon</id>
+    <content type="html"><![CDATA[<p>Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.</p>
+
+
+<p><strong>Gr8Cooking Presentation</strong></p>
+
+
+<p>My first Session at Gr8 US this year talked about JavaFX, Groovy, and Griffon.  Having watched too many episodes of <a href="http://www.foodnetwork.com/chopped/index.html">Chopped</a> I decided that my presentation needed to use the required ingredients of JavaFX, Groovy, Griffon, and Dogfood.  The results are in the <a href="https://github.com/shemnon/Gr8Cooking">Gr8Cooking</a> project on my github account.  And this is an interactive presentation, feel free to click on buttons and whatnot that are actually on the slide.  That was the point of this presentation.</p>
+
+
+<!-- more -->
+
+
+<p><strong>Griffon JavaFX Archetype</strong></p>
+
+
+<p>This presentation also was built using the JavaFX Archetype in Griffon.  The new release merely updates the required Griffon version since the latest version of GroovyFX depends on some bug fixes in the core of Griffon.  To use the archetype simply use the <code>-archetype</code> parameter at the command line: <div><script src='https://gist.github.com/3621275.js?file='></script>
+<noscript><pre><code>griffon create-app MyJavaFXApp -archetype=javafx</code></pre></noscript></div>
+</p>
+
+
+<p><strong>Griffon JavaFX Plugin</strong></p>
+
+
+<p>The JavaFX Plugin was also upgraded.  With the release of JavaFX 2.2 the Java Developers Kit now supports the creation of native installer and app bundles for JavaFX applications.  No need to pay someone to write InstallShield scripts anymore.  (There's a reason I never mention that in my resume).  Creating a native JavaFX package of your Griffon application is now insanely easy: <div><script src='https://gist.github.com/3621291.js?file='></script>
+<noscript><pre><code>griffon package jfx-native</code></pre></noscript></div>
+ Afterwards you can look for the native installers in <code>&lt;app&gt;/dist/jfxnative/bundles</code>.  Of course you can only create native bundles for the platform you are building on, and there are some required libraries for each platform you must install that vary for each platform.  Oracle has the <a href="http://docs.oracle.com/javafx/2/deployment/self-contained-packaging.htm#A1324980">details</a> in it's JDK documentation.</p>
+
+
+<p><strong>GroovyFX</strong></p>
+
+
+<p>The final piece of the puzzle is the GroovyFX library, the integration of JavaFX into Groovy.  GroovyFX has upgraded in version 0.3 to require the 2.2 release of JavaFX, which includes support for the new Canvas element.  Jim Clarke did nearly all the work on that piece and <a href="http://www.codetown.us/profiles/blogs/javafx-2-2-canvas">blogged about it</a> a couple of months ago.</p>
+
+
+<p>The other major feature add is the ability to reference FXML elements in a <code>fxml</code> block in your Groovy scripts and code.  This allows you to take an FXML file with only a visual description of the nodes and add the behavior code in the code creating the FXML, rather than in the xml declarations.  It looks like this: <div><script src='https://gist.github.com/3621462.js?file='></script>
+<noscript><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;?import java.lang.*?&gt;
+&lt;?import javafx.scene.*?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+
+&lt;AnchorPane xmlns:fx=&quot;http://javafx.com/fxml&quot;
+            id=&quot;AnchorPane&quot; 
+            prefHeight=&quot;150.0&quot; prefWidth=&quot;320.0&quot; &gt;
+  &lt;children&gt;
+    &lt;Button id=&quot;buttonCSSID&quot; 
+            layoutX=&quot;40.0&quot; layoutY=&quot;65.0&quot; 
+            prefWidth=&quot;100.0&quot; 
+            text=&quot;Click Me!&quot; /&gt;
+    &lt;Label id=&quot;labelCSSID&quot; 
+           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
+           layoutX=&quot;40.0&quot; layoutY=&quot;100.0&quot; 
+           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
+           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
+    &lt;Button fx:id=&quot;buttonFXID&quot; 
+            layoutX=&quot;180.0&quot; layoutY=&quot;65.0&quot; 
+            prefWidth=&quot;100.0&quot; text=&quot;Click Me!&quot; /&gt;
+    &lt;Label fx:id=&quot;labelFXID&quot; 
+           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
+           layoutX=&quot;180.0&quot; layoutY=&quot;100.0&quot; 
+           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
+           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
+  &lt;/children&gt;
+&lt;/AnchorPane&gt;</code></pre></noscript></div>
+</p>
+
+
+<p><strong>Summary</strong></p>
+
+
+<p>There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don't need to.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Life and Times of a JavaFX Skin]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/"/>
+    <updated>2012-08-28T21:06:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin</id>
+    <content type="html"><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I've been wanting to create a real "Deck" control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the "back" metaphor but the path forward isn't fixed, like a Wizard.</p>
+
+
+<p>Last evening I finally got around to coding some stuff up. My work is currently on github under my craftily named <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project. Nothing earth shattering (yet). So there will be no screenshots or demos in this post. What I do want to talk about is the Skin model JavaFX is using. These tidbits I have yet to find in any documentation. But that also may be because I haven't really read the documentation beyond a cursory level, or any of the books for that matter.  I still haven't finished reading the Wheel of Time, so it's not too surprising.</p>
+
+
+<!-- more -->
+
+
+<p>Skins in JavaFX provide something Swing never could fully arrive at: total separation between the abstract control and the literal representation of the control on the screen. There were always ways to subvert and abuse the PLAF mechanisms. While a poorly constructed control can still present problems the architecture is there for a complete look and structure separation.</p>
+
+
+<p><strong>Structure of a Skin</strong></p>
+
+
+<p>A Skin is mostly a class that extends <code>javafx.scene.control.Skin</code>. I say mostly because there are two caveats. First, the <code>Skin</code> interface is a generic interface. The type parameter must be the same type as the control you are skinning. Second you must provide a constructor that takes a single argument of the type of the generic parameter. A piece of trivia is that the Skin need not be a <code>javafx.scene.Node</code>, although they often are a <code>StackPane</code>.  Just to prove my point my skin didn't extend from <code>Node</code>.</p>
+
+
+<p><strong>Lifecycle of a Skin</strong></p>
+
+
+<p>The lifecycle of the skin is fairly straight forward. Simplified by the fact that skins are created for only one control, ever. No double dipping or reuse here. Garbage Collection has come a long way in the last 15 years.</p>
+
+
+<ol>
+<li><strong>Construct the Skin</strong><br />First the single argument constructor is called. If you are subclassing a skin pass the argument to the super. If not, stash the node you are passed in. You will need it later.<br />Next you will need to prepare everything you need. The constructor is a good place, although lazily in the next step is an option. But I think initializing in the constructor is the best place.</li>
+<li><strong>Stuff Happens</strong><br />Stuff in the world will now happen. Some of this may or may not affect your control you are skinning. It's hard to tell, unless you attached listeners to the parts of the world you care about.</li>
+<li><strong>Node and Control Queried</strong><br />Two of the interface methods may now get called. They may get called multiple times, or once. Or not at all in pathological cases. (The kind of pathological cases QA departments are paid to find).<br />First for <code>getSkinnable()</code> you must return the control passed into your constructor.  If you subclassed an existing skin you are in the clear.<br />Second, <code>getNode()</code> will be called to get the <em>singular</em> node you are using to represent the control.  If you extend a Node class and it is the representation, return <code>this</code>.  Otherwise return the node you are using.  But whatever you do you must always return the same value (until you don't have to, see step 6).</li>
+<li><strong>More Stuff Happens</strong><br />This is much like step 2.  Except now that your node is in the wild anything in the world that changes that you need to reflect in the skin node tree must be reflected in that node.  In my case I have to pay attention to what nodes are being added to the deck and what node in the deck is showing.  This step repeats with step 3 for an indeterminate number of cycles, zero or more times.  Make sure you play nicely with repetition</li>
+<li><strong>Disposal</strong><br />Finally, <code>dispose()</code> is called.  This is JavaFX saying "we're through" and storming out the door, never(?) to be seen again.  There is no getting back together, if a new skin of the same kind is needed it will be created anew.<br />All that is left to do now is to clean up whatever messes you made.  Most importantly this includes any listeners you have attached outside the world of your Skin.  So keep track of listeners you attach.  And if you are not sure if the listener left your little world then cut it off, just to be sure.</li>
+<li><strong>Afterlife</strong><br />There is a chance that JavaFX may drunk-dial you and <code>getNode()</code> and <code>getSkinnable()</code> may be called again.  Don't get excited, things won't be like they were before, this was an accident.  You can return null at this point as long as you immediately start returning null after <code>dispose()</code> is called.</li>
+</ol>
+
+
+<p><strong>Clean up after yourself</strong></p>
+
+
+<p>If there is one thing to point out in the lifecycle, it is that you should clean up after yourself. The listeners you attach don't always fall away magically. And you should design for on the fly skin changes. This isn't like Swing where changing the PLAF after the controls were shown was the exception to the rule, and formally dissed by core developers in conference sessions. Skins will change at runtime and they will result in magical effects, so plan accordingly.</p>
+
 ]]></content>
   </entry>
   

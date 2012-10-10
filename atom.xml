@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-10-10T04:39:52-06:00</updated>
+  <updated>2012-10-10T05:01:48-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -77,9 +77,9 @@
   
   <entry>
     <title type="html"><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
-    <link href="http://speling.shemnon.com//blog/2012/08/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/"/>
-    <updated>2012-08-13T08:02:00-06:00</updated>
-    <id>http://speling.shemnon.com//blog/2012/08/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</id>
+    <link href="http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/"/>
+    <updated>2012-09-13T08:02:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</id>
     <content type="html"><![CDATA[<p>JavaFX is finally delivering on it&#8217;s promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
 
 
@@ -224,6 +224,177 @@
 
 
 <p>I am sure I violated some coding standards the JavaFX team uses to create their CSS properties, but at the end of the day the code works. I do have to say, there is quite a bit of Yak Shaving that goes on. Hopefully in JavaFX 8 they will come up with some amazingly simple means to mark properties as styleable (I have <a href="https://gist.github.com/3711882">some ideas</a>). But until that future day, you can do CSS styling on your custom controls now.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[JavaFX, Groovy, and Griffon]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/"/>
+    <updated>2012-09-04T07:24:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon</id>
+    <content type="html"><![CDATA[<p>Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.</p>
+
+
+<p><strong>Gr8Cooking Presentation</strong></p>
+
+
+<p>My first Session at Gr8 US this year talked about JavaFX, Groovy, and Griffon.  Having watched too many episodes of <a href="http://www.foodnetwork.com/chopped/index.html">Chopped</a> I decided that my presentation needed to use the required ingredients of JavaFX, Groovy, Griffon, and Dogfood.  The results are in the <a href="https://github.com/shemnon/Gr8Cooking">Gr8Cooking</a> project on my github account.  And this is an interactive presentation, feel free to click on buttons and whatnot that are actually on the slide.  That was the point of this presentation.</p>
+
+
+<!-- more -->
+
+
+<p><strong>Griffon JavaFX Archetype</strong></p>
+
+
+<p>This presentation also was built using the JavaFX Archetype in Griffon.  The new release merely updates the required Griffon version since the latest version of GroovyFX depends on some bug fixes in the core of Griffon.  To use the archetype simply use the <code>-archetype</code> parameter at the command line: <div><script src='https://gist.github.com/3621275.js?file='></script>
+<noscript><pre><code>griffon create-app MyJavaFXApp -archetype=javafx</code></pre></noscript></div>
+</p>
+
+
+<p><strong>Griffon JavaFX Plugin</strong></p>
+
+
+<p>The JavaFX Plugin was also upgraded.  With the release of JavaFX 2.2 the Java Developers Kit now supports the creation of native installer and app bundles for JavaFX applications.  No need to pay someone to write InstallShield scripts anymore.  (There&#8217;s a reason I never mention that in my resume).  Creating a native JavaFX package of your Griffon application is now insanely easy: <div><script src='https://gist.github.com/3621291.js?file='></script>
+<noscript><pre><code>griffon package jfx-native</code></pre></noscript></div>
+ Afterwards you can look for the native installers in <code>&lt;app&gt;/dist/jfxnative/bundles</code>.  Of course you can only create native bundles for the platform you are building on, and there are some required libraries for each platform you must install that vary for each platform.  Oracle has the <a href="http://docs.oracle.com/javafx/2/deployment/self-contained-packaging.htm#A1324980">details</a> in it&#8217;s JDK documentation.</p>
+
+
+<p><strong>GroovyFX</strong></p>
+
+
+<p>The final piece of the puzzle is the GroovyFX library, the integration of JavaFX into Groovy.  GroovyFX has upgraded in version 0.3 to require the 2.2 release of JavaFX, which includes support for the new Canvas element.  Jim Clarke did nearly all the work on that piece and <a href="http://www.codetown.us/profiles/blogs/javafx-2-2-canvas">blogged about it</a> a couple of months ago.</p>
+
+
+<p>The other major feature add is the ability to reference FXML elements in a <code>fxml</code> block in your Groovy scripts and code.  This allows you to take an FXML file with only a visual description of the nodes and add the behavior code in the code creating the FXML, rather than in the xml declarations.  It looks like this: <div><script src='https://gist.github.com/3621462.js?file='></script>
+<noscript><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+
+&lt;?import java.lang.*?&gt;
+&lt;?import javafx.scene.*?&gt;
+&lt;?import javafx.scene.control.*?&gt;
+&lt;?import javafx.scene.layout.*?&gt;
+
+&lt;AnchorPane xmlns:fx=&quot;http://javafx.com/fxml&quot;
+            id=&quot;AnchorPane&quot; 
+            prefHeight=&quot;150.0&quot; prefWidth=&quot;320.0&quot; &gt;
+  &lt;children&gt;
+    &lt;Button id=&quot;buttonCSSID&quot; 
+            layoutX=&quot;40.0&quot; layoutY=&quot;65.0&quot; 
+            prefWidth=&quot;100.0&quot; 
+            text=&quot;Click Me!&quot; /&gt;
+    &lt;Label id=&quot;labelCSSID&quot; 
+           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
+           layoutX=&quot;40.0&quot; layoutY=&quot;100.0&quot; 
+           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
+           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
+    &lt;Button fx:id=&quot;buttonFXID&quot; 
+            layoutX=&quot;180.0&quot; layoutY=&quot;65.0&quot; 
+            prefWidth=&quot;100.0&quot; text=&quot;Click Me!&quot; /&gt;
+    &lt;Label fx:id=&quot;labelFXID&quot; 
+           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
+           layoutX=&quot;180.0&quot; layoutY=&quot;100.0&quot; 
+           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
+           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
+  &lt;/children&gt;
+&lt;/AnchorPane&gt;</code></pre></noscript></div>
+</p>
+
+
+<p><strong>Summary</strong></p>
+
+
+<p>There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don&#8217;t need to.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Life and Times of a JavaFX Skin]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/"/>
+    <updated>2012-08-28T21:06:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin</id>
+    <content type="html"><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I&#8217;ve been wanting to create a real &#8220;Deck&#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &#8220;back&#8221; metaphor but the path forward isn&#8217;t fixed, like a Wizard.</p>
+
+
+<p>Last evening I finally got around to coding some stuff up. My work is currently on github under my craftily named <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project. Nothing earth shattering (yet). So there will be no screenshots or demos in this post. What I do want to talk about is the Skin model JavaFX is using. These tidbits I have yet to find in any documentation. But that also may be because I haven&#8217;t really read the documentation beyond a cursory level, or any of the books for that matter.  I still haven&#8217;t finished reading the Wheel of Time, so it&#8217;s not too surprising.</p>
+
+
+<!-- more -->
+
+
+<p>Skins in JavaFX provide something Swing never could fully arrive at: total separation between the abstract control and the literal representation of the control on the screen. There were always ways to subvert and abuse the PLAF mechanisms. While a poorly constructed control can still present problems the architecture is there for a complete look and structure separation.</p>
+
+
+<p><strong>Structure of a Skin</strong></p>
+
+
+<p>A Skin is mostly a class that extends <code>javafx.scene.control.Skin</code>. I say mostly because there are two caveats. First, the <code>Skin</code> interface is a generic interface. The type parameter must be the same type as the control you are skinning. Second you must provide a constructor that takes a single argument of the type of the generic parameter. A piece of trivia is that the Skin need not be a <code>javafx.scene.Node</code>, although they often are a <code>StackPane</code>.  Just to prove my point my skin didn&#8217;t extend from <code>Node</code>.</p>
+
+
+<p><strong>Lifecycle of a Skin</strong></p>
+
+
+<p>The lifecycle of the skin is fairly straight forward. Simplified by the fact that skins are created for only one control, ever. No double dipping or reuse here. Garbage Collection has come a long way in the last 15 years.</p>
+
+
+<ol>
+<li><strong>Construct the Skin</strong><br />First the single argument constructor is called. If you are subclassing a skin pass the argument to the super. If not, stash the node you are passed in. You will need it later.<br />Next you will need to prepare everything you need. The constructor is a good place, although lazily in the next step is an option. But I think initializing in the constructor is the best place.</li>
+<li><strong>Stuff Happens</strong><br />Stuff in the world will now happen. Some of this may or may not affect your control you are skinning. It&#8217;s hard to tell, unless you attached listeners to the parts of the world you care about.</li>
+<li><strong>Node and Control Queried</strong><br />Two of the interface methods may now get called. They may get called multiple times, or once. Or not at all in pathological cases. (The kind of pathological cases QA departments are paid to find).<br />First for <code>getSkinnable()</code> you must return the control passed into your constructor.  If you subclassed an existing skin you are in the clear.<br />Second, <code>getNode()</code> will be called to get the <em>singular</em> node you are using to represent the control.  If you extend a Node class and it is the representation, return <code>this</code>.  Otherwise return the node you are using.  But whatever you do you must always return the same value (until you don&#8217;t have to, see step 6).</li>
+<li><strong>More Stuff Happens</strong><br />This is much like step 2.  Except now that your node is in the wild anything in the world that changes that you need to reflect in the skin node tree must be reflected in that node.  In my case I have to pay attention to what nodes are being added to the deck and what node in the deck is showing.  This step repeats with step 3 for an indeterminate number of cycles, zero or more times.  Make sure you play nicely with repetition</li>
+<li><strong>Disposal</strong><br />Finally, <code>dispose()</code> is called.  This is JavaFX saying &#8220;we&#8217;re through&#8221; and storming out the door, never(?) to be seen again.  There is no getting back together, if a new skin of the same kind is needed it will be created anew.<br />All that is left to do now is to clean up whatever messes you made.  Most importantly this includes any listeners you have attached outside the world of your Skin.  So keep track of listeners you attach.  And if you are not sure if the listener left your little world then cut it off, just to be sure.</li>
+<li><strong>Afterlife</strong><br />There is a chance that JavaFX may drunk-dial you and <code>getNode()</code> and <code>getSkinnable()</code> may be called again.  Don&#8217;t get excited, things won&#8217;t be like they were before, this was an accident.  You can return null at this point as long as you immediately start returning null after <code>dispose()</code> is called.</li>
+</ol>
+
+
+<p><strong>Clean up after yourself</strong></p>
+
+
+<p>If there is one thing to point out in the lifecycle, it is that you should clean up after yourself. The listeners you attach don&#8217;t always fall away magically. And you should design for on the fly skin changes. This isn&#8217;t like Swing where changing the PLAF after the controls were shown was the exception to the rule, and formally dissed by core developers in conference sessions. Skins will change at runtime and they will result in magical effects, so plan accordingly.</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NPEs: Permission vs. Forgiveness]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/"/>
+    <updated>2012-02-20T17:52:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness</id>
+    <content type="html"><![CDATA[<p>Is it better to ask for permission or forgiveness? That is a question that always depends on the context.</p>
+
+
+<!-- more -->
+
+
+<p>For one shot events forgiveness is always less of a hassle. For example, if your motivational speaker for your group at work performs stunts like juggling flaming batons and swallowing swords, it&#8217;s best not to get HR involved. From your perspective it is a onetime deal and if nothing goes wrong it will just be an uncomfortable e-mail thread when the responsible adults in the company find out. And that is assuming HR isn&#8217;t dealing with any real issues (like making sure everyone has finished their sensitivity training). However, the speaker will likely have been through this process before. A true professional who does these stunts all the time will insist on signed releases from the company, especially from anyone authorized to sue.</p>
+
+
+<p>Another context is programming. Instead of lawsuits we have exceptions. And instead of juggling flaming batons and swallowing swords we dereference pointers, a truly dangerous practice. When writing code to deal with these pointers there are two broad approaches: guard blocks where you check for null before dereferencing, and attempting it without the guard and catching the inevitable exception.</p>
+
+
+<p>Old school C and C++ coders will always use guard blocks. This is primarily for two reasons, (a) null dereferences were almost always fatal, and (b) they didn&#8217;t always have fancy things like exception handling&#8230;&nbsp;<em>and they liked it!</em>&nbsp;Permission was the only reliable approach (now get off my lawn you script kiddie).</p>
+
+
+<p>New generation languages like Java and later incarnations of C++ standardized exception catching. If you make a mistake you can pick up the pieces and move on. Forgiveness became an option. And for a lot of code it is easier to read and write forgiving code rather than permission seeking code.</p>
+
+
+<p>But easier to read and write is a very subjective criteria. Whether permission or forgiveness is better has no hard metric. But which is more efficient and faster? That is a hard metric! Time of execution. So I&nbsp;<a href="https://gist.github.com/1871252">coded up an experiment</a>&nbsp;to get cold hard numbers.</p>
+
+
+<p>But before we conduct this experiment we should predict the outcome. Can forgiveness ever be faster than permission? If we get rid of all of the null checks those are less cycles to burn on every execution through a loop. If the overhead of an exception is low enough then with infrequent enough exceptions it should be faster. Kind of like a parking ticket. If it&#8217;s 5 cents a minute to park and for every 4 hours you are parked you will get a $20 ticket (with no other consequences) should you feed the meter? Never! you can save about a dollar an our just paying the parking ticket. But if the fine is $24 then it&#8217;s a wash, and you depend on beating the parking enforcement officer to make any gains. So if the exception overhead is low enough eventually forgiveness makes sense. Right?</p>
+
+
+<p><img style="border-style: initial; border-color: initial;" src="http://chart.apis.google.com/chart?chxl=0:|-5|-10|-15|-20|1:|1ms|0.5ms|0.3ms|0.2ms|0.1ms&amp;chxp=0,5,10,15,20|1,1,0.5,0.3,0.2,0.1&amp;chxr=0,4,20|1,0,1&amp;chxs=1,676767,11.5,0,lt,676767&amp;chxt=x,y&amp;chs=440x220&amp;cht=lxy&amp;chco=3072F3,FF0000&amp;chds=5,20,0,1,5,20,0,1&amp;chd=t:-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|0.109,0.098,0.098,0.094,0.092,0.092,0.093,0.093,0.092,0.093,0.095,0.098,0.095,0.093,0.092,0.095,0.094,0.094,0.094|-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|-1,-1,-1,0.998,0.55,0.331,0.213,0.151,0.127,0.11,0.104,0.098,0.097,0.096,0.095,0.105,0.116,0.094,0.093&amp;chdl=Permission|Forgiveness&amp;chg=0,20,4,9&amp;chls=2|1&amp;chma=5,0,5,25|0,5&amp;chtt=Permission+vs+Forgiveness" alt="Permission vs Forgiveness" width="440" height="220" /></p>
+
+
+<p>Well, it looks like forgiveness is not very rewarding on the JVM. For this chart the Y axis is the average time through my test call, and the X axis is the increasing rarity of the exception, a probability of between 2<sup>-4</sup> and 2<sup>-20</sup>, or 1 in 16 to over 1 in a million (so your saying there&#8217;s a chance!). Forgiveness is&nbsp;<em>at best</em>&nbsp;nearly as good as permission, and at worst over two magnitudes of order worse (it&#8217;s like 147x at 100% forgiveness).</p>
+
+
+<p>So that motivational speaker may really be awesome, but it is almost always better to ask for permission. Especially when he sets the carpet on fire.</p>
+
+
+<p>&nbsp;</p>
 
 ]]></content>
   </entry>

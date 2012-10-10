@@ -1,21 +1,35 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</loc>
+        <lastmod>2012-10-10T05:01:22-06:00</lastmod>
+    </url>
+    <url>
         <loc>
-            http://speling.shemnon.com//blog/2012/08/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/
+            http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/
         </loc>
-        <lastmod>2012-10-09T22:10:04-06:00</lastmod>
+        <lastmod>2012-10-10T04:58:00-06:00</lastmod>
+    </url>
+    <url>
+        <loc>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</loc>
+        <lastmod>2012-10-10T04:54:29-06:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/
+        </loc>
+        <lastmod>2012-10-10T04:50:58-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</loc>
-        <lastmod>2012-10-09T22:10:33-06:00</lastmod>
+        <lastmod>2012-10-10T04:47:30-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2012-10-09T22:10:33-06:00</lastmod>
+        <lastmod>2012-10-10T05:01:22-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2012-10-09T22:10:33-06:00</lastmod>
+        <lastmod>2012-10-10T05:01:22-06:00</lastmod>
     </url>
 </urlset>

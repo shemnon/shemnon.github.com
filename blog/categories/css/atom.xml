@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CSS | ...and they shall know me by my speling errors.]]></title>
+  <link href="http://speling.shemnon.com//blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://speling.shemnon.com//"/>
+  <updated>2012-10-10T05:01:48-06:00</updated>
+  <id>http://speling.shemnon.com//</id>
+  <author>
+    <name><![CDATA[Danno Ferrin]]></name>
+    <email><![CDATA[danno.ferrin@shemnon.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/"/>
+    <updated>2012-09-13T08:02:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</id>
+    <content type="html"><![CDATA[<p>JavaFX is finally delivering on it's promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
+
+
+<p>One of the questions I had was how the CSS styles are used in a Node. And after looking at some of the innards I realized that I didn't really care how JavaFX does it, I care about how I can get my control stylized like the built in controls. To demonstrate the CSS stylings, I created <code>DemoTwo</code> in my <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project, allowing you to customize the control via CSS. Only the shelf variants in this demo use the custom properties, the others are just using the built in <code>-fx-skin</code> style to do the switching.</p>
+
+
+
+
+<!-- more -->
+
+
+
+
+<p><strong>A Word of Warning</strong></p>
+
+
+<p>These are all internal APIs, the kind that the java compiler ought to warn you about but doesn't. These APIs will change before JavaFX 8 is released in some fashion (assuming that they can keep the schedule and get these APIs exposed properly). These changes may be as minor as package names but are likely to change in more substantive ways. So before you read further I want you to raise your right hand, place your left hand behind your back, cross your fingers, and swear to me that you will not whine, complain, or moan when Oracle changes things and ruins all your fun. Now pinky swear on it. Ok, now we can begin.</p>
+
+
+<p><strong>Make Your Property Styleable</strong></p>
+
+
+<p>First, you have to make the properties use the styleable types. The types you will want to use are the  <code>com.sun.javafx.css.Styleable&lt;Foo&gt;Property</code> classes. It's not a find-and-replace option, you will need to use an inner class of some sort.The classes are abstract and three methods are not implemented: <code>getStyleableProperty()</code>, <code>getBean()</code>, and <code>getName()</code>. The first method <code>getStyleableProperty()</code> returns an instance of <code>StyleableProperty</code> that describes this property. We will discuss this more in the next section. The other two methods (<code>getBean()</code> and <code>getName()</code>) actually come from the <code>javafx.beans.properties.ReadOnlyProperties</code> interface, so their role is already a known quantity. You may also want to overload the <code>invalidated()</code> method, which at this point provides less overhead than attaching an invalidated listener.</p>
+
+
+<p>There are also some stylistic concerns with extending the property. You may want to use some lazy loading of the property to make overriding easier to detect. You can also return a default value from the getter if the property is null, and only initialize the getter in the property method. Here is an example from my Deck class of the styleable property.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty1.java'></script>
+<noscript><pre><code>    public final void setBackScale(double value) {
+        backScaleProperty().set(value);
+    }
+    public final double getBackScale() {
+        return backScale == null ? 0.7 : backScale.get();
+    }
+
+    public final DoubleProperty backScaleProperty() {
+        if (backScale == null) {
+            backScale = new StyleableDoubleProperty(0.7) {
+
+                @Override
+                protected void invalidated() {
+                    styleablePropertyInvalidated();
+                }
+
+                @Override
+                public StyleableProperty getStyleableProperty() {
+                    return BACK_SCALE;
+                }
+
+                @Override
+                public Object getBean() {
+                    return ShelfDeckSkin.this;
+                }
+
+                @Override
+                public String getName() {
+                    return &quot;backScale&quot;;
+                }
+            };
+        }
+        return backScale;
+    }
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Describe Your Styleable Property</strong></p>
+
+
+<p>The next step is to describe your styleable property. It's kind of chicken and egg with the property instance itself since you have to reference the description in the property and the description needs to know how to get the property.</p>
+
+
+<p>All of these descriptions are of type <code>com.sun.javafx.css.StyleableProperty</code> and this class is (you guessed it) abstract. All of the concrete version of this class in the codebase I can find are all anonymous or implementation details.</p>
+
+
+<p>The class is generically typed, with the first type <code>N</code> being the type of the <code>Node</code> you are creating the styleable property for, and the second type <code>V</code> being the type of the property in the Java code, such as Number or Boolean.</p>
+
+
+<p>Since this is an abstract class and not an interface we have to deal with the parent constructor. The two required variables are the CSS name of the property and an object responsible for the conversions of the CSS strings to the real type. Do yourself a favor and just use one of the converters in <code>com.sun.javafx.css.convrrters</code>. There are constructors with more parameters, such as a default value, CSS inheritance flags, and information for marking the property as one that can be composed by other properties (such as font handling).  I would anticipate that the two or three argument constructors being the most useful ones.</p>
+
+
+<p>The two methods you have to implement are <code>isSettable(N)</code> and <code>getWritableValue(N)</code>. The first method returns a boolean flag that tells the CSS engine if it should try and set the property from CSS or not. If you don't want to set the property under some circumstances, like it is bound to some other properties value, you will return false. This is where the first type parameter comes into play, it doesn't have to exactly be your type, but it will be the type of the parameter of this and the next method. The second method is where you return your property object from the previous section.  Since the declaration is shared among multiple controls, the particular instance is passed in as a parameter.</p>
+
+
+<p>Remember, this object is more of a type declaration than the actual value of the property. We are telling the engine about the property and not becoming the property itself, that is what the previous section was about.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty2.java'></script>
+<noscript><pre><code>    private static final StyleableProperty&lt;ShelfDeckSkin,Number&gt; BACK_SCALE =
+            new StyleableProperty&lt;ShelfDeckSkin,Number&gt;(&quot;-x-back-scale&quot;,
+                    SizeConverter.getInstance(), 0.7) {
+
+                @Override
+                public boolean isSettable(ShelfDeckSkin deck) {
+                    return deck.backScale == null || !deck.backScale.isBound();
+                }
+
+                @Override
+                public WritableValue&lt;Number&gt; getWritableValue(ShelfDeckSkin deck) {
+                    return deck.backScaleProperty();
+                }
+            };
+</code></pre></noscript></div>
+</p>
+
+<p><strong>Enumerate Your Styleable Property</strong></p>
+
+
+<p>Finally we have to let the engine know about our CSS properties. The magic incantation in this case is to add a method <code>public List&lt;StyleableProperty&gt; impl_getStyleableProperties()</code> to your control class. Note that this method is marked as deprecated and starts with <code>impl_</code>. The combination of these two markings are how the JavaFX team tells us that this method will change and break in unexpected ways. But I think we are safe for JavaFX 2.2.x.</p>
+
+
+<p>In this method simply return all of the <code>StyleableProperty</code> objects that you want the CSS engine to set and alter. Remember, this is all of the properties, including the properties of the parent class. So be sure you return those (unless you explicitly want to hide them). You can be a good software engineer and use a lazy cache if you like. It will perform (slightly) better.</p>
+
+
+<p><div><script src='https://gist.github.com/3711714.js?file=StyleableProperty3.java'></script>
+<noscript><pre><code>    private static List&lt;StyleableProperty&gt; STYLEABLES;
+
+    @Override
+    @Deprecated
+    public List&lt;StyleableProperty&gt; impl_getStyleableProperties() {
+        if (STYLEABLES == null) {
+            final List&lt;StyleableProperty&gt; styleables = new ArrayList&lt;StyleableProperty&gt;(super.impl_getStyleableProperties());
+            Collections.addAll(styleables,
+                    BACK_ANGLE,
+                    BACK_OFFSET,
+                    BACK_SCALE,
+                    BACK_SPACING);
+            STYLEABLES = Collections.unmodifiableList(styleables);
+        }
+        return STYLEABLES;    //To change body of overridden methods use File | Settings | File Templates.
+    }
+</code></pre></noscript></div>
+</p>
+
+<p><strong>The Proof is in the Pudding</strong></p>
+
+
+<p>I am sure I violated some coding standards the JavaFX team uses to create their CSS properties, but at the end of the day the code works. I do have to say, there is quite a bit of Yak Shaving that goes on. Hopefully in JavaFX 8 they will come up with some amazingly simple means to mark properties as styleable (I have <a href="https://gist.github.com/3711882">some ideas</a>). But until that future day, you can do CSS styling on your custom controls now.</p>
+
+]]></content>
+  </entry>
+  
+</feed>

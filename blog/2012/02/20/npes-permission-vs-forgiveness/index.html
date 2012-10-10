@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>NPEs: Permission vs. Forgiveness - ...and they shall know me by my speling errors.</title>
+  <meta name="author" content="Danno Ferrin">
+
+  
+  <meta name="description" content="Is it better to ask for permission or forgiveness? That is a question that always depends on the context. For one shot events forgiveness is always &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="...and they shall know me by my speling errors." type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">...and they shall know me by my speling errors.</a></h1>
+  
+    <h2>Danno Ferrin (aka shemnon) on stuff that matters to him.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:speling.shemnon.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">NPEs: Permission vs. Forgiveness</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T17:52:00-07:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Is it better to ask for permission or forgiveness? That is a question that always depends on the context.</p>
+
+
+<!-- more -->
+
+
+<p>For one shot events forgiveness is always less of a hassle. For example, if your motivational speaker for your group at work performs stunts like juggling flaming batons and swallowing swords, it&#8217;s best not to get HR involved. From your perspective it is a onetime deal and if nothing goes wrong it will just be an uncomfortable e-mail thread when the responsible adults in the company find out. And that is assuming HR isn&#8217;t dealing with any real issues (like making sure everyone has finished their sensitivity training). However, the speaker will likely have been through this process before. A true professional who does these stunts all the time will insist on signed releases from the company, especially from anyone authorized to sue.</p>
+
+
+<p>Another context is programming. Instead of lawsuits we have exceptions. And instead of juggling flaming batons and swallowing swords we dereference pointers, a truly dangerous practice. When writing code to deal with these pointers there are two broad approaches: guard blocks where you check for null before dereferencing, and attempting it without the guard and catching the inevitable exception.</p>
+
+
+<p>Old school C and C++ coders will always use guard blocks. This is primarily for two reasons, (a) null dereferences were almost always fatal, and (b) they didn&#8217;t always have fancy things like exception handling&#8230;&nbsp;<em>and they liked it!</em>&nbsp;Permission was the only reliable approach (now get off my lawn you script kiddie).</p>
+
+
+<p>New generation languages like Java and later incarnations of C++ standardized exception catching. If you make a mistake you can pick up the pieces and move on. Forgiveness became an option. And for a lot of code it is easier to read and write forgiving code rather than permission seeking code.</p>
+
+
+<p>But easier to read and write is a very subjective criteria. Whether permission or forgiveness is better has no hard metric. But which is more efficient and faster? That is a hard metric! Time of execution. So I&nbsp;<a href="https://gist.github.com/1871252">coded up an experiment</a>&nbsp;to get cold hard numbers.</p>
+
+
+<p>But before we conduct this experiment we should predict the outcome. Can forgiveness ever be faster than permission? If we get rid of all of the null checks those are less cycles to burn on every execution through a loop. If the overhead of an exception is low enough then with infrequent enough exceptions it should be faster. Kind of like a parking ticket. If it&#8217;s 5 cents a minute to park and for every 4 hours you are parked you will get a $20 ticket (with no other consequences) should you feed the meter? Never! you can save about a dollar an our just paying the parking ticket. But if the fine is $24 then it&#8217;s a wash, and you depend on beating the parking enforcement officer to make any gains. So if the exception overhead is low enough eventually forgiveness makes sense. Right?</p>
+
+
+<p><img style="border-style: initial; border-color: initial;" src="http://chart.apis.google.com/chart?chxl=0:|-5|-10|-15|-20|1:|1ms|0.5ms|0.3ms|0.2ms|0.1ms&amp;chxp=0,5,10,15,20|1,1,0.5,0.3,0.2,0.1&amp;chxr=0,4,20|1,0,1&amp;chxs=1,676767,11.5,0,lt,676767&amp;chxt=x,y&amp;chs=440x220&amp;cht=lxy&amp;chco=3072F3,FF0000&amp;chds=5,20,0,1,5,20,0,1&amp;chd=t:-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|0.109,0.098,0.098,0.094,0.092,0.092,0.093,0.093,0.092,0.093,0.095,0.098,0.095,0.093,0.092,0.095,0.094,0.094,0.094|-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|-1,-1,-1,0.998,0.55,0.331,0.213,0.151,0.127,0.11,0.104,0.098,0.097,0.096,0.095,0.105,0.116,0.094,0.093&amp;chdl=Permission|Forgiveness&amp;chg=0,20,4,9&amp;chls=2|1&amp;chma=5,0,5,25|0,5&amp;chtt=Permission+vs+Forgiveness" alt="Permission vs Forgiveness" width="440" height="220" /></p>
+
+
+<p>Well, it looks like forgiveness is not very rewarding on the JVM. For this chart the Y axis is the average time through my test call, and the X axis is the increasing rarity of the exception, a probability of between 2<sup>-4</sup> and 2<sup>-20</sup>, or 1 in 16 to over 1 in a million (so your saying there&#8217;s a chance!). Forgiveness is&nbsp;<em>at best</em>&nbsp;nearly as good as permission, and at worst over two magnitudes of order worse (it&#8217;s like 147x at 100% forgiveness).</p>
+
+
+<p>So that motivational speaker may really be awesome, but it is almost always better to ask for permission. Especially when he sets the carpet on fire.</p>
+
+
+<p>&nbsp;</p>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T17:52:00-07:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/exceptions/'>Exceptions</a>, <a class='category' href='/blog/categories/java/'>Java</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/" title="Next Post: The Life and Times of a JavaFX Skin">The Life and Times of a JavaFX Skin &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/10/09/mirroring-openjfx-on-bitbucket/">Mirroring OpenJFX on BitBucket</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/">Fashion Forward: Styling your Controls in JavaFX 2.2</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/09/04/javafx-groovy-and-griffon/">JavaFX, Groovy, and Griffon</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/">The Life and Times of a JavaFX Skin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/02/20/npes-permission-vs-forgiveness/">NPEs: Permission vs. Forgiveness</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shemnon">@shemnon</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shemnon',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shemnon", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shemnon" class="twitter-follow-button" data-show-count="false">Follow @shemnon</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/107563042277462358434?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Danno Ferrin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
