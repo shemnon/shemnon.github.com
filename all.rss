@@ -1,21 +1,21 @@
 <?xml version="1.0"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>functionn.com</title>
-    <link>http://functionn.github.com/</link>
-    <atom:link href="http://functionn.github.com/rss.xml" rel="self" type="application/rss+xml" />
-    <description>stuff from functionn.github.com</description>
+    <title>… and they shall know me by my speling errors.</title>
+    <link>http://speling.shemnon.com/</link>
+    <atom:link href="http://speling.shemnon.com/all.rss" rel="self" type="application/rss+xml" />
+    <description>Danno Ferrin (aka shemnon) on stuff that matters to him.</description>
     <language>en-us</language>
-    <pubDate>Fri, 12 Oct 2012 13:41:05 -0600</pubDate>
-    <lastBuildDate>Fri, 12 Oct 2012 13:41:05 -0600</lastBuildDate>
+    <pubDate>Fri, 12 Oct 2012 16:19:38 -0600</pubDate>
+    <lastBuildDate>Fri, 12 Oct 2012 16:19:38 -0600</lastBuildDate>
 
     
     <item>
       <title>Mirroring OpenJFX on BitBucket</title>
-      <link>http://functionn.github.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket/</link>
+      <link>http://speling.shemnon.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket/</link>
       <pubDate>Tue, 09 Oct 2012 21:16:00 -0600</pubDate>
-      <author>functionn.github@functionn.github.com (Functionn)</author>
-      <guid>http://functionn.github.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket</guid>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket</guid>
       <description>&lt;p&gt;I&amp;#8217;ve started mirroring the OpenJFX repositories over at &lt;a href=&quot;http://bitbucket.org/shemnon/&quot;&gt;bitbucket&lt;/a&gt;.  Viewing the repos on bitbucket has several advantages:&lt;/p&gt;
 
 &lt;ol&gt;
@@ -75,10 +75,10 @@
     
     <item>
       <title>Fashion Forward: Styling your Controls in JavaFX 2.2</title>
-      <link>http://functionn.github.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</link>
+      <link>http://speling.shemnon.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</link>
       <pubDate>Thu, 13 Sep 2012 08:02:00 -0600</pubDate>
-      <author>functionn.github@functionn.github.com (Functionn)</author>
-      <guid>http://functionn.github.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</guid>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</guid>
       <description>&lt;p&gt;JavaFX is finally delivering on it&amp;#8217;s promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the &lt;a href=&quot;http://hg.openjdk.java.net/openjfx/8/master/&quot;&gt;JavaFX 8 repos&lt;/a&gt; are open we can now look at the internals of JavaFX in a format much more readable than &lt;code&gt;javap&lt;/code&gt; decompilations. (The previous statement is not an admission, wink wink nod nod).&lt;/p&gt;
 
 
@@ -229,10 +229,10 @@
     
     <item>
       <title>JavaFX, Groovy, and Griffon</title>
-      <link>http://functionn.github.com/blog/2012/09/04/javafx-groovy-and-griffon/</link>
+      <link>http://speling.shemnon.com/blog/2012/09/04/javafx-groovy-and-griffon/</link>
       <pubDate>Tue, 04 Sep 2012 07:24:00 -0600</pubDate>
-      <author>functionn.github@functionn.github.com (Functionn)</author>
-      <guid>http://functionn.github.com/blog/2012/09/04/javafx-groovy-and-griffon</guid>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/09/04/javafx-groovy-and-griffon</guid>
       <description>&lt;p&gt;Over the weekend the GroovyFX 0.3 libraries were released. &amp;nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.&lt;/p&gt;
 
 
@@ -311,10 +311,10 @@
     
     <item>
       <title>The Life and Times of a JavaFX Skin</title>
-      <link>http://functionn.github.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</link>
+      <link>http://speling.shemnon.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</link>
       <pubDate>Tue, 28 Aug 2012 21:06:00 -0600</pubDate>
-      <author>functionn.github@functionn.github.com (Functionn)</author>
-      <guid>http://functionn.github.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin</guid>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin</guid>
       <description>&lt;p&gt;As a consequence of the &lt;a href=&quot;http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif&quot;&gt;talk&lt;/a&gt; I gave at &lt;a href=&quot;http://gr8conf.us/&quot;&gt;Gr8Conf US&lt;/a&gt; I&amp;#8217;ve been wanting to create a real &amp;#8220;Deck&amp;#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &amp;#8220;back&amp;#8221; metaphor but the path forward isn&amp;#8217;t fixed, like a Wizard.&lt;/p&gt;
 
 
@@ -359,10 +359,10 @@
     
     <item>
       <title>NPEs: Permission vs. Forgiveness</title>
-      <link>http://functionn.github.com/blog/2012/02/20/npes-permission-vs-forgiveness/</link>
+      <link>http://speling.shemnon.com/blog/2012/02/20/npes-permission-vs-forgiveness/</link>
       <pubDate>Mon, 20 Feb 2012 17:52:00 -0700</pubDate>
-      <author>functionn.github@functionn.github.com (Functionn)</author>
-      <guid>http://functionn.github.com/blog/2012/02/20/npes-permission-vs-forgiveness</guid>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/02/20/npes-permission-vs-forgiveness</guid>
       <description>&lt;p&gt;Is it better to ask for permission or forgiveness? That is a question that always depends on the context.&lt;/p&gt;
 
 
