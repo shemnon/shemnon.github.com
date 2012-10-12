@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>functionn.com</title>
+    <link>http://functionn.github.com/</link>
+    <atom:link href="http://functionn.github.com/rss.xml" rel="self" type="application/rss+xml" />
+    <description>stuff from functionn.github.com</description>
+    <language>en-us</language>
+    <pubDate>Fri, 12 Oct 2012 13:41:05 -0600</pubDate>
+    <lastBuildDate>Fri, 12 Oct 2012 13:41:05 -0600</lastBuildDate>
+
+    
+    <item>
+      <title>Mirroring OpenJFX on BitBucket</title>
+      <link>http://functionn.github.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket/</link>
+      <pubDate>Tue, 09 Oct 2012 21:16:00 -0600</pubDate>
+      <author>functionn.github@functionn.github.com (Functionn)</author>
+      <guid>http://functionn.github.com/blog/2012/10/09/mirroring-openjfx-on-bitbucket</guid>
+      <description>&lt;p&gt;I&amp;#8217;ve started mirroring the OpenJFX repositories over at &lt;a href=&quot;http://bitbucket.org/shemnon/&quot;&gt;bitbucket&lt;/a&gt;.  Viewing the repos on bitbucket has several advantages:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;It has an easier on the eyes user interface.  Really, I could stop here.&lt;/li&gt;
+&lt;li&gt;The push request mechanism encourages social coding&lt;/li&gt;
+&lt;li&gt;It has a code review feature&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;This last point is the most recent one.  You can comment on commits and comment at specific lines in the commit.  Useful when you have to send a pull request back.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Repos&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;As for the repositories I have four repos right now.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;The first three are direct mirrors of their &lt;code&gt;rt&lt;/code&gt; counterparts in the JavaFX portion of the &lt;a href=&quot;http://hg.openjdk.java.net/&quot;&gt;official OpenJDK Mercurial repository&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://hg.openjdk.java.net/openjfx/8/master/rt/&quot;&gt;master/rt&lt;/a&gt; -&gt; &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-8-rt-master-branch&quot;&gt;openjfx-rt-master-branch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://hg.openjdk.java.net/openjfx/8/controls/rt/&quot;&gt;controls/rt&lt;/a&gt; -&gt; &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-8-rt-controls-branch&quot;&gt;openjfx-rt-controls-branch&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://hg.openjdk.java.net/openjfx/8/graphics/rt/&quot;&gt;graphics/rt&lt;/a&gt; -&gt; &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-8-rt-graphics-branch&quot;&gt;openjfx-rt-graphics-branch&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;I am not mirroring the parent repo nor the &lt;code&gt;test&lt;/code&gt; repo.  The parent repo is just a holder for the &lt;code&gt;rt&lt;/code&gt; repo and (presumed) binary repos.  The &lt;code&gt;test&lt;/code&gt; repo contains jemmy and a smoke test driven off of ensemble, i.e. parts needed for a professional build but not needed for the casual hack.  The casual hack is why I am doing this.&lt;/p&gt;
+
+&lt;p&gt;The fourth repo is my &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-rt/&quot;&gt;openfx-rt&lt;/a&gt; repo.  This is a merger of the three previous repos.  Instead of keeping a branch for each I am pushing the bookmark for &lt;code&gt;controls&lt;/code&gt;, &lt;code&gt;graphics&lt;/code&gt;, and &lt;code&gt;master&lt;/code&gt; to match the current tip of each of the real repos.  Bookmarks in Mercurial are more like branches in Git, just pointers to a change list.  Branches in mercurial embed themselves in the commit message, so you cannot retroactively create them without rewriting history.&lt;/p&gt;
+
+&lt;p&gt;This is also the repo where I do my hacks.  Look for the stray tips.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Builds&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Also, as best as I can tell the open source build is currently broken.  The instructions pre-date the JRE integration of JavaFX, and also predate the addition of some of the more interesting sub projects, like FXML.  So to fix that I threw together some Gradle builds &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-rt/changeset/46b2f08c0a3cb40c12a1e67184ba0b05c70d5596&quot;&gt;here&lt;/a&gt; and &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-rt/changeset/a5a78c8ed2c4f287d2525ddf2231ea05f3659a99&quot;&gt;here&lt;/a&gt; that will compile the code and the tests.  Some of the tests even run. To completion. Successfully.  But it doesn&amp;#8217;t create a usable &lt;code&gt;jfxrt.jar&lt;/code&gt; at the end.  Until the while kit and caboodle is released I don&amp;#8217;t think it&amp;#8217;s worth going that far.  i.e. not fit for production use.  But perfect for casual hacking.&lt;/p&gt;
+
+&lt;p&gt;To run it you need to either&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Run Gradle with a &lt;a href=&quot;http://jdk8.java.net/download.html&quot;&gt;current JDK8 build&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Point the env var &lt;code&gt;JFXRT_HOME&lt;/code&gt; to the directory &lt;code&gt;jfxrt.jar&lt;/code&gt; lives from a &lt;a href=&quot;http://jdk8.java.net/download.html&quot;&gt;current JDK8 build&lt;/a&gt; before running Gradle.&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;Then do something like &lt;code&gt;gradle assemble&lt;/code&gt;, &lt;code&gt;gradle test&lt;/code&gt;, &lt;code&gt;gradle compileJava&lt;/code&gt;, &lt;code&gt;gradle compileTest&lt;/code&gt;.  Be careful with the &lt;code&gt;test&lt;/code&gt; task, it will go into an infinite loop in &lt;code&gt;javafx-concurrent&lt;/code&gt;, I&amp;#8217;m sure I don&amp;#8217;t have something set up right.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Casual Hacking&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I did this to aid my casual hacking, or as I like to call it &amp;#8220;random acts of coding.&amp;#8221;  You will note that I hooked up the JIRA bugs to the &lt;a href=&quot;http://javafx-jira.kenai.com/&quot;&gt;OpenJFX bug database&lt;/a&gt;, and that &lt;a href=&quot;https://bitbucket.org/shemnon/openjfx-rt/changeset/ab6e4c5150e45a92391bd2bf4c6a78255c283535&quot;&gt;my first random act of code&lt;/a&gt; is hooked up to the &lt;a href=&quot;http://javafx-jira.kenai.com/browse/RT-25559&quot;&gt;associated JIRA&lt;/a&gt;.  It is a feature request I tweeted to Jonathan Giles several months ago, and was too lazy to write up a JIRA specifying what I want. The problem was that it seemed like a long loop of (a) landing in someone&amp;#8217;s bug queue then (b) they have the bandwidth to do it and (c) that they do it the way I intended it to work.  If (c) fails it is another giant loop with the jiras to iterate (a), (b), and (c) again.  That and I&amp;#8217;ve always been the type of person who would rather jump in and do it. I do have to say thug, that this has been quite a bit of yak shaving for 10 lines of code. And my &lt;a href=&quot;http://preshavedyak.com/&quot;&gt;pre shaved yak hoodie&lt;/a&gt; I got at JavaOne only helps me with web apps.&lt;/p&gt;
+
+&lt;p&gt;If we want to make OpenJFX more accessible to casual hacking then some of the barriers need to be removed.  A &amp;#8216;blessed&amp;#8217; repo on BitBucket would make sandbox hacking more accessible.  A build that requires nothing more that a current Java 8 build and the build tool installed would be another great step.  With this casual hackers could push changes and a quick yes/no/maybe on the hack could be said in the pull queue before they fire up a JIRA and make sure their contributor paperwork is in order. In my opinion a hack then shave the yak ordering will get a lot more interest than a shave the yak then hack ordering.&lt;/p&gt;
+
+&lt;p&gt;But all of this only holds for the Java portions of the build.  When it comes to the native libraries I really don&amp;#8217;t think you can wander too far from your yak shaving shears.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Fashion Forward: Styling your Controls in JavaFX 2.2</title>
+      <link>http://functionn.github.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</link>
+      <pubDate>Thu, 13 Sep 2012 08:02:00 -0600</pubDate>
+      <author>functionn.github@functionn.github.com (Functionn)</author>
+      <guid>http://functionn.github.com/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</guid>
+      <description>&lt;p&gt;JavaFX is finally delivering on it&amp;#8217;s promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the &lt;a href=&quot;http://hg.openjdk.java.net/openjfx/8/master/&quot;&gt;JavaFX 8 repos&lt;/a&gt; are open we can now look at the internals of JavaFX in a format much more readable than &lt;code&gt;javap&lt;/code&gt; decompilations. (The previous statement is not an admission, wink wink nod nod).&lt;/p&gt;
+
+
+&lt;p&gt;One of the questions I had was how the CSS styles are used in a Node. And after looking at some of the innards I realized that I didn&amp;#8217;t really care how JavaFX does it, I care about how I can get my control stylized like the built in controls. To demonstrate the CSS stylings, I created &lt;code&gt;DemoTwo&lt;/code&gt; in my &lt;a href=&quot;https://github.com/shemnon/DeckControl/&quot;&gt;DeckControl&lt;/a&gt; project, allowing you to customize the control via CSS. Only the shelf variants in this demo use the custom properties, the others are just using the built in &lt;code&gt;-fx-skin&lt;/code&gt; style to do the switching.&lt;/p&gt;
+
+
+
+
+&lt;!-- more --&gt;
+
+
+
+
+&lt;p&gt;&lt;strong&gt;A Word of Warning&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;These are all internal APIs, the kind that the java compiler ought to warn you about but doesn&amp;#8217;t. These APIs will change before JavaFX 8 is released in some fashion (assuming that they can keep the schedule and get these APIs exposed properly). These changes may be as minor as package names but are likely to change in more substantive ways. So before you read further I want you to raise your right hand, place your left hand behind your back, cross your fingers, and swear to me that you will not whine, complain, or moan when Oracle changes things and ruins all your fun. Now pinky swear on it. Ok, now we can begin.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Make Your Property Styleable&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;First, you have to make the properties use the styleable types. The types you will want to use are the  &lt;code&gt;com.sun.javafx.css.Styleable&amp;lt;Foo&amp;gt;Property&lt;/code&gt; classes. It&amp;#8217;s not a find-and-replace option, you will need to use an inner class of some sort.The classes are abstract and three methods are not implemented: &lt;code&gt;getStyleableProperty()&lt;/code&gt;, &lt;code&gt;getBean()&lt;/code&gt;, and &lt;code&gt;getName()&lt;/code&gt;. The first method &lt;code&gt;getStyleableProperty()&lt;/code&gt; returns an instance of &lt;code&gt;StyleableProperty&lt;/code&gt; that describes this property. We will discuss this more in the next section. The other two methods (&lt;code&gt;getBean()&lt;/code&gt; and &lt;code&gt;getName()&lt;/code&gt;) actually come from the &lt;code&gt;javafx.beans.properties.ReadOnlyProperties&lt;/code&gt; interface, so their role is already a known quantity. You may also want to overload the &lt;code&gt;invalidated()&lt;/code&gt; method, which at this point provides less overhead than attaching an invalidated listener.&lt;/p&gt;
+
+
+&lt;p&gt;There are also some stylistic concerns with extending the property. You may want to use some lazy loading of the property to make overriding easier to detect. You can also return a default value from the getter if the property is null, and only initialize the getter in the property method. Here is an example from my Deck class of the styleable property.&lt;/p&gt;
+
+
+&lt;div&gt;&lt;script src='https://gist.github.com/3711714.js?file=StyleableProperty1.java'&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;    public final void setBackScale(double value) {
+        backScaleProperty().set(value);
+    }
+    public final double getBackScale() {
+        return backScale == null ? 0.7 : backScale.get();
+    }
+
+    public final DoubleProperty backScaleProperty() {
+        if (backScale == null) {
+            backScale = new StyleableDoubleProperty(0.7) {
+
+                @Override
+                protected void invalidated() {
+                    styleablePropertyInvalidated();
+                }
+
+                @Override
+                public StyleableProperty getStyleableProperty() {
+                    return BACK_SCALE;
+                }
+
+                @Override
+                public Object getBean() {
+                    return ShelfDeckSkin.this;
+                }
+
+                @Override
+                public String getName() {
+                    return &amp;quot;backScale&amp;quot;;
+                }
+            };
+        }
+        return backScale;
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
+
+&lt;p&gt;&lt;strong&gt;Describe Your Styleable Property&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;The next step is to describe your styleable property. It&amp;#8217;s kind of chicken and egg with the property instance itself since you have to reference the description in the property and the description needs to know how to get the property.&lt;/p&gt;
+
+
+&lt;p&gt;All of these descriptions are of type &lt;code&gt;com.sun.javafx.css.StyleableProperty&lt;/code&gt; and this class is (you guessed it) abstract. All of the concrete version of this class in the codebase I can find are all anonymous or implementation details.&lt;/p&gt;
+
+
+&lt;p&gt;The class is generically typed, with the first type &lt;code&gt;N&lt;/code&gt; being the type of the &lt;code&gt;Node&lt;/code&gt; you are creating the styleable property for, and the second type &lt;code&gt;V&lt;/code&gt; being the type of the property in the Java code, such as Number or Boolean.&lt;/p&gt;
+
+
+&lt;p&gt;Since this is an abstract class and not an interface we have to deal with the parent constructor. The two required variables are the CSS name of the property and an object responsible for the conversions of the CSS strings to the real type. Do yourself a favor and just use one of the converters in &lt;code&gt;com.sun.javafx.css.convrrters&lt;/code&gt;. There are constructors with more parameters, such as a default value, CSS inheritance flags, and information for marking the property as one that can be composed by other properties (such as font handling).  I would anticipate that the two or three argument constructors being the most useful ones.&lt;/p&gt;
+
+
+&lt;p&gt;The two methods you have to implement are &lt;code&gt;isSettable(N)&lt;/code&gt; and &lt;code&gt;getWritableValue(N)&lt;/code&gt;. The first method returns a boolean flag that tells the CSS engine if it should try and set the property from CSS or not. If you don&amp;#8217;t want to set the property under some circumstances, like it is bound to some other properties value, you will return false. This is where the first type parameter comes into play, it doesn&amp;#8217;t have to exactly be your type, but it will be the type of the parameter of this and the next method. The second method is where you return your property object from the previous section.  Since the declaration is shared among multiple controls, the particular instance is passed in as a parameter.&lt;/p&gt;
+
+
+&lt;p&gt;Remember, this object is more of a type declaration than the actual value of the property. We are telling the engine about the property and not becoming the property itself, that is what the previous section was about.&lt;/p&gt;
+
+
+&lt;div&gt;&lt;script src='https://gist.github.com/3711714.js?file=StyleableProperty2.java'&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;    private static final StyleableProperty&amp;lt;ShelfDeckSkin,Number&amp;gt; BACK_SCALE =
+            new StyleableProperty&amp;lt;ShelfDeckSkin,Number&amp;gt;(&amp;quot;-x-back-scale&amp;quot;,
+                    SizeConverter.getInstance(), 0.7) {
+
+                @Override
+                public boolean isSettable(ShelfDeckSkin deck) {
+                    return deck.backScale == null || !deck.backScale.isBound();
+                }
+
+                @Override
+                public WritableValue&amp;lt;Number&amp;gt; getWritableValue(ShelfDeckSkin deck) {
+                    return deck.backScaleProperty();
+                }
+            };
+&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
+
+&lt;p&gt;&lt;strong&gt;Enumerate Your Styleable Property&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Finally we have to let the engine know about our CSS properties. The magic incantation in this case is to add a method &lt;code&gt;public List&amp;lt;StyleableProperty&amp;gt; impl_getStyleableProperties()&lt;/code&gt; to your control class. Note that this method is marked as deprecated and starts with &lt;code&gt;impl_&lt;/code&gt;. The combination of these two markings are how the JavaFX team tells us that this method will change and break in unexpected ways. But I think we are safe for JavaFX 2.2.x.&lt;/p&gt;
+
+
+&lt;p&gt;In this method simply return all of the &lt;code&gt;StyleableProperty&lt;/code&gt; objects that you want the CSS engine to set and alter. Remember, this is all of the properties, including the properties of the parent class. So be sure you return those (unless you explicitly want to hide them). You can be a good software engineer and use a lazy cache if you like. It will perform (slightly) better.&lt;/p&gt;
+
+
+&lt;div&gt;&lt;script src='https://gist.github.com/3711714.js?file=StyleableProperty3.java'&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;    private static List&amp;lt;StyleableProperty&amp;gt; STYLEABLES;
+
+    @Override
+    @Deprecated
+    public List&amp;lt;StyleableProperty&amp;gt; impl_getStyleableProperties() {
+        if (STYLEABLES == null) {
+            final List&amp;lt;StyleableProperty&amp;gt; styleables = new ArrayList&amp;lt;StyleableProperty&amp;gt;(super.impl_getStyleableProperties());
+            Collections.addAll(styleables,
+                    BACK_ANGLE,
+                    BACK_OFFSET,
+                    BACK_SCALE,
+                    BACK_SPACING);
+            STYLEABLES = Collections.unmodifiableList(styleables);
+        }
+        return STYLEABLES;    //To change body of overridden methods use File | Settings | File Templates.
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+
+
+
+
+&lt;p&gt;&lt;strong&gt;The Proof is in the Pudding&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;I am sure I violated some coding standards the JavaFX team uses to create their CSS properties, but at the end of the day the code works. I do have to say, there is quite a bit of Yak Shaving that goes on. Hopefully in JavaFX 8 they will come up with some amazingly simple means to mark properties as styleable (I have &lt;a href=&quot;https://gist.github.com/3711882&quot;&gt;some ideas&lt;/a&gt;). But until that future day, you can do CSS styling on your custom controls now.&lt;/p&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>JavaFX, Groovy, and Griffon</title>
+      <link>http://functionn.github.com/blog/2012/09/04/javafx-groovy-and-griffon/</link>
+      <pubDate>Tue, 04 Sep 2012 07:24:00 -0600</pubDate>
+      <author>functionn.github@functionn.github.com (Functionn)</author>
+      <guid>http://functionn.github.com/blog/2012/09/04/javafx-groovy-and-griffon</guid>
+      <description>&lt;p&gt;Over the weekend the GroovyFX 0.3 libraries were released. &amp;nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Gr8Cooking Presentation&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;My first Session at Gr8 US this year talked about JavaFX, Groovy, and Griffon.  Having watched too many episodes of &lt;a href=&quot;http://www.foodnetwork.com/chopped/index.html&quot;&gt;Chopped&lt;/a&gt; I decided that my presentation needed to use the required ingredients of JavaFX, Groovy, Griffon, and Dogfood.  The results are in the &lt;a href=&quot;https://github.com/shemnon/Gr8Cooking&quot;&gt;Gr8Cooking&lt;/a&gt; project on my github account.  And this is an interactive presentation, feel free to click on buttons and whatnot that are actually on the slide.  That was the point of this presentation.&lt;/p&gt;
+
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Griffon JavaFX Archetype&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;This presentation also was built using the JavaFX Archetype in Griffon.  The new release merely updates the required Griffon version since the latest version of GroovyFX depends on some bug fixes in the core of Griffon.  To use the archetype simply use the &lt;code&gt;-archetype&lt;/code&gt; parameter at the command line: &lt;div&gt;&lt;script src='https://gist.github.com/3621275.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;griffon create-app MyJavaFXApp -archetype=javafx&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Griffon JavaFX Plugin&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;The JavaFX Plugin was also upgraded.  With the release of JavaFX 2.2 the Java Developers Kit now supports the creation of native installer and app bundles for JavaFX applications.  No need to pay someone to write InstallShield scripts anymore.  (There&amp;#8217;s a reason I never mention that in my resume).  Creating a native JavaFX package of your Griffon application is now insanely easy: &lt;div&gt;&lt;script src='https://gist.github.com/3621291.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;griffon package jfx-native&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+ Afterwards you can look for the native installers in &lt;code&gt;&amp;lt;app&amp;gt;/dist/jfxnative/bundles&lt;/code&gt;.  Of course you can only create native bundles for the platform you are building on, and there are some required libraries for each platform you must install that vary for each platform.  Oracle has the &lt;a href=&quot;http://docs.oracle.com/javafx/2/deployment/self-contained-packaging.htm#A1324980&quot;&gt;details&lt;/a&gt; in it&amp;#8217;s JDK documentation.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;GroovyFX&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;The final piece of the puzzle is the GroovyFX library, the integration of JavaFX into Groovy.  GroovyFX has upgraded in version 0.3 to require the 2.2 release of JavaFX, which includes support for the new Canvas element.  Jim Clarke did nearly all the work on that piece and &lt;a href=&quot;http://www.codetown.us/profiles/blogs/javafx-2-2-canvas&quot;&gt;blogged about it&lt;/a&gt; a couple of months ago.&lt;/p&gt;
+
+
+&lt;p&gt;The other major feature add is the ability to reference FXML elements in a &lt;code&gt;fxml&lt;/code&gt; block in your Groovy scripts and code.  This allows you to take an FXML file with only a visual description of the nodes and add the behavior code in the code creating the FXML, rather than in the xml declarations.  It looks like this: &lt;div&gt;&lt;script src='https://gist.github.com/3621462.js?file='&gt;&lt;/script&gt;
+&lt;noscript&gt;&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+
+&amp;lt;?import java.lang.*?&amp;gt;
+&amp;lt;?import javafx.scene.*?&amp;gt;
+&amp;lt;?import javafx.scene.control.*?&amp;gt;
+&amp;lt;?import javafx.scene.layout.*?&amp;gt;
+
+&amp;lt;AnchorPane xmlns:fx=&amp;quot;http://javafx.com/fxml&amp;quot;
+            id=&amp;quot;AnchorPane&amp;quot; 
+            prefHeight=&amp;quot;150.0&amp;quot; prefWidth=&amp;quot;320.0&amp;quot; &amp;gt;
+  &amp;lt;children&amp;gt;
+    &amp;lt;Button id=&amp;quot;buttonCSSID&amp;quot; 
+            layoutX=&amp;quot;40.0&amp;quot; layoutY=&amp;quot;65.0&amp;quot; 
+            prefWidth=&amp;quot;100.0&amp;quot; 
+            text=&amp;quot;Click Me!&amp;quot; /&amp;gt;
+    &amp;lt;Label id=&amp;quot;labelCSSID&amp;quot; 
+           alignment=&amp;quot;CENTER&amp;quot; contentDisplay=&amp;quot;CENTER&amp;quot; 
+           layoutX=&amp;quot;40.0&amp;quot; layoutY=&amp;quot;100.0&amp;quot; 
+           minHeight=&amp;quot;16.0&amp;quot; minWidth=&amp;quot;69.0&amp;quot; 
+           prefHeight=&amp;quot;16.0&amp;quot; prefWidth=&amp;quot;100.0&amp;quot; /&amp;gt;
+    &amp;lt;Button fx:id=&amp;quot;buttonFXID&amp;quot; 
+            layoutX=&amp;quot;180.0&amp;quot; layoutY=&amp;quot;65.0&amp;quot; 
+            prefWidth=&amp;quot;100.0&amp;quot; text=&amp;quot;Click Me!&amp;quot; /&amp;gt;
+    &amp;lt;Label fx:id=&amp;quot;labelFXID&amp;quot; 
+           alignment=&amp;quot;CENTER&amp;quot; contentDisplay=&amp;quot;CENTER&amp;quot; 
+           layoutX=&amp;quot;180.0&amp;quot; layoutY=&amp;quot;100.0&amp;quot; 
+           minHeight=&amp;quot;16.0&amp;quot; minWidth=&amp;quot;69.0&amp;quot; 
+           prefHeight=&amp;quot;16.0&amp;quot; prefWidth=&amp;quot;100.0&amp;quot; /&amp;gt;
+  &amp;lt;/children&amp;gt;
+&amp;lt;/AnchorPane&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/noscript&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Summary&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don&amp;#8217;t need to.&lt;/p&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>The Life and Times of a JavaFX Skin</title>
+      <link>http://functionn.github.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</link>
+      <pubDate>Tue, 28 Aug 2012 21:06:00 -0600</pubDate>
+      <author>functionn.github@functionn.github.com (Functionn)</author>
+      <guid>http://functionn.github.com/blog/2012/08/28/the-life-and-times-of-a-javafx-skin</guid>
+      <description>&lt;p&gt;As a consequence of the &lt;a href=&quot;http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif&quot;&gt;talk&lt;/a&gt; I gave at &lt;a href=&quot;http://gr8conf.us/&quot;&gt;Gr8Conf US&lt;/a&gt; I&amp;#8217;ve been wanting to create a real &amp;#8220;Deck&amp;#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &amp;#8220;back&amp;#8221; metaphor but the path forward isn&amp;#8217;t fixed, like a Wizard.&lt;/p&gt;
+
+
+&lt;p&gt;Last evening I finally got around to coding some stuff up. My work is currently on github under my craftily named &lt;a href=&quot;https://github.com/shemnon/DeckControl/&quot;&gt;DeckControl&lt;/a&gt; project. Nothing earth shattering (yet). So there will be no screenshots or demos in this post. What I do want to talk about is the Skin model JavaFX is using. These tidbits I have yet to find in any documentation. But that also may be because I haven&amp;#8217;t really read the documentation beyond a cursory level, or any of the books for that matter.  I still haven&amp;#8217;t finished reading the Wheel of Time, so it&amp;#8217;s not too surprising.&lt;/p&gt;
+
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;Skins in JavaFX provide something Swing never could fully arrive at: total separation between the abstract control and the literal representation of the control on the screen. There were always ways to subvert and abuse the PLAF mechanisms. While a poorly constructed control can still present problems the architecture is there for a complete look and structure separation.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Structure of a Skin&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;A Skin is mostly a class that extends &lt;code&gt;javafx.scene.control.Skin&lt;/code&gt;. I say mostly because there are two caveats. First, the &lt;code&gt;Skin&lt;/code&gt; interface is a generic interface. The type parameter must be the same type as the control you are skinning. Second you must provide a constructor that takes a single argument of the type of the generic parameter. A piece of trivia is that the Skin need not be a &lt;code&gt;javafx.scene.Node&lt;/code&gt;, although they often are a &lt;code&gt;StackPane&lt;/code&gt;.  Just to prove my point my skin didn&amp;#8217;t extend from &lt;code&gt;Node&lt;/code&gt;.&lt;/p&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Lifecycle of a Skin&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;The lifecycle of the skin is fairly straight forward. Simplified by the fact that skins are created for only one control, ever. No double dipping or reuse here. Garbage Collection has come a long way in the last 15 years.&lt;/p&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Construct the Skin&lt;/strong&gt;&lt;br /&gt;First the single argument constructor is called. If you are subclassing a skin pass the argument to the super. If not, stash the node you are passed in. You will need it later.&lt;br /&gt;Next you will need to prepare everything you need. The constructor is a good place, although lazily in the next step is an option. But I think initializing in the constructor is the best place.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stuff Happens&lt;/strong&gt;&lt;br /&gt;Stuff in the world will now happen. Some of this may or may not affect your control you are skinning. It&amp;#8217;s hard to tell, unless you attached listeners to the parts of the world you care about.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Node and Control Queried&lt;/strong&gt;&lt;br /&gt;Two of the interface methods may now get called. They may get called multiple times, or once. Or not at all in pathological cases. (The kind of pathological cases QA departments are paid to find).&lt;br /&gt;First for &lt;code&gt;getSkinnable()&lt;/code&gt; you must return the control passed into your constructor.  If you subclassed an existing skin you are in the clear.&lt;br /&gt;Second, &lt;code&gt;getNode()&lt;/code&gt; will be called to get the &lt;em&gt;singular&lt;/em&gt; node you are using to represent the control.  If you extend a Node class and it is the representation, return &lt;code&gt;this&lt;/code&gt;.  Otherwise return the node you are using.  But whatever you do you must always return the same value (until you don&amp;#8217;t have to, see step 6).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;More Stuff Happens&lt;/strong&gt;&lt;br /&gt;This is much like step 2.  Except now that your node is in the wild anything in the world that changes that you need to reflect in the skin node tree must be reflected in that node.  In my case I have to pay attention to what nodes are being added to the deck and what node in the deck is showing.  This step repeats with step 3 for an indeterminate number of cycles, zero or more times.  Make sure you play nicely with repetition&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Disposal&lt;/strong&gt;&lt;br /&gt;Finally, &lt;code&gt;dispose()&lt;/code&gt; is called.  This is JavaFX saying &amp;#8220;we&amp;#8217;re through&amp;#8221; and storming out the door, never(?) to be seen again.  There is no getting back together, if a new skin of the same kind is needed it will be created anew.&lt;br /&gt;All that is left to do now is to clean up whatever messes you made.  Most importantly this includes any listeners you have attached outside the world of your Skin.  So keep track of listeners you attach.  And if you are not sure if the listener left your little world then cut it off, just to be sure.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Afterlife&lt;/strong&gt;&lt;br /&gt;There is a chance that JavaFX may drunk-dial you and &lt;code&gt;getNode()&lt;/code&gt; and &lt;code&gt;getSkinnable()&lt;/code&gt; may be called again.  Don&amp;#8217;t get excited, things won&amp;#8217;t be like they were before, this was an accident.  You can return null at this point as long as you immediately start returning null after &lt;code&gt;dispose()&lt;/code&gt; is called.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;p&gt;&lt;strong&gt;Clean up after yourself&lt;/strong&gt;&lt;/p&gt;
+
+
+&lt;p&gt;If there is one thing to point out in the lifecycle, it is that you should clean up after yourself. The listeners you attach don&amp;#8217;t always fall away magically. And you should design for on the fly skin changes. This isn&amp;#8217;t like Swing where changing the PLAF after the controls were shown was the exception to the rule, and formally dissed by core developers in conference sessions. Skins will change at runtime and they will result in magical effects, so plan accordingly.&lt;/p&gt;
+
+</description>
+    </item>
+    
+    <item>
+      <title>NPEs: Permission vs. Forgiveness</title>
+      <link>http://functionn.github.com/blog/2012/02/20/npes-permission-vs-forgiveness/</link>
+      <pubDate>Mon, 20 Feb 2012 17:52:00 -0700</pubDate>
+      <author>functionn.github@functionn.github.com (Functionn)</author>
+      <guid>http://functionn.github.com/blog/2012/02/20/npes-permission-vs-forgiveness</guid>
+      <description>&lt;p&gt;Is it better to ask for permission or forgiveness? That is a question that always depends on the context.&lt;/p&gt;
+
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;For one shot events forgiveness is always less of a hassle. For example, if your motivational speaker for your group at work performs stunts like juggling flaming batons and swallowing swords, it&amp;#8217;s best not to get HR involved. From your perspective it is a onetime deal and if nothing goes wrong it will just be an uncomfortable e-mail thread when the responsible adults in the company find out. And that is assuming HR isn&amp;#8217;t dealing with any real issues (like making sure everyone has finished their sensitivity training). However, the speaker will likely have been through this process before. A true professional who does these stunts all the time will insist on signed releases from the company, especially from anyone authorized to sue.&lt;/p&gt;
+
+
+&lt;p&gt;Another context is programming. Instead of lawsuits we have exceptions. And instead of juggling flaming batons and swallowing swords we dereference pointers, a truly dangerous practice. When writing code to deal with these pointers there are two broad approaches: guard blocks where you check for null before dereferencing, and attempting it without the guard and catching the inevitable exception.&lt;/p&gt;
+
+
+&lt;p&gt;Old school C and C++ coders will always use guard blocks. This is primarily for two reasons, (a) null dereferences were almost always fatal, and (b) they didn&amp;#8217;t always have fancy things like exception handling&amp;#8230;&amp;nbsp;&lt;em&gt;and they liked it!&lt;/em&gt;&amp;nbsp;Permission was the only reliable approach (now get off my lawn you script kiddie).&lt;/p&gt;
+
+
+&lt;p&gt;New generation languages like Java and later incarnations of C++ standardized exception catching. If you make a mistake you can pick up the pieces and move on. Forgiveness became an option. And for a lot of code it is easier to read and write forgiving code rather than permission seeking code.&lt;/p&gt;
+
+
+&lt;p&gt;But easier to read and write is a very subjective criteria. Whether permission or forgiveness is better has no hard metric. But which is more efficient and faster? That is a hard metric! Time of execution. So I&amp;nbsp;&lt;a href=&quot;https://gist.github.com/1871252&quot;&gt;coded up an experiment&lt;/a&gt;&amp;nbsp;to get cold hard numbers.&lt;/p&gt;
+
+
+&lt;p&gt;But before we conduct this experiment we should predict the outcome. Can forgiveness ever be faster than permission? If we get rid of all of the null checks those are less cycles to burn on every execution through a loop. If the overhead of an exception is low enough then with infrequent enough exceptions it should be faster. Kind of like a parking ticket. If it&amp;#8217;s 5 cents a minute to park and for every 4 hours you are parked you will get a $20 ticket (with no other consequences) should you feed the meter? Never! you can save about a dollar an our just paying the parking ticket. But if the fine is $24 then it&amp;#8217;s a wash, and you depend on beating the parking enforcement officer to make any gains. So if the exception overhead is low enough eventually forgiveness makes sense. Right?&lt;/p&gt;
+
+
+&lt;p&gt;&lt;img style=&quot;border-style: initial; border-color: initial;&quot; src=&quot;http://chart.apis.google.com/chart?chxl=0:|-5|-10|-15|-20|1:|1ms|0.5ms|0.3ms|0.2ms|0.1ms&amp;amp;chxp=0,5,10,15,20|1,1,0.5,0.3,0.2,0.1&amp;amp;chxr=0,4,20|1,0,1&amp;amp;chxs=1,676767,11.5,0,lt,676767&amp;amp;chxt=x,y&amp;amp;chs=440x220&amp;amp;cht=lxy&amp;amp;chco=3072F3,FF0000&amp;amp;chds=5,20,0,1,5,20,0,1&amp;amp;chd=t:-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|0.109,0.098,0.098,0.094,0.092,0.092,0.093,0.093,0.092,0.093,0.095,0.098,0.095,0.093,0.092,0.095,0.094,0.094,0.094|-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|-1,-1,-1,0.998,0.55,0.331,0.213,0.151,0.127,0.11,0.104,0.098,0.097,0.096,0.095,0.105,0.116,0.094,0.093&amp;amp;chdl=Permission|Forgiveness&amp;amp;chg=0,20,4,9&amp;amp;chls=2|1&amp;amp;chma=5,0,5,25|0,5&amp;amp;chtt=Permission+vs+Forgiveness&quot; alt=&quot;Permission vs Forgiveness&quot; width=&quot;440&quot; height=&quot;220&quot; /&gt;&lt;/p&gt;
+
+
+&lt;p&gt;Well, it looks like forgiveness is not very rewarding on the JVM. For this chart the Y axis is the average time through my test call, and the X axis is the increasing rarity of the exception, a probability of between 2&lt;sup&gt;-4&lt;/sup&gt; and 2&lt;sup&gt;-20&lt;/sup&gt;, or 1 in 16 to over 1 in a million (so your saying there&amp;#8217;s a chance!). Forgiveness is&amp;nbsp;&lt;em&gt;at best&lt;/em&gt;&amp;nbsp;nearly as good as permission, and at worst over two magnitudes of order worse (it&amp;#8217;s like 147x at 100% forgiveness).&lt;/p&gt;
+
+
+&lt;p&gt;So that motivational speaker may really be awesome, but it is almost always better to ask for permission. Especially when he sets the carpet on fire.&lt;/p&gt;
+
+
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+</description>
+    </item>
+    
+
+  </channel> 
+</rss>
