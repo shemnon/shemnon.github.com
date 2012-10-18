@@ -6,12 +6,12 @@
     <atom:link href="http://speling.shemnon.com/all.rss" rel="self" type="application/rss+xml" />
     <description>Danno Ferrin (aka shemnon) on stuff that matters to him.</description>
     <language>en-us</language>
-    <pubDate>Wed, 17 Oct 2012 23:15:45 -0600</pubDate>
-    <lastBuildDate>Wed, 17 Oct 2012 23:15:45 -0600</lastB/Users/shemnon/git/bitbucket/shemnon/javafx-gradle/Ensemble/manifest.mfuildDate>
+    <pubDate>Wed, 17 Oct 2012 23:17:38 -0600</pubDate>
+    <lastBuildDate>Wed, 17 Oct 2012 23:17:38 -0600</lastB/Users/shemnon/git/bitbucket/shemnon/javafx-gradle/Ensemble/manifest.mfuildDate>
 
     
     <item>
-      <title>JavaFX Gradle Plugin</title>
+      <title>Starting a JavaFX Gradle Plugin</title>
       <link>http://speling.shemnon.com/blog/2012/10/17/javafx-gradle-plugin/</link>
       <pubDate>Wed, 17 Oct 2012 22:47:00 -0600</pubDate>
       <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>

@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-10-17T23:15:45-06:00</updated>
+  <updated>2012-10-17T23:17:38-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[JavaFX Gradle Plugin]]></title>
+    <title type="html"><![CDATA[Starting a JavaFX Gradle Plugin]]></title>
     <link href="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/"/>
     <updated>2012-10-17T22:47:00-06:00</updated>
     <id>http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin</id>
