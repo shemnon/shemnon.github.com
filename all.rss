@@ -6,9 +6,34 @@
     <atom:link href="http://speling.shemnon.com/all.rss" rel="self" type="application/rss+xml" />
     <description>Danno Ferrin (aka shemnon) on stuff that matters to him.</description>
     <language>en-us</language>
-    <pubDate>Fri, 12 Oct 2012 16:19:38 -0600</pubDate>
-    <lastBuildDate>Fri, 12 Oct 2012 16:19:38 -0600</lastBuildDate>
+    <pubDate>Wed, 17 Oct 2012 23:15:45 -0600</pubDate>
+    <lastBuildDate>Wed, 17 Oct 2012 23:15:45 -0600</lastB/Users/shemnon/git/bitbucket/shemnon/javafx-gradle/Ensemble/manifest.mfuildDate>
 
+    
+    <item>
+      <title>JavaFX Gradle Plugin</title>
+      <link>http://speling.shemnon.com/blog/2012/10/17/javafx-gradle-plugin/</link>
+      <pubDate>Wed, 17 Oct 2012 22:47:00 -0600</pubDate>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <guid>http://speling.shemnon.com/blog/2012/10/17/javafx-gradle-plugin</guid>
+      <description>&lt;p&gt;I wanted to get this out there early, since &amp;#8220;release early release often&amp;#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&amp;#8217;m not sure when I&amp;#8217;ll get to write it.&lt;/p&gt;
+
+&lt;p&gt;I am starting to write a &lt;a href=&quot;https://bitbucket.org/shemnon/javafx-gradle&quot;&gt;JavaFX 2.0 Gradle Plugin&lt;/a&gt; over at bitbucket.  Right now it handles just the &lt;code&gt;fx:jar&lt;/code&gt; and &lt;code&gt;fx:deploy&lt;/code&gt; ant tasks.  And not completely. I don&amp;#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.&lt;/p&gt;
+
+&lt;!-- more --&gt;
+
+
+&lt;p&gt;There are two samples in the repo demonstrating the build.  I pulled from the JavaFX 2.2.0 Samples brickbreaker and Ensemble2 which represents a small and large project. I moved the files around into a conventional layout, and provided the barest of Gradle scripts I could, with the help of the plugin.  The script for &lt;a href=&quot;https://bitbucket.org/shemnon/javafx-gradle/src/4f1f197a845d5fccc4408ad3c49167e65421b1df/brickbreaker/build.gradle?at=master&quot;&gt;brickbreaker&lt;/a&gt; is awesomely short.  And &lt;a href=&quot;https://bitbucket.org/shemnon/javafx-gradle/src/955cc9b99dc86c3b384b40157801ffd3c1adfe94/Ensemble2/build.gradle?at=master&quot;&gt;Ensemble2&lt;/a&gt; is a bit longer because of the custom build work it is doing to bring the source of the samples into the jar.  When you run &amp;#8216;gradle assemble` it will actually create the Mac OSX .app and .dmg files.  It probably does the correct thing on Linux and Windows but I haven&amp;#8217;t tried yet.  But first you need to install the plugin via &amp;#8216;gradle install&amp;#8217; in the plugin dir.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Conventions&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;My main purpose in this exercise is to try and nail down a set of file layout conventions that Gradle and Maven can use to create a shippable app with a minimum of configuration.  Layouts that match the Maven way for the most part.  And Ant scripts can be written to these conventions.  If, you know, Ant is your thing.&lt;/p&gt;
+
+&lt;p&gt;The only out there conventions would be the bundle resources, which I am placing in &lt;code&gt;src/main/resources&lt;/code&gt;.  I also intend to add some other standard files, like &lt;code&gt;src/main/resources/icon.png&lt;/code&gt; and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world&amp;#8217;s most awesome password.&lt;/p&gt;
+
+&lt;p&gt;Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&amp;#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Mirroring OpenJFX on BitBucket</title>

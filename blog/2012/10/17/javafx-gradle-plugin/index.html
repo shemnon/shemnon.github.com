@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: CSS - ...and they shall know me by my speling errors.</title>
+  <title>JavaFX Gradle Plugin - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="Category: CSS">
+  <meta name="description" content="I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras. I have a longer blog post &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com/blog/categories/css/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,35 +63,99 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: CSS</h1>
+    
+      <h1 class="entry-title">JavaFX Gradle Plugin</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
 
-  
-  <h2>2012</h2>
+<p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don&#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
 
-<article>
-  
-<h1><a href="/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/">Fashion Forward: Styling your Controls in JavaFX 2.2</a></h1>
-<time datetime="2012-09-13T08:02:00-06:00" pubdate><span class='month'>Sep</span> <span class='day'>13</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<p>There are two samples in the repo demonstrating the build.  I pulled from the JavaFX 2.2.0 Samples brickbreaker and Ensemble2 which represents a small and large project. I moved the files around into a conventional layout, and provided the barest of Gradle scripts I could, with the help of the plugin.  The script for <a href="https://bitbucket.org/shemnon/javafx-gradle/src/4f1f197a845d5fccc4408ad3c49167e65421b1df/brickbreaker/build.gradle?at=master">brickbreaker</a> is awesomely short.  And <a href="https://bitbucket.org/shemnon/javafx-gradle/src/955cc9b99dc86c3b384b40157801ffd3c1adfe94/Ensemble2/build.gradle?at=master">Ensemble2</a> is a bit longer because of the custom build work it is doing to bring the source of the samples into the jar.  When you run &#8216;gradle assemble` it will actually create the Mac OSX .app and .dmg files.  It probably does the correct thing on Linux and Windows but I haven&#8217;t tried yet.  But first you need to install the plugin via &#8216;gradle install&#8217; in the plugin dir.</p>
 
+<p><strong>Conventions</strong></p>
+
+<p>My main purpose in this exercise is to try and nail down a set of file layout conventions that Gradle and Maven can use to create a shippable app with a minimum of configuration.  Layouts that match the Maven way for the most part.  And Ant scripts can be written to these conventions.  If, you know, Ant is your thing.</p>
+
+<p>The only out there conventions would be the bundle resources, which I am placing in <code>src/main/resources</code>.  I also intend to add some other standard files, like <code>src/main/resources/icon.png</code> and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world&#8217;s most awesome password.</p>
+
+<p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gradle/'>Gradle</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/10/09/mirroring-openjfx-on-bitbucket/" title="Previous Post: Mirroring OpenJFX on BitBucket">&laquo; Mirroring OpenJFX on BitBucket</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
