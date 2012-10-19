@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>...and they shall know me by my speling errors.</title>
-    <description>Danno Ferrin (aka shemnon) on stuff that matters to him.</description>
-    <link>http://speling.shemnon.com/</link>
-    <atom:link href="http://speling.shemnon.com//all.rss" rel="self" type="application/rss+xml" />
-    <language>en-us</language>
-    <pubDate>Fri, 19 Oct 2012 07:52:27 -0600</pubDate>
-    <lastBuildDate>Fri, 19 Oct 2012 07:52:27 -0600</lastBuildDate>
-    
-      
-    <item>
-      <title><![CDATA[Starting a JavaFX Gradle Plugin]]></title>
-      <description><![CDATA[<p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
+	<channel>
+		<title>&#8230;and they shall know me by my speling errors.</title>
+		<description>Danno Ferrin (aka shemnon) on stuff that matters to him.</description>
+		<link>http://speling.shemnon.com/</link>
+		<atom:link href="http://speling.shemnon.com//feed.articles.xml" rel="self" type="application/rss+xml" />
+		
+			
+			<item>
+				<title><![CDATA[Starting a JavaFX Gradle Plugin]]></title>
+				<description><![CDATA[<p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
 
 <p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don&#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
 
@@ -29,17 +26,16 @@
 
 <p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
 ]]></description>
-      <pubDate>Wed, 17 Oct 2012 22:47:00 -0600</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/</guid>
-    </item>
-      
-    
-      
-    <item>
-      <title><![CDATA[Mirroring OpenJFX on BitBucket]]></title>
-      <description><![CDATA[<p>I&#8217;ve started mirroring the OpenJFX repositories over at <a href="http://bitbucket.org/shemnon/">bitbucket</a>.  Viewing the repos on bitbucket has several advantages:</p>
+				<pubDate>Wed, 17 Oct 2012 22:47:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title><![CDATA[Mirroring OpenJFX on BitBucket]]></title>
+				<description><![CDATA[<p>I&#8217;ve started mirroring the OpenJFX repositories over at <a href="http://bitbucket.org/shemnon/">bitbucket</a>.  Viewing the repos on bitbucket has several advantages:</p>
 
 <ol>
 <li>It has an easier on the eyes user interface.  Really, I could stop here.</li>
@@ -94,17 +90,16 @@
 
 <p>But all of this only holds for the Java portions of the build.  When it comes to the native libraries I really don&#8217;t think you can wander too far from your yak shaving shears.</p>
 ]]></description>
-      <pubDate>Tue, 09 Oct 2012 21:16:00 -0600</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</guid>
-    </item>
-      
-    
-      
-    <item>
-      <title><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
-      <description><![CDATA[<p>JavaFX is finally delivering on it&#8217;s promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
+				<pubDate>Tue, 09 Oct 2012 21:16:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
+				<description><![CDATA[<p>JavaFX is finally delivering on it&#8217;s promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
 
 
 <p>One of the questions I had was how the CSS styles are used in a Node. And after looking at some of the innards I realized that I didn&#8217;t really care how JavaFX does it, I care about how I can get my control stylized like the built in controls. To demonstrate the CSS stylings, I created <code>DemoTwo</code> in my <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project, allowing you to customize the control via CSS. Only the shelf variants in this demo use the custom properties, the others are just using the built in <code>-fx-skin</code> style to do the switching.</p>
@@ -250,17 +245,16 @@
 <p>I am sure I violated some coding standards the JavaFX team uses to create their CSS properties, but at the end of the day the code works. I do have to say, there is quite a bit of Yak Shaving that goes on. Hopefully in JavaFX 8 they will come up with some amazingly simple means to mark properties as styleable (I have <a href="https://gist.github.com/3711882">some ideas</a>). But until that future day, you can do CSS styling on your custom controls now.</p>
 
 ]]></description>
-      <pubDate>Thu, 13 Sep 2012 08:02:00 -0600</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</guid>
-    </item>
-      
-    
-      
-    <item>
-      <title><![CDATA[JavaFX, Groovy, and Griffon]]></title>
-      <description><![CDATA[<p>Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.</p>
+				<pubDate>Thu, 13 Sep 2012 08:02:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title><![CDATA[JavaFX, Groovy, and Griffon]]></title>
+				<description><![CDATA[<p>Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.</p>
 
 
 <p><strong>Gr8Cooking Presentation</strong></p>
@@ -334,17 +328,16 @@
 <p>There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don&#8217;t need to.</p>
 
 ]]></description>
-      <pubDate>Tue, 04 Sep 2012 07:24:00 -0600</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</guid>
-    </item>
-      
-    
-      
-    <item>
-      <title><![CDATA[The Life and Times of a JavaFX Skin]]></title>
-      <description><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I&#8217;ve been wanting to create a real &#8220;Deck&#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &#8220;back&#8221; metaphor but the path forward isn&#8217;t fixed, like a Wizard.</p>
+				<pubDate>Tue, 04 Sep 2012 07:24:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title><![CDATA[The Life and Times of a JavaFX Skin]]></title>
+				<description><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I&#8217;ve been wanting to create a real &#8220;Deck&#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &#8220;back&#8221; metaphor but the path forward isn&#8217;t fixed, like a Wizard.</p>
 
 
 <p>Last evening I finally got around to coding some stuff up. My work is currently on github under my craftily named <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project. Nothing earth shattering (yet). So there will be no screenshots or demos in this post. What I do want to talk about is the Skin model JavaFX is using. These tidbits I have yet to find in any documentation. But that also may be because I haven&#8217;t really read the documentation beyond a cursory level, or any of the books for that matter.  I still haven&#8217;t finished reading the Wheel of Time, so it&#8217;s not too surprising.</p>
@@ -384,17 +377,16 @@
 <p>If there is one thing to point out in the lifecycle, it is that you should clean up after yourself. The listeners you attach don&#8217;t always fall away magically. And you should design for on the fly skin changes. This isn&#8217;t like Swing where changing the PLAF after the controls were shown was the exception to the rule, and formally dissed by core developers in conference sessions. Skins will change at runtime and they will result in magical effects, so plan accordingly.</p>
 
 ]]></description>
-      <pubDate>Tue, 28 Aug 2012 21:06:00 -0600</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</guid>
-    </item>
-      
-    
-      
-    <item>
-      <title><![CDATA[NPEs: Permission vs. Forgiveness]]></title>
-      <description><![CDATA[<p>Is it better to ask for permission or forgiveness? That is a question that always depends on the context.</p>
+				<pubDate>Tue, 28 Aug 2012 21:06:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/</guid>
+			</item>
+			
+		
+			
+			<item>
+				<title><![CDATA[NPEs: Permission vs. Forgiveness]]></title>
+				<description><![CDATA[<p>Is it better to ask for permission or forgiveness? That is a question that always depends on the context.</p>
 
 
 <!-- more -->
@@ -430,12 +422,11 @@
 <p>&nbsp;</p>
 
 ]]></description>
-      <pubDate>Mon, 20 Feb 2012 17:52:00 -0700</pubDate>
-      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</guid>
-    </item>
-      
-    
-  </channel>
+				<pubDate>Mon, 20 Feb 2012 17:52:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</guid>
+			</item>
+			
+		
+	</channel>
 </rss>
