@@ -6,8 +6,62 @@
     <link>http://speling.shemnon.com/</link>
     <atom:link href="http://speling.shemnon.com//all.rss" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <pubDate>Tue, 23 Oct 2012 22:13:54 -0600</pubDate>
-    <lastBuildDate>Tue, 23 Oct 2012 22:13:54 -0600</lastBuildDate>
+    <pubDate>Tue, 23 Oct 2012 22:16:28 -0600</pubDate>
+    <lastBuildDate>Tue, 23 Oct 2012 22:16:28 -0600</lastBuildDate>
+    
+      
+    <item>
+      <title><![CDATA[Conventions and Configuratons]]></title>
+      <description><![CDATA[<p>Creating an app in any new framework can sometimes be a bit of a chore.  Have you looked at the files that come form a new Hello World JavaFX app from NetBeans?  Not very dry at all and a lot of esoteric stuff in side directories is created, you know just in case you want to customize it.  And the problem isn&#8217;t NetBeans, they are doing the best they can with Ant.</p>
+
+<p><strong>The Ideal Build</strong></p>
+
+<p>To me the ideal build setup for a JavaFX application would involve putting your source files in a specific directory layout, placing supporting files in a similarly conventional manner, adding a <em>minimal</em> build script, pressing a button, and catching my .app or .exe as it falls out the other side.</p>
+
+<!-- more -->
+
+
+<p>One of the keys here is the minimal build script.  If I am doing things the standard way then my actions should be presumed.  Presumed without comment.  Part of the legacy of the <a href="http://ant.apache.org/">ant</a> build system is you cannot simply say &#8216;my Java code is here, make a jar.&#8217;  You have to hand walk the build from where your source code lives, to where you want the compiled class files to go, to where you want the jar to go, to what you want to name it.  And heaven forbid if you use other peoples libraries, or expect other people to use yours.</p>
+
+<p>I&#8217;m being a little harsh on Ant here. Let&#8217;s roll back our memory to 13 years ago and realize how Ant was eight kinds of awesome compared to a <a href="http://www.gnu.org/software/make/manual/make.html">make</a> file.  Many builds I saw used to drop class files in the source tree.  And if you had to add a package you either had to update the make file or hope some side voodoo script could sniff it out, and the mess leftover was barely tolerable.  Recursive file sniffing and a separate build directories were the gold standard back at the turn of the century.  But the problem with higher standards is eventually they become the baseline expectation.  Consider how much building software stunk before even make existed!</p>
+
+<p><strong>Hand Cranked to Configurable to Conventional</strong></p>
+
+<p>The evolution we are witnessing here is one of increased automation, and the standardization.  This is just like the industrial revolution and the classic example of firearms.  You can hand craft a rife, and it will work just fine.  If anything breaks, however, you have to hand craft a replacement and often craft other pieces to make sure it continues to work.  When the parts were standardized, in both assembly and interface, you can mass produce many different rifles and do many interesting things with the various add ons.  If you want a slightly different grip or trigger, you can replace it because if the interface.  If you find a broken rifle you can figure out what is wrong with it because of the standard assembly,  And if you stick to the standards, ammunition is readily interchangeable between any rifle.</p>
+
+<p>One of the key issues with interchangeable parts, however, is the need for a critical mass.  With a small audience conventions are merely incidental.  In large groups and with enough adoption they become the rules of society, for example what side you pass someone on the sidewalk.</p>
+
+<p><strong>File Conventions</strong></p>
+
+<p>To take us closer to the industrialized build we need to agree on some conventions. Even though I am building a Gradle plugin, I feel we need to accept and adopt widely some Maven conventions.  Specifically the <code>src/&lt;set&gt;/&lt;language|role&gt;/...</code> pattern for source files.  Gradle already adopts this pattern by default, which is good from the viewpoint of interchangeable parts.</p>
+
+<pre><code>&lt;root&gt;/
++--src/
+   +--main/
+      +--java/
+      |  +--&lt;Java Classes by package&gt;
+      +--resources/
+      |  +--&lt;Resources, like CSS and image, by package&gt;
+      +--package/
+         +--win/
+         |  +--&lt;Bundle specific files&gt;
+         +--macosx/
+         |  +--&lt;Bundle specific files&gt;
+         +--linux/
+         |  +--&lt;Bundle specific files&gt;
+         +--&lt;icon files for bundles&gt;
+</code></pre>
+
+<p>This is notional, and I am more than willing to hear comments as to where I am getting stuff wrong.  This is currently the file layout I am using for my Gradle JavaFX plugin, and I&#8217;ve pulled three of the JavaFX sample apps into this directory format, and the build files are all quite short (after the yak shaving to install the plugin).  <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341796394ae9c7ba9d44f1d79c45889/samples/brickbreaker/build.gradle?at=master">Brickbreaker</a> just installs the plugin.  <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341/samples/ConferenceScheduleApp/build.gradle?at=master">ConferenceScheduleApp</a> only names the executable (with bonus Java Version yak shaving) while <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341/samples/Ensemble2/build.gradle?at=master">Ensemble2</a> has the most to do, and none of it involved JavaFX but it is peculiar to how the app works.</p>
+
+<p>My goal here, is to make all of the JavaFX yak shaving transparent, so you can focus on indexing your samples in your build rather than remembering the syntax of the ant deploy task.</p>
+]]></description>
+      <pubDate>Tue, 23 Oct 2012 22:13:00 -0600</pubDate>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <link>http://speling.shemnon.com//blog/2012/10/23/conventions-and-configurations/</link>
+      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/10/23/conventions-and-configurations/</guid>
+    </item>
+      
     
       
     <item>
