@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-11-07T23:14:05-07:00</updated>
+  <updated>2012-11-08T09:24:11-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -22,16 +22,16 @@
 
 <p><strong>Real Computer Scientists Count from Zero</strong></p>
 
-<p>Why the 0.0.0 release?  Well, real computer scientist count from zero.  The vending machines in the Computer Science building at my University started with zero on the left, then one and two and so on.  And when software is released the &#8216;oh dots&#8217; precede the &#8216;one dot oh&#8217;, clearly establishing that the digit on the right should be zero.  So why are first releases 0.1 or 0.0.1?  It&#8217;s not the second release, it&#8217;s the first release!  So start at the first index: Zero!  Why three numbers?  I blame OSGi.  And blame is the correct word, not credit.</p>
+<p>Why the 0.0.0 release?  Well, real computer scientists count from zero.  The vending machines in the computer science building at my university started with zero on the left, then one and two and so on.  And when software is released the &#8216;oh dots&#8217; precede the &#8216;one dot oh&#8217;, clearly establishing that the digit on the right should be zero.  So why are first releases 0.1 or 0.0.1?  It&#8217;s not the second release, it&#8217;s the first release!  So start at the first index: Zero!  Why three numbers?  I blame OSGi.  And blame is the correct word, not credit.</p>
 
 <!-- more -->
 
 
-<p>All silliness aside, the plugin is actually kinda useful.  It takes care of a lot of the JavaFX package stuff, you know, magically.  Magically in the sense that if you saw it happen you would know what is going on, but you don&#8217;t see it so you applaud and say &#8216;what a neat magic trick.&#8217;</p>
+<p>All silliness aside, the plugin is actually useful.  It takes care of a lot of the JavaFX package stuff, you know, magically.  Magically in the sense that if you saw it happen you would know what is going on, but you don&#8217;t see it so you applaud and say &#8216;what a neat magic trick.&#8217;</p>
 
 <p><strong>Getting Started</strong></p>
 
-<p>I&#8217;m going to assume you already know a little about Gradle, and also that you know about the <code>src/main/java</code> and <code>src/main/resources</code> conventions from Maven.  Once you set your source files up in those directories set up your <code>build.gradle</code> file by installing the plugin.  There are two options for installing the plugin: you can apply it explicitly, or you can use a nifty script shortcut I learned from the vaadin plugin.</p>
+<p>I&#8217;m going to assume you already know a little about Gradle, and also that you know about the <code>src/main/java</code> and <code>src/main/resources</code> conventions from Maven.  Once you set your source files up in those directories set up your <code>build.gradle</code> file by installing the plugin.  There are two options for installing the plugin: you can apply it explicitly, or you can use a nifty script shortcut I learned from a <a href="https://github.com/johndevs/gradle-vaadin-plugin">Vaadin Gradle plugin</a> I found.</p>
 
 <p>Short way:</p>
 
@@ -59,7 +59,7 @@
 apply plugin: 'javafx'</code></pre></noscript></div>
 
 
-<p>The short way just brings in a script from the repository that automatically loads basically the same content as the long way.  The advantage of the long way is you won&#8217;t get surprised when the JavaFX plugin gets updated to the latest version.  The advantage of the short way is it is more terse (except that the url is kinda long).</p>
+<p>The short way just brings in a script from the repository that does everything the long way.  The advantage of the long way is you won&#8217;t get surprised when the JavaFX plugin gets updated to the latest version.  The advantage of the short way is that it is more terse (except that the url is kinda long).</p>
 
 <p><strong>Configurations and Conventions</strong></p>
 
@@ -733,7 +733,7 @@ I think you should use an
 </code></pre></noscript></div>
 
 
-<p>The documentation for the conventions is the weakest part right now, but I have <a href="https://bitbucket.org/shemnon/javafx-gradle/src/9eef1086856b/samples/FullyExpressed/build.gradle?at=release_0.0.0">an example</a> that I use for smoke testing that shows everything that ought to be configured but most of them don&#8217;t need to be.</p>
+<p>The documentation for the JavaFX conventions and tasks are the weakest part right now, but I have <a href="https://bitbucket.org/shemnon/javafx-gradle/src/9eef1086856b/samples/FullyExpressed/build.gradle?at=release_0.0.0">an example</a> that I use for smoke testing that shows everything that ought to be configured, but most items don&#8217;t need to be.</p>
 
 <p><strong>Tasks</strong></p>
 
