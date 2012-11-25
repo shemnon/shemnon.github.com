@@ -8,6 +8,50 @@
 		
 			
 			<item>
+				<title><![CDATA[Scenic View in the Gradle JavaFX Plugin]]></title>
+				<description><![CDATA[<p>While I really like the <a href="http://fxexperience.com/scenic-view/">Scenic View</a> application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of a struggle.  But like most things I wind up blogging about this is something that can be fixed with a little bit of magical Gradle dust.</p>
+
+<!-- more -->
+
+
+<p><strong>Skinning the Cat</strong></p>
+
+<p>Getting Scenic view to work shouldn&#8217;t be a struggle since there are three ways to start it up.  Well the fact there are three ways may be part of the problem actually.  The first is to rely on auto-discovery.  This is the same thing that JVisualVM relies on.  However this doesn&#8217;t work for me since I do my personal hacking on a MacBook Air, and the auto-discovery isn&#8217;t as reliable as it is on Windows machines.  I.e. you get the mac experience of it &#8216;just working&#8217; on windows but no mac.  To be fair, this is option number three on the list and they openly admit it&#8217;s not the best choice currently.</p>
+
+<p>Another option is to bundle in the jar and explicitly start the scenic view.  The code is incredibly terse and has no real dependencies on your application code, except that the code needs to be run and the node to view.  The downside here is that you always need the code available to compile and you always need the line in your code.  You can hide the invocation with bear-claw clicks and keystrokes but the burden remains on you to either properly hide it or strip the code before you publish.</p>
+
+<p>The last option, and the preferable one according to the docs, is to add the scenic view code as a java agent to your JVM.  This is very reliable method but it has a very specific incantation you need to add to your launch command.  And to add on to the troubles, there is no standard place this jar files live, it lives where you drop it.  And old man Murphy says that you cannot depend on others placing it in the same place, unless you do it for them.</p>
+
+<p><strong>Integrations with Gradle</strong></p>
+
+<p>The first problem is that this program is not released into Maven Central.  With gradle we can punt on running a maven repository and just upload it to an ivy repository.  In this case I am doubling up with the <a href="https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/">Gradle JavaFX Plugin</a> repository.  Unlike the FXExperience Tools the code isn&#8217;t in a public repo so I cannot guess the license.  I&#8217;ll err on the side of sharing.</p>
+
+<p>The next problem is getting the jar local.  I tried several approaches.  I don&#8217;t need the jar at build time for the plugin.  And adding it to the plugin dependencies creates some unneeded weirdness for application build scripts.  Finally what I settled on was to dynamically alter the gradle script via the DSL.  As <a href="https://bitbucket.org/shemnon/javafx-gradle/changeset/4dd2ff67e69410802306948ef097caf4#Lplugin/src/main/groovy/com/bitbucket/shemnon/javafxplugin/JavaFXPlugin.groovyT233">part of the task</a> I create a new configuration, add a new repository, and add a dependency to that configuration,  Then I find all the tasks that are considered execution tasks and I prepend the needed agent string with the local cached copy of the scenic view jar.  Did you catch and understand all of that?  Don&#8217;t worry, you don&#8217;t need to understand the magic to use it.</p>
+
+<p>This task will be part of the next release of the plugin.  If you are using the snapshot script you already have it.</p>
+
+<p><strong>Too Long; Didn&#8217;t Read</strong></p>
+
+<p>To use scenic view with the gradle plugin just add the task <code>scenicview</code> before your execution task.  Really you have two options.  If you are not attaching a debugger:</p>
+
+<pre><code>gradle scenicview run
+</code></pre>
+
+<p>if you are attaching a debugger:</p>
+
+<pre><code>gradle scenicview debug
+</code></pre>
+
+<p>There will be no random jars added into your released code as long as you stick with the above incantations.  And it will magically work.</p>
+]]></description>
+				<pubDate>Sun, 25 Nov 2012 13:42:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[JavaFX Gradle Plugin 0.0.0 Released]]></title>
 				<description><![CDATA[<p>I haven&#8217;t&#8217; done much to promote it yet, but I feel I have written enough to announce that I have written a JavaFX 2.0 Plugin for Gradle.  Better documentation will follow, but this is the announcement getting it out there,  After all this is just an oh dot oh dot oh.</p>
 

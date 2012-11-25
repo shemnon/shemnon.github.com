@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>JavaFX, Groovy, and Griffon - ...and they shall know me by my speling errors.</title>
+  <title>Scenic View in the Gradle JavaFX Plugin - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my &hellip;">
+  <meta name="description" content="While I really like the Scenic View application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">JavaFX, Groovy, and Griffon</h1>
+      <h1 class="entry-title">Scenic View in the Gradle JavaFX Plugin</h1>
     
     
       <p class="meta">
@@ -83,86 +83,47 @@
   
 
 
-<time datetime="2012-09-04T07:24:00-06:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Over the weekend the GroovyFX 0.3 libraries were released. &nbsp;With this domino as well as the release of Griffon 1.0.2 I was able to update my Gr8Conf US presentation on JavaFX use only published libraries, rather than the local snapshots I had been using.</p>
-
-
-<p><strong>Gr8Cooking Presentation</strong></p>
-
-
-<p>My first Session at Gr8 US this year talked about JavaFX, Groovy, and Griffon.  Having watched too many episodes of <a href="http://www.foodnetwork.com/chopped/index.html">Chopped</a> I decided that my presentation needed to use the required ingredients of JavaFX, Groovy, Griffon, and Dogfood.  The results are in the <a href="https://github.com/shemnon/Gr8Cooking">Gr8Cooking</a> project on my github account.  And this is an interactive presentation, feel free to click on buttons and whatnot that are actually on the slide.  That was the point of this presentation.</p>
-
+<div class="entry-content"><p>While I really like the <a href="http://fxexperience.com/scenic-view/">Scenic View</a> application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of a struggle.  But like most things I wind up blogging about this is something that can be fixed with a little bit of magical Gradle dust.</p>
 
 <!-- more -->
 
 
-<p><strong>Griffon JavaFX Archetype</strong></p>
+<p><strong>Skinning the Cat</strong></p>
 
+<p>Getting Scenic view to work shouldn&#8217;t be a struggle since there are three ways to start it up.  Well the fact there are three ways may be part of the problem actually.  The first is to rely on auto-discovery.  This is the same thing that JVisualVM relies on.  However this doesn&#8217;t work for me since I do my personal hacking on a MacBook Air, and the auto-discovery isn&#8217;t as reliable as it is on Windows machines.  I.e. you get the mac experience of it &#8216;just working&#8217; on windows but no mac.  To be fair, this is option number three on the list and they openly admit it&#8217;s not the best choice currently.</p>
 
-<p>This presentation also was built using the JavaFX Archetype in Griffon.  The new release merely updates the required Griffon version since the latest version of GroovyFX depends on some bug fixes in the core of Griffon.  To use the archetype simply use the <code>-archetype</code> parameter at the command line: <div><script src='https://gist.github.com/3621275.js?file='></script>
-<noscript><pre><code>griffon create-app MyJavaFXApp -archetype=javafx</code></pre></noscript></div>
-</p>
+<p>Another option is to bundle in the jar and explicitly start the scenic view.  The code is incredibly terse and has no real dependencies on your application code, except that the code needs to be run and the node to view.  The downside here is that you always need the code available to compile and you always need the line in your code.  You can hide the invocation with bear-claw clicks and keystrokes but the burden remains on you to either properly hide it or strip the code before you publish.</p>
 
+<p>The last option, and the preferable one according to the docs, is to add the scenic view code as a java agent to your JVM.  This is very reliable method but it has a very specific incantation you need to add to your launch command.  And to add on to the troubles, there is no standard place this jar files live, it lives where you drop it.  And old man Murphy says that you cannot depend on others placing it in the same place, unless you do it for them.</p>
 
-<p><strong>Griffon JavaFX Plugin</strong></p>
+<p><strong>Integrations with Gradle</strong></p>
 
+<p>The first problem is that this program is not released into Maven Central.  With gradle we can punt on running a maven repository and just upload it to an ivy repository.  In this case I am doubling up with the <a href="https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/">Gradle JavaFX Plugin</a> repository.  Unlike the FXExperience Tools the code isn&#8217;t in a public repo so I cannot guess the license.  I&#8217;ll err on the side of sharing.</p>
 
-<p>The JavaFX Plugin was also upgraded.  With the release of JavaFX 2.2 the Java Developers Kit now supports the creation of native installer and app bundles for JavaFX applications.  No need to pay someone to write InstallShield scripts anymore.  (There&#8217;s a reason I never mention that in my resume).  Creating a native JavaFX package of your Griffon application is now insanely easy: <div><script src='https://gist.github.com/3621291.js?file='></script>
-<noscript><pre><code>griffon package jfx-native</code></pre></noscript></div>
- Afterwards you can look for the native installers in <code>&lt;app&gt;/dist/jfxnative/bundles</code>.  Of course you can only create native bundles for the platform you are building on, and there are some required libraries for each platform you must install that vary for each platform.  Oracle has the <a href="http://docs.oracle.com/javafx/2/deployment/self-contained-packaging.htm#A1324980">details</a> in it&#8217;s JDK documentation.</p>
+<p>The next problem is getting the jar local.  I tried several approaches.  I don&#8217;t need the jar at build time for the plugin.  And adding it to the plugin dependencies creates some unneeded weirdness for application build scripts.  Finally what I settled on was to dynamically alter the gradle script via the DSL.  As <a href="https://bitbucket.org/shemnon/javafx-gradle/changeset/4dd2ff67e69410802306948ef097caf4#Lplugin/src/main/groovy/com/bitbucket/shemnon/javafxplugin/JavaFXPlugin.groovyT233">part of the task</a> I create a new configuration, add a new repository, and add a dependency to that configuration,  Then I find all the tasks that are considered execution tasks and I prepend the needed agent string with the local cached copy of the scenic view jar.  Did you catch and understand all of that?  Don&#8217;t worry, you don&#8217;t need to understand the magic to use it.</p>
 
+<p>This task will be part of the next release of the plugin.  If you are using the snapshot script you already have it.</p>
 
-<p><strong>GroovyFX</strong></p>
+<p><strong>Too Long; Didn&#8217;t Read</strong></p>
 
+<p>To use scenic view with the gradle plugin just add the task <code>scenicview</code> before your execution task.  Really you have two options.  If you are not attaching a debugger:</p>
 
-<p>The final piece of the puzzle is the GroovyFX library, the integration of JavaFX into Groovy.  GroovyFX has upgraded in version 0.3 to require the 2.2 release of JavaFX, which includes support for the new Canvas element.  Jim Clarke did nearly all the work on that piece and <a href="http://www.codetown.us/profiles/blogs/javafx-2-2-canvas">blogged about it</a> a couple of months ago.</p>
+<pre><code>gradle scenicview run
+</code></pre>
 
+<p>if you are attaching a debugger:</p>
 
-<p>The other major feature add is the ability to reference FXML elements in a <code>fxml</code> block in your Groovy scripts and code.  This allows you to take an FXML file with only a visual description of the nodes and add the behavior code in the code creating the FXML, rather than in the xml declarations.  It looks like this: <div><script src='https://gist.github.com/3621462.js?file='></script>
-<noscript><pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+<pre><code>gradle scenicview debug
+</code></pre>
 
-&lt;?import java.lang.*?&gt;
-&lt;?import javafx.scene.*?&gt;
-&lt;?import javafx.scene.control.*?&gt;
-&lt;?import javafx.scene.layout.*?&gt;
-
-&lt;AnchorPane xmlns:fx=&quot;http://javafx.com/fxml&quot;
-            id=&quot;AnchorPane&quot; 
-            prefHeight=&quot;150.0&quot; prefWidth=&quot;320.0&quot; &gt;
-  &lt;children&gt;
-    &lt;Button id=&quot;buttonCSSID&quot; 
-            layoutX=&quot;40.0&quot; layoutY=&quot;65.0&quot; 
-            prefWidth=&quot;100.0&quot; 
-            text=&quot;Click Me!&quot; /&gt;
-    &lt;Label id=&quot;labelCSSID&quot; 
-           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
-           layoutX=&quot;40.0&quot; layoutY=&quot;100.0&quot; 
-           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
-           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
-    &lt;Button fx:id=&quot;buttonFXID&quot; 
-            layoutX=&quot;180.0&quot; layoutY=&quot;65.0&quot; 
-            prefWidth=&quot;100.0&quot; text=&quot;Click Me!&quot; /&gt;
-    &lt;Label fx:id=&quot;labelFXID&quot; 
-           alignment=&quot;CENTER&quot; contentDisplay=&quot;CENTER&quot; 
-           layoutX=&quot;180.0&quot; layoutY=&quot;100.0&quot; 
-           minHeight=&quot;16.0&quot; minWidth=&quot;69.0&quot; 
-           prefHeight=&quot;16.0&quot; prefWidth=&quot;100.0&quot; /&gt;
-  &lt;/children&gt;
-&lt;/AnchorPane&gt;</code></pre></noscript></div>
-</p>
-
-
-<p><strong>Summary</strong></p>
-
-
-<p>There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don&#8217;t need to.</p>
-
+<p>There will be no random jars added into your released code as long as you stick with the above incantations.  And it will magically work.</p>
 </div>
 
 
@@ -185,12 +146,12 @@
   
 
 
-<time datetime="2012-09-04T07:24:00-06:00" pubdate data-updated="true">Sep 4<span>th</span>, 2012</time>
+<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/griffon/'>Griffon</a>, <a class='category' href='/blog/categories/groovy/'>Groovy</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
+    <a class='category' href='/blog/categories/gradle/'>Gradle</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>, <a class='category' href='/blog/categories/scenicview/'>ScenicView</a>
   
 </span>
 
@@ -199,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/" >Tweet</a>
   
   
   
@@ -208,10 +169,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/" title="Previous Post: The Life and Times of a JavaFX Skin">&laquo; The Life and Times of a JavaFX Skin</a>
+        <a class="basic-alignment left" href="/blog/2012/11/07/javafx-gradle-plugin-0.0.0-released/" title="Previous Post: JavaFX Gradle Plugin 0.0.0 Released">&laquo; JavaFX Gradle Plugin 0.0.0 Released</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/" title="Next Post: Fashion Forward: Styling your Controls in JavaFX 2.2">Fashion Forward: Styling your Controls in JavaFX 2.2 &raquo;</a>
       
     </p>
   </footer>
@@ -364,8 +323,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/';
         var disqus_script = 'embed.js';
       
     (function () {
