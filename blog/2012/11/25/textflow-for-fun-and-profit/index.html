@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Skin - ...and they shall know me by my speling errors.</title>
+  <title>TextFlow for Fun and Profit - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="Category: Skin">
+  <meta name="description" content="One of the newer features for JavaFX is the new TextFlow node. Revealed at JavaOne San Francisco this is the generel solution to a rich text &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com/blog/categories/skin/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,36 +63,108 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Skin</h1>
+    
+      <h1 class="entry-title">TextFlow for Fun and Profit</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
 
-  
-  <h2>2012</h2>
+<p>This also happens to fit in nicely with my planned hobby project for the next few months.  The deck control was one part, and the ability to take MarkDown into a JavaFX node is another important part of the equation.  To prototype this I wrote a little toy app I call <a href="https://bitbucket.org/shemnon/flowdown">FlowDown</a></p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/">The Life and Times of a JavaFX Skin</a></h1>
-<time datetime="2012-08-28T21:06:00-06:00" pubdate><span class='month'>Aug</span> <span class='day'>28</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/javafx/'>JavaFX</a>, <a class='category' href='/blog/categories/skin/'>Skin</a></span>
-</footer>
+<!-- more -->
 
 
-</article>
+<p><strong>FlowPane turns the corner</strong></p>
 
+<p>TextFlow at it&#8217;s core is a lot like <a href="http://docs.oracle.com/javafx/2/api/index.html?javafx/scene/layout/FlowPane.html">FlowPane</a>.  The children are laid out in order from the leading edge to the training edge.  When it reaches the edge of the component it goes to the next row and continues to lay out it&#8217;s children.  What is different about TextFlow is that if the next child is a Text node it will fit as much of it as it can in the current row, and then take the remainder to the next row. And if needed it will flow the content across multiple rows to fit the constrained width.  So large long paragraphs of text now take only one node, whereas before you had to resort to tricks that essentially created one node per word.</p>
+
+<p><img src="/images/FlowDown.png" alt="FlowDown in action" /></p>
+
+<p><strong>Caution: Beta Code Ahead</strong></p>
+
+<p>To use this toy app you will need one of the more current builds of <a href="http://jdk8.java.net/download.html">JDK8</a> newer than build 66 (build 67 was the current one as of this post).  But this is an early access build which means you cannot distribute it and other things may be broken (like copy and paste on OSX).</p>
+
+<p>The markdown previewer itself is also beta.  Problems include ordered lists not being numbered, and list layout in general being wonky.  Feel free to <a href="https://bitbucket.org/shemnon/flowdown/issues?status=new&amp;status=open">post issues</a>.  Since markdown to JFX nodes is something that may be generally useful I do see myself making a component out of.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javafx/'>JavaFX</a>, <a class='category' href='/blog/categories/textflow/'>TextFlow</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/11/25/scenic-view-in-the-gradle-plugin/" title="Previous Post: Scenic View in the Gradle JavaFX Plugin">&laquo; Scenic View in the Gradle JavaFX Plugin</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -234,7 +306,10 @@
       var disqus_shortname = 'andtheyshallknowmebymyspelingerrors';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

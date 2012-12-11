@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-11-25T14:56:06-07:00</updated>
+  <updated>2012-12-10T20:13:38-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,32 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TextFlow for Fun and Profit]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/"/>
+    <updated>2012-11-25T13:42:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit</id>
+    <content type="html"><![CDATA[<p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
+
+<p>This also happens to fit in nicely with my planned hobby project for the next few months.  The deck control was one part, and the ability to take MarkDown into a JavaFX node is another important part of the equation.  To prototype this I wrote a little toy app I call <a href="https://bitbucket.org/shemnon/flowdown">FlowDown</a></p>
+
+<!-- more -->
+
+
+<p><strong>FlowPane turns the corner</strong></p>
+
+<p>TextFlow at it&#8217;s core is a lot like <a href="http://docs.oracle.com/javafx/2/api/index.html?javafx/scene/layout/FlowPane.html">FlowPane</a>.  The children are laid out in order from the leading edge to the training edge.  When it reaches the edge of the component it goes to the next row and continues to lay out it&#8217;s children.  What is different about TextFlow is that if the next child is a Text node it will fit as much of it as it can in the current row, and then take the remainder to the next row. And if needed it will flow the content across multiple rows to fit the constrained width.  So large long paragraphs of text now take only one node, whereas before you had to resort to tricks that essentially created one node per word.</p>
+
+<p><img src="http://speling.shemnon.com//images/FlowDown.png" alt="FlowDown in action" /></p>
+
+<p><strong>Caution: Beta Code Ahead</strong></p>
+
+<p>To use this toy app you will need one of the more current builds of <a href="http://jdk8.java.net/download.html">JDK8</a> newer than build 66 (build 67 was the current one as of this post).  But this is an early access build which means you cannot distribute it and other things may be broken (like copy and paste on OSX).</p>
+
+<p>The markdown previewer itself is also beta.  Problems include ordered lists not being numbered, and list layout in general being wonky.  Feel free to <a href="https://bitbucket.org/shemnon/flowdown/issues?status=new&amp;status=open">post issues</a>.  Since markdown to JFX nodes is something that may be generally useful I do see myself making a component out of.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scenic View in the Gradle JavaFX Plugin]]></title>
