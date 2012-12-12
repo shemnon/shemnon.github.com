@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaFX | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/javafx/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-12-10T20:13:38-07:00</updated>
+  <updated>2012-12-11T20:59:08-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[TextFlow for Fun and Profit]]></title>
-    <link href="http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/"/>
-    <updated>2012-11-25T13:42:00-07:00</updated>
-    <id>http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit</id>
+    <link href="http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/"/>
+    <updated>2012-12-10T19:42:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit</id>
     <content type="html"><![CDATA[<p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
 
 <p>This also happens to fit in nicely with my planned hobby project for the next few months.  The deck control was one part, and the ability to take MarkDown into a JavaFX node is another important part of the equation.  To prototype this I wrote a little toy app I call <a href="https://bitbucket.org/shemnon/flowdown">FlowDown</a></p>

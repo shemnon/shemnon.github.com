@@ -6,8 +6,8 @@
     <link>http://speling.shemnon.com/</link>
     <atom:link href="http://speling.shemnon.com//all.rss" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <pubDate>Mon, 10 Dec 2012 20:13:38 -0700</pubDate>
-    <lastBuildDate>Mon, 10 Dec 2012 20:13:38 -0700</lastBuildDate>
+    <pubDate>Tue, 11 Dec 2012 20:59:08 -0700</pubDate>
+    <lastBuildDate>Tue, 11 Dec 2012 20:59:08 -0700</lastBuildDate>
     
       
     <item>
@@ -31,10 +31,10 @@
 
 <p>The markdown previewer itself is also beta.  Problems include ordered lists not being numbered, and list layout in general being wonky.  Feel free to <a href="https://bitbucket.org/shemnon/flowdown/issues?status=new&amp;status=open">post issues</a>.  Since markdown to JFX nodes is something that may be generally useful I do see myself making a component out of.</p>
 ]]></description>
-      <pubDate>Sun, 25 Nov 2012 13:42:00 -0700</pubDate>
+      <pubDate>Mon, 10 Dec 2012 19:42:00 -0700</pubDate>
       <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
-      <link>http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/</link>
-      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/11/25/textflow-for-fun-and-profit/</guid>
+      <link>http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/</link>
+      <guid isPermaLink="true">http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/</guid>
     </item>
       
     
