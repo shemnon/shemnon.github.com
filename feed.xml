@@ -8,6 +8,67 @@
 		
 			
 			<item>
+				<title><![CDATA[Mirroring OpenJFX on BitBucket, an Update]]></title>
+				<description><![CDATA[<p>This is a quick update on my mirrors of OpenJFX on BitBucket.  I&#8217;ve moved some stuff around and automated it a bit.  I am also retiring my &#8220;combined&#8221; repo that would merge the master, graphics, and controls scrums together.  It got messy with multiple heads and bookmarks, and given the weekly merging the two scrums do wasn&#8217;t really adding any value.</p>
+
+<!-- more -->
+
+
+<p><strong>Updates on Names</strong></p>
+
+<p>The first major change that I did was to move the mirrors off of my personal account onto a team account named <a href="https://bitbucket.org/openjfxmirrors">&#8216;OpenJFX Mirrors&#8217;</a>.  That landing page is kind of ugly, so I created a repo to hold a wiki whose only page right now <a href="https://bitbucket.org/openjfxmirrors/mirrors/wiki/Home">describes the current mirrors</a>.</p>
+
+<p>One advantage of the name change is that it allows for more participation.  On the free bitbucket account up to 4 other people can be added in to manage things.  There is also the marketing advantage of saying the BitBucket &#8220;team&#8221; is dedicated to mirroring OpenJFX, and that it is more than one of my many repos on BitBucket (I have many private repos).</p>
+
+<p>There is a standard mapping of the OpenJDK repos to the BitBucket repos.  Basically you change the prefix and then replaces slashes with dashes.  For example this URL:</p>
+
+<pre><code>https://hg.openjdk.java.net/openjfx/8/controls/rt
+</code></pre>
+
+<p>is mirrored to this URL:</p>
+
+<pre><code>https://bitbucket.org/openjfxmirrors/openjfx-8-controls-rt
+</code></pre>
+
+<p>It is important to note that not every OpenJFX Repo is mirrored.  Right now I only mirror the Version 8 branches.  Of the 2.x line I only consider 2.2.6 to be worthy of mirroring, and then since it is just bug fixes and not feature adds I consider it less interesting.</p>
+
+<p><strong>Automation</strong></p>
+
+<p>The second major change is that I have automated the update of the repos.  Before I had a shell script on my MacBook Air that would do the pulling and pushing of the repo data.  It was slick and easy, but it required me opening up my Macbook air once in a while.  At my old job it was a more than daily occurrence.  But since I am starting up new work at Fluke Networks I have more interesting things to do all day than keeping up to date on all of Reddit&#8217;s Advice Animals.</p>
+
+<p>Writing this script is incredibly simple.  At the core of the loop are the two real commands that get work done:</p>
+
+<pre><code>hg pull
+hg push
+</code></pre>
+
+<p>That&#8217;s all.  And I am not just pushing the repo back onto itself.  Mercurial comes with the concept of a <em>default push</em> repository.  Pulls come from the default, and pushes by default go to the default push repo, or just the default repo if not set.  The <code>.hg/hgrc</code> file contains this mapping:</p>
+
+<pre><code>[paths]
+default = http://hg.openjdk.java.net/openjfx/8/controls/rt
+default-push = ssh://hg@bitbucket.org/openjfxmirrors/openjfx-8-controls-rt
+</code></pre>
+
+<p>Of note is that I use the SSH mapping with a public key so the script is never asked for my user password and never knows about it to begin with.</p>
+
+<p><strong>Props to CloudBees and Atlassian</strong></p>
+
+<p>None of this would have been possible without the gracious donation of disk space and processing time from two names you should already know.  Atlassian and CloudBees.</p>
+
+<p><a href="http://www.atlassian.com/">Atlassian</a> owns and operates the <a href="https://bitbucket.org/">BitBucket</a> service, which hosts the Mercurial repositories that I am using to mirror.  The point of this mirroring is that the UI at BitBucket is orders of magnitude better than the one you get at OpenJDK.  Visualizing the changes and examining the source files is actually possible with this interface.</p>
+
+<p>The automation is hosted over at <a href="http://www.cloudbees.com/">CloudBees</a> on their eponymous cloud build platform. It is awesome of them to offer free build server time to open source projects.  I even have one of their technical running shirts I snagged at JavaOne this year.  (And I promise it will get more use as a running shirt next year).</p>
+
+<p>Give these companies some of your business, they deserve it.</p>
+]]></description>
+				<pubDate>Thu, 20 Dec 2012 20:18:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[TextFlow for Fun and Profit]]></title>
 				<description><![CDATA[<p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
 
@@ -28,7 +89,7 @@
 
 <p>The markdown previewer itself is also beta.  Problems include ordered lists not being numbered, and list layout in general being wonky.  Feel free to <a href="https://bitbucket.org/shemnon/flowdown/issues?status=new&amp;status=open">post issues</a>.  Since markdown to JFX nodes is something that may be generally useful I do see myself making a component out of.</p>
 ]]></description>
-				<pubDate>Mon, 10 Dec 2012 19:42:00 -0700</pubDate>
+				<pubDate>Mon, 10 Dec 2012 21:10:00 -0700</pubDate>
 				<link>http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/</link>
 				<guid isPermaLink="true">http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/</guid>
 			</item>

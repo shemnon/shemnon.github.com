@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaFX | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/javafx/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-12-11T20:59:08-07:00</updated>
+  <updated>2012-12-20T21:12:05-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -14,9 +14,68 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Mirroring OpenJFX on BitBucket, an Update]]></title>
+    <link href="http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/"/>
+    <updated>2012-12-20T20:18:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update</id>
+    <content type="html"><![CDATA[<p>This is a quick update on my mirrors of OpenJFX on BitBucket.  I've moved some stuff around and automated it a bit.  I am also retiring my "combined" repo that would merge the master, graphics, and controls scrums together.  It got messy with multiple heads and bookmarks, and given the weekly merging the two scrums do wasn't really adding any value.</p>
+
+<!-- more -->
+
+
+<p><strong>Updates on Names</strong></p>
+
+<p>The first major change that I did was to move the mirrors off of my personal account onto a team account named <a href="https://bitbucket.org/openjfxmirrors">'OpenJFX Mirrors'</a>.  That landing page is kind of ugly, so I created a repo to hold a wiki whose only page right now <a href="https://bitbucket.org/openjfxmirrors/mirrors/wiki/Home">describes the current mirrors</a>.</p>
+
+<p>One advantage of the name change is that it allows for more participation.  On the free bitbucket account up to 4 other people can be added in to manage things.  There is also the marketing advantage of saying the BitBucket "team" is dedicated to mirroring OpenJFX, and that it is more than one of my many repos on BitBucket (I have many private repos).</p>
+
+<p>There is a standard mapping of the OpenJDK repos to the BitBucket repos.  Basically you change the prefix and then replaces slashes with dashes.  For example this URL:</p>
+
+<pre><code>https://hg.openjdk.java.net/openjfx/8/controls/rt
+</code></pre>
+
+<p>is mirrored to this URL:</p>
+
+<pre><code>https://bitbucket.org/openjfxmirrors/openjfx-8-controls-rt
+</code></pre>
+
+<p>It is important to note that not every OpenJFX Repo is mirrored.  Right now I only mirror the Version 8 branches.  Of the 2.x line I only consider 2.2.6 to be worthy of mirroring, and then since it is just bug fixes and not feature adds I consider it less interesting.</p>
+
+<p><strong>Automation</strong></p>
+
+<p>The second major change is that I have automated the update of the repos.  Before I had a shell script on my MacBook Air that would do the pulling and pushing of the repo data.  It was slick and easy, but it required me opening up my Macbook air once in a while.  At my old job it was a more than daily occurrence.  But since I am starting up new work at Fluke Networks I have more interesting things to do all day than keeping up to date on all of Reddit's Advice Animals.</p>
+
+<p>Writing this script is incredibly simple.  At the core of the loop are the two real commands that get work done:</p>
+
+<pre><code>hg pull
+hg push
+</code></pre>
+
+<p>That's all.  And I am not just pushing the repo back onto itself.  Mercurial comes with the concept of a <em>default push</em> repository.  Pulls come from the default, and pushes by default go to the default push repo, or just the default repo if not set.  The <code>.hg/hgrc</code> file contains this mapping:</p>
+
+<pre><code>[paths]
+default = http://hg.openjdk.java.net/openjfx/8/controls/rt
+default-push = ssh://hg@bitbucket.org/openjfxmirrors/openjfx-8-controls-rt
+</code></pre>
+
+<p>Of note is that I use the SSH mapping with a public key so the script is never asked for my user password and never knows about it to begin with.</p>
+
+<p><strong>Props to CloudBees and Atlassian</strong></p>
+
+<p>None of this would have been possible without the gracious donation of disk space and processing time from two names you should already know.  Atlassian and CloudBees.</p>
+
+<p><a href="http://www.atlassian.com/">Atlassian</a> owns and operates the <a href="https://bitbucket.org/">BitBucket</a> service, which hosts the Mercurial repositories that I am using to mirror.  The point of this mirroring is that the UI at BitBucket is orders of magnitude better than the one you get at OpenJDK.  Visualizing the changes and examining the source files is actually possible with this interface.</p>
+
+<p>The automation is hosted over at <a href="http://www.cloudbees.com/">CloudBees</a> on their eponymous cloud build platform. It is awesome of them to offer free build server time to open source projects.  I even have one of their technical running shirts I snagged at JavaOne this year.  (And I promise it will get more use as a running shirt next year).</p>
+
+<p>Give these companies some of your business, they deserve it.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[TextFlow for Fun and Profit]]></title>
     <link href="http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/"/>
-    <updated>2012-12-10T19:42:00-07:00</updated>
+    <updated>2012-12-10T21:10:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit</id>
     <content type="html"><![CDATA[<p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
 
@@ -871,30 +930,6 @@ I think you should use an
 <p>This is notional, and I am more than willing to hear comments as to where I am getting stuff wrong.  This is currently the file layout I am using for my Gradle JavaFX plugin, and I've pulled three of the JavaFX sample apps into this directory format, and the build files are all quite short (after the yak shaving to install the plugin).  <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341796394ae9c7ba9d44f1d79c45889/samples/brickbreaker/build.gradle?at=master">Brickbreaker</a> just installs the plugin.  <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341/samples/ConferenceScheduleApp/build.gradle?at=master">ConferenceScheduleApp</a> only names the executable (with bonus Java Version yak shaving) while <a href="https://bitbucket.org/shemnon/javafx-gradle/src/c52be485c341/samples/Ensemble2/build.gradle?at=master">Ensemble2</a> has the most to do, and none of it involved JavaFX but it is peculiar to how the app works.</p>
 
 <p>My goal here, is to make all of the JavaFX yak shaving transparent, so you can focus on indexing your samples in your build rather than remembering the syntax of the ant deploy task.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Starting a JavaFX Gradle Plugin]]></title>
-    <link href="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/"/>
-    <updated>2012-10-17T22:47:00-06:00</updated>
-    <id>http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin</id>
-    <content type="html"><![CDATA[<p>I wanted to get this out there early, since "release early release often" is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I'm not sure when I'll get to write it.</p>
-
-<p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don't have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
-
-<!-- more -->
-
-
-<p>There are two samples in the repo demonstrating the build.  I pulled from the JavaFX 2.2.0 Samples brickbreaker and Ensemble2 which represents a small and large project. I moved the files around into a conventional layout, and provided the barest of Gradle scripts I could, with the help of the plugin.  The script for <a href="https://bitbucket.org/shemnon/javafx-gradle/src/4f1f197a845d5fccc4408ad3c49167e65421b1df/brickbreaker/build.gradle?at=master">brickbreaker</a> is awesomely short.  And <a href="https://bitbucket.org/shemnon/javafx-gradle/src/955cc9b99dc86c3b384b40157801ffd3c1adfe94/Ensemble2/build.gradle?at=master">Ensemble2</a> is a bit longer because of the custom build work it is doing to bring the source of the samples into the jar.  When you run 'gradle assemble` it will actually create the Mac OSX .app and .dmg files.  It probably does the correct thing on Linux and Windows but I haven't tried yet.  But first you need to install the plugin via 'gradle install' in the plugin dir.</p>
-
-<p><strong>Conventions</strong></p>
-
-<p>My main purpose in this exercise is to try and nail down a set of file layout conventions that Gradle and Maven can use to create a shippable app with a minimum of configuration.  Layouts that match the Maven way for the most part.  And Ant scripts can be written to these conventions.  If, you know, Ant is your thing.</p>
-
-<p>The only out there conventions would be the bundle resources, which I am placing in <code>src/main/resources</code>.  I also intend to add some other standard files, like <code>src/main/resources/icon.png</code> and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world's most awesome password.</p>
-
-<p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I'de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
 ]]></content>
   </entry>
   
