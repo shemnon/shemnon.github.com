@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2012-12-20T21:12:05-07:00</updated>
+  <updated>2013-01-08T23:10:03-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[JavaFX Gradle Plugin 0.1.0 Released]]></title>
+    <link href="http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/"/>
+    <updated>2013-01-08T22:24:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released</id>
+    <content type="html"><![CDATA[<p>I just spun and released the 0.1.0 version of my JavaFX Gradle plugin.  There is only one new feature: ScenicView integration.  The rest is behind the scenes work where I am moving away from the Ant tasks.  I also updated some of the web scripts to launch it.</p>
+
+<!-- more -->
+
+
+<p><strong>Scenic View</strong></p>
+
+<p>As mentioned in a <a href="http://speling.shemnon.com/blog/2012/11/25/scenic-view-in-the-gradle-plugin/">previous post</a> the plugin now integrates the Scenic View libraries.  This is the easiest way I know of to launch it on a Mac, since the auto-connect still seems to be a bit wonky.</p>
+
+<p><strong>Escaping the Legacy of Ant</strong></p>
+
+<p>Ant was awesome.  Especially in the Twentieth Century when it was first written.  And for a good number of years after Y2K failed to end the world.  It gave us a Rosetta Stone by which all build systems could access an invoke a given task.  The problem is that it is usually just a proxy for more powerful features just under the surface.  Since Oracle has been living up to their commitment of releasing more of JavaFX as open source I can now <a href="http://hg.openjdk.java.net/openjfx/8/master/rt/file/e25ee61a987d/deploy/packager/">look and see</a> exactly how the JavaFX packager Ant tasks are working.</p>
+
+<p>The first step is to replicate what was functioning through the 0.0.0 release directly without going through the Ant tasks.  The next task, for the 0.2.0 releases, is to expose more of the knobs and switches that the Ant tasks didn&#8217;t expose.  Just the ones that make sense however.  Then after that I will look at adding more value-adds on top of the packager, like automatic icon generation.  This also opens the realm of writing other bundling options, even outside the realm of JavaFX such as XMLVM and other shiny technologies.  But I digress.</p>
+
+<p><strong>Versioned Launch Scripts</strong></p>
+
+<p>To support using the classes directly in the build file I added a couple of dependencies into the plugin script.  Hence I have added versioning information into the URLs of the launch scripts so these dependencies don&#8217;t bleed into unneeded versions.  If you want the latest and greatest all the time continue to use the version free URL:</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/javafx.plugin'
+</code></pre>
+
+<p>The danger here is that I may change something that breaks your builds.  To lock into a particular version of the plugin, you can add the version just after release or snapshot:</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/0.1.0/javafx.plugin'
+</code></pre>
+
+<p>Note that if you are using a snapshot URL you need the <code>-SNAPSHOT</code> in the url as well</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/snapshot/0.2.0-SNAPSHOT/javafx.plugin'
+</code></pre>
+
+<p>Of course you can always do a copy and paste of the content of these scripts.  This is useful for network disconnected builds.</p>
+
+<p><strong>Roadmap</strong></p>
+
+<p>I intend to call whatever is out and running when Java 8 ships the &#8220;1.0&#8221; version.  At that time I will no longer make it a point to have it work on Java 7 versions of JavaFX.  There is so much new and awesome stuff coming in version 8 that it will be hard to not use it.  Until then expect sporadic and unpredictable updates as my schedule allows.</p>
+
+<p>As previously stated for the 0.2.0 release I intend to expose more of the packager interfaces that make sense.  I also intend to make the plugin more Gradle &#8220;idiomatic&#8221; with the help of <a href="http://twitter.com/MrHaKi">@MrHaki</a>&#8217;s <a href="http://www.packtpub.com/gradle-effective-implementation-guide/book">Gradle Effective Implementation Guide</a>.  Apparently I am doing the JavaFX convention wrong in the code and I should be using ExtensionContainer or something to that effect.  I&#8217;ll let you know more after I read up on it.</p>
+
+<p>I also like feedback, that is why I turned on the <a href="https://bitbucket.org/shemnon/javafx-gradle/issues">bug tracker</a> that BitBucket provides.  While I cannot commit to fix every bug immediately I will look at all patches and pull requests with a bias towards committing them.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mirroring OpenJFX on BitBucket, an Update]]></title>

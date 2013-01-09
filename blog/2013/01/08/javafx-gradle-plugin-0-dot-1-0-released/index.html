@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Starting a JavaFX Gradle Plugin - ...and they shall know me by my speling errors.</title>
+  <title>JavaFX Gradle Plugin 0.1.0 Released - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras. I have a longer blog post &hellip;">
+  <meta name="description" content="I just spun and released the 0.1.0 version of my JavaFX Gradle plugin. There is only one new feature: ScenicView integration. The rest is behind the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Starting a JavaFX Gradle Plugin</h1>
+      <h1 class="entry-title">JavaFX Gradle Plugin 0.1.0 Released</h1>
     
     
       <p class="meta">
@@ -83,29 +83,54 @@
   
 
 
-<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-01-08T22:24:00-07:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
-
-<p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don&#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
+<div class="entry-content"><p>I just spun and released the 0.1.0 version of my JavaFX Gradle plugin.  There is only one new feature: ScenicView integration.  The rest is behind the scenes work where I am moving away from the Ant tasks.  I also updated some of the web scripts to launch it.</p>
 
 <!-- more -->
 
 
-<p>There are two samples in the repo demonstrating the build.  I pulled from the JavaFX 2.2.0 Samples brickbreaker and Ensemble2 which represents a small and large project. I moved the files around into a conventional layout, and provided the barest of Gradle scripts I could, with the help of the plugin.  The script for <a href="https://bitbucket.org/shemnon/javafx-gradle/src/4f1f197a845d5fccc4408ad3c49167e65421b1df/brickbreaker/build.gradle?at=master">brickbreaker</a> is awesomely short.  And <a href="https://bitbucket.org/shemnon/javafx-gradle/src/955cc9b99dc86c3b384b40157801ffd3c1adfe94/Ensemble2/build.gradle?at=master">Ensemble2</a> is a bit longer because of the custom build work it is doing to bring the source of the samples into the jar.  When you run &#8216;gradle assemble` it will actually create the Mac OSX .app and .dmg files.  It probably does the correct thing on Linux and Windows but I haven&#8217;t tried yet.  But first you need to install the plugin via &#8216;gradle install&#8217; in the plugin dir.</p>
+<p><strong>Scenic View</strong></p>
 
-<p><strong>Conventions</strong></p>
+<p>As mentioned in a <a href="http://speling.shemnon.com/blog/2012/11/25/scenic-view-in-the-gradle-plugin/">previous post</a> the plugin now integrates the Scenic View libraries.  This is the easiest way I know of to launch it on a Mac, since the auto-connect still seems to be a bit wonky.</p>
 
-<p>My main purpose in this exercise is to try and nail down a set of file layout conventions that Gradle and Maven can use to create a shippable app with a minimum of configuration.  Layouts that match the Maven way for the most part.  And Ant scripts can be written to these conventions.  If, you know, Ant is your thing.</p>
+<p><strong>Escaping the Legacy of Ant</strong></p>
 
-<p>The only out there conventions would be the bundle resources, which I am placing in <code>src/main/resources</code>.  I also intend to add some other standard files, like <code>src/main/resources/icon.png</code> and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world&#8217;s most awesome password.</p>
+<p>Ant was awesome.  Especially in the Twentieth Century when it was first written.  And for a good number of years after Y2K failed to end the world.  It gave us a Rosetta Stone by which all build systems could access an invoke a given task.  The problem is that it is usually just a proxy for more powerful features just under the surface.  Since Oracle has been living up to their commitment of releasing more of JavaFX as open source I can now <a href="http://hg.openjdk.java.net/openjfx/8/master/rt/file/e25ee61a987d/deploy/packager/">look and see</a> exactly how the JavaFX packager Ant tasks are working.</p>
 
-<p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
+<p>The first step is to replicate what was functioning through the 0.0.0 release directly without going through the Ant tasks.  The next task, for the 0.2.0 releases, is to expose more of the knobs and switches that the Ant tasks didn&#8217;t expose.  Just the ones that make sense however.  Then after that I will look at adding more value-adds on top of the packager, like automatic icon generation.  This also opens the realm of writing other bundling options, even outside the realm of JavaFX such as XMLVM and other shiny technologies.  But I digress.</p>
+
+<p><strong>Versioned Launch Scripts</strong></p>
+
+<p>To support using the classes directly in the build file I added a couple of dependencies into the plugin script.  Hence I have added versioning information into the URLs of the launch scripts so these dependencies don&#8217;t bleed into unneeded versions.  If you want the latest and greatest all the time continue to use the version free URL:</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/javafx.plugin'
+</code></pre>
+
+<p>The danger here is that I may change something that breaks your builds.  To lock into a particular version of the plugin, you can add the version just after release or snapshot:</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/0.1.0/javafx.plugin'
+</code></pre>
+
+<p>Note that if you are using a snapshot URL you need the <code>-SNAPSHOT</code> in the url as well</p>
+
+<pre><code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/snapshot/0.2.0-SNAPSHOT/javafx.plugin'
+</code></pre>
+
+<p>Of course you can always do a copy and paste of the content of these scripts.  This is useful for network disconnected builds.</p>
+
+<p><strong>Roadmap</strong></p>
+
+<p>I intend to call whatever is out and running when Java 8 ships the &#8220;1.0&#8221; version.  At that time I will no longer make it a point to have it work on Java 7 versions of JavaFX.  There is so much new and awesome stuff coming in version 8 that it will be hard to not use it.  Until then expect sporadic and unpredictable updates as my schedule allows.</p>
+
+<p>As previously stated for the 0.2.0 release I intend to expose more of the packager interfaces that make sense.  I also intend to make the plugin more Gradle &#8220;idiomatic&#8221; with the help of <a href="http://twitter.com/MrHaKi">@MrHaki</a>&#8217;s <a href="http://www.packtpub.com/gradle-effective-implementation-guide/book">Gradle Effective Implementation Guide</a>.  Apparently I am doing the JavaFX convention wrong in the code and I should be using ExtensionContainer or something to that effect.  I&#8217;ll let you know more after I read up on it.</p>
+
+<p>I also like feedback, that is why I turned on the <a href="https://bitbucket.org/shemnon/javafx-gradle/issues">bug tracker</a> that BitBucket provides.  While I cannot commit to fix every bug immediately I will look at all patches and pull requests with a bias towards committing them.</p>
 </div>
 
 
@@ -128,21 +153,15 @@
   
 
 
-<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-01-08T22:24:00-07:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/gradle/'>Gradle</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/" >Tweet</a>
   
   
   
@@ -151,10 +170,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/09/mirroring-openjfx-on-bitbucket/" title="Previous Post: Mirroring OpenJFX on BitBucket">&laquo; Mirroring OpenJFX on BitBucket</a>
+        <a class="basic-alignment left" href="/blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/" title="Previous Post: Mirroring OpenJFX on BitBucket, an Update">&laquo; Mirroring OpenJFX on BitBucket, an Update</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/10/23/conventions-and-configurations/" title="Next Post: Conventions and Configuratons">Conventions and Configuratons &raquo;</a>
       
     </p>
   </footer>
@@ -307,8 +324,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/';
         var disqus_script = 'embed.js';
       
     (function () {
