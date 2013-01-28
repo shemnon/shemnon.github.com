@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Adding Icons with the Gradle JavaFX Plugin - ...and they shall know me by my speling errors.</title>
+  <meta name="author" content="Danno Ferrin">
+
+  
+  <meta name="description" content="The 0.2.0 release of the Gradle JavaFX Plugin is just around the corner. I want to spend some time building all the samples on all of the platforms &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="...and they shall know me by my speling errors." type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">...and they shall know me by my speling errors.</a></h1>
+  
+    <h2>Danno Ferrin (aka shemnon) on stuff that matters to him.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:speling.shemnon.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Adding Icons With the Gradle JavaFX Plugin</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-28T14:57:00-07:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The 0.2.0 release of the Gradle JavaFX Plugin is just around the corner. I want to spend some time building all the samples on all of the platforms and making sure smoke doesn&#8217;t come out. Expect it in a day or two.</p>
+
+<p>The major feature for this release is better handling of packaged icons across the platforms. There is a file convention manner and a build script configuration method that will allow you to take a set of PNG images and let the build tool create the needed specialty file for each platform.</p>
+
+<!-- more -->
+
+
+<p>A quick word of warning before I dive into the details. You have to choose either the convention or the configuration, not both. If you do any configuration of your icons then none of the file conventions will be applied.</p>
+
+<p><strong> Icons By Convention </strong></p>
+
+<p>The easiest method is just to place specifically named icons in a specific place. The directory you should place the icons in is <code>src/deploy/package</code>. The icons also all need to be PNG images. The real magic is in how you name your icons. If they have the right pattern for their name then icon will be used and the sizes and other metadata are calculated by the plugin.</p>
+
+<p>When naming icons for the conventional method the first part of the name describes the role of the icon. Right now the values are <code>shortcut</code>, <code>volume</code>, and <code>setup</code>. An icon of type <code>shortcut</code> will be the icon in the launcher, executable, taskbar, menu, or dock. An icon of type <code>volume</code> will be used for the MacOSX DMG folder icon. And an icon of type <code>setup</code> will appear in the corner of a Windows EXE setup wizard.</p>
+
+<p>The second part of the name is any random set of characters. You would do this to distinguish the various sizes of the icons. However multiple icons are only recommend for the <code>shortcut</code> and <code>volume</code> icon sets, since the <code>setup</code> icon is converted into a BMP by the plugin. For MacOSX you also need to pay attention to the icon sizes, since only certain sizes are used by the MacOSX ICNS file. Those size are 16, 32, 128, 256, and 512 square. Note that 64x64 is not in that list!</p>
+
+<p>The final part of the name is only relevant to MacOSX installers. If the file has &#8216;@2x&#8217; in it&#8217;s name anywhere, it is presumed to be a HDPI icon for that size. This means that the pixel dimensions are twice as large for that icon then the size it is considered to be. Right now the string can occur anywhere, but future versions of the plugin may require it to be at the end of the name.</p>
+
+<p>For example, a 16x16 icon named <code>shortcut.png</code> would be used as the shortcut icon. If there was another 512x512 icon named <code>shortcut-awesome.png</code> that icon would be used as well. And if a 1024x1024 icon was also in the correct directory and it was named <code>shortcutReallyAwesome@2x.png</code> then it would be a shortcut icon, at HDPI scale 2, used for the 512x512 icon. For a functional example of this see the <a href="https://bitbucket.org/shemnon/javafx-gradle/src/1bd371c2d4656d383636f84a37a5841e6894af23/samples/brickbreaker/src/deploy/package?at=master">brickbreaker</a> sample in the source code.</p>
+
+<p><strong>Icons by Configuration</strong></p>
+
+<p>If you want to have the build script configure the icons you can do that as well. This will allow the re-use of icons across different usage kinds. There are two methods of configuration both of which are supported when using the configuration option.</p>
+
+<p>The shorthand method involved adding an <code>icons</code> configuration setting inside the <code>javafx</code> configuration setting. Inside this configuration you set a value for each kind of icon you are using to either a string or list of strings. These strings will be resolved as files against the <code>src/deploy/package</code> directory. For example, from the <a href="https://bitbucket.org/shemnon/javafx-gradle/src/1bd371c2d465/samples/FullyExpressed/build.gradle?at=master#cl-92">FullyExpressed</a> sample (which is a junk project that turns every knob and flips every switch just to do it) the icons are configured like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>javafx {
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>    icons {
+</span><span class='line'>        shortcut = ['shortcut-16.png', 'shortcut-32.png', 
+</span><span class='line'>                    'shortcut-128.png', 'shortcut-256.png', 
+</span><span class='line'>                    'shortcut-16@2x.png', 'shortcut-32@2x.png', 
+</span><span class='line'>                    'shortcut-128@2x.png']
+</span><span class='line'>        volume = 'javafx-icon.png'
+</span><span class='line'>        setup = 'javafx-icon.png'
+</span><span class='line'>    }
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Like the conventional way the sizes of the icons are sniffed out and the HDPI icons all contain &#8216;@2x&#8217; at the end of their name. The icons also all must be PNG icons. Finally, remember that any text between the kind and the possible end of the name is not used by the plugin, unless it is the <code>@2x</code> at the end to tell the icon it is a HDPI icon.</p>
+
+<p>If you need total control over the JNLP descriptor you can specify each one in an <code>icon</code> setting. You repeat the setting for each icon. You can then set each attribute individually. For example, form the same <a href="https://bitbucket.org/shemnon/javafx-gradle/src/bbe9d6ebe08d/samples/FullyExpressed/build.gradle?at=master#cl-99">FullyExpressed</a> sample the splash and selected icons are configured manually.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>javafx {
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>    icon {
+</span><span class='line'>        href = 'src/main/resources/javafx-icon.png'
+</span><span class='line'>        kind = 'splash'
+</span><span class='line'>        width = 128
+</span><span class='line'>        height = 128
+</span><span class='line'>    }
+</span><span class='line'>    icon {
+</span><span class='line'>        href = 'shortcut-32@2x.png'
+</span><span class='line'>        kind = 'selected'
+</span><span class='line'>        width = 16
+</span><span class='line'>        height = 16
+</span><span class='line'>        scale = 1
+</span><span class='line'>    }
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Packager Defaults</strong></p>
+
+<p>The defaults provided buy the JavaFX packaging library were not changed.  So if you see a grey embossed java coffee cup then the default for that icon has not been changed.</p>
+
+<p>If you want to use the current code, you can add <code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/snapshot/javafx.plugin</code> to the top of your gradle file.  Or you can wait a few days until I push the bits to BinTray.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-28T14:57:00-07:00" pubdate data-updated="true">Jan 28<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/gradle/'>Gradle</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/" title="Previous Post: JavaFX Gradle Plugin 0.1.0 Released">&laquo; JavaFX Gradle Plugin 0.1.0 Released</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">Adding Icons with the Gradle JavaFX Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/">JavaFX Gradle Plugin 0.1.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/">Mirroring OpenJFX on BitBucket, an Update</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/12/10/textflow-for-fun-and-profit/">TextFlow for Fun and Profit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/11/25/scenic-view-in-the-gradle-plugin/">Scenic View in the Gradle JavaFX Plugin</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Bitbucket Repos</h1>
+  <ul id="bb_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://bitbucket.org/shemnon">@shemnon</a> on Bitbucket
+  
+
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        bitbucket.showRepos({
+            user: 'shemnon',
+            password: '',
+            count: 4,
+            require_wiki: false,
+            target: '#bb_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/bitbucket.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shemnon">@shemnon</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shemnon',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shemnon", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shemnon" class="twitter-follow-button" data-show-count="false">Follow @shemnon</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/107563042277462358434?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Danno Ferrin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'andtheyshallknowmebymyspelingerrors';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

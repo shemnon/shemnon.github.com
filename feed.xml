@@ -8,6 +8,114 @@
 		
 			
 			<item>
+				<title><![CDATA[Adding Icons with the Gradle JavaFX Plugin]]></title>
+				<description><![CDATA[<p>The 0.2.0 release of the Gradle JavaFX Plugin is just around the corner. I want to spend some time building all the samples on all of the platforms and making sure smoke doesn&#8217;t come out. Expect it in a day or two.</p>
+
+<p>The major feature for this release is better handling of packaged icons across the platforms. There is a file convention manner and a build script configuration method that will allow you to take a set of PNG images and let the build tool create the needed specialty file for each platform.</p>
+
+<!-- more -->
+
+
+<p>A quick word of warning before I dive into the details. You have to choose either the convention or the configuration, not both. If you do any configuration of your icons then none of the file conventions will be applied.</p>
+
+<p><strong> Icons By Convention </strong></p>
+
+<p>The easiest method is just to place specifically named icons in a specific place. The directory you should place the icons in is <code>src/deploy/package</code>. The icons also all need to be PNG images. The real magic is in how you name your icons. If they have the right pattern for their name then icon will be used and the sizes and other metadata are calculated by the plugin.</p>
+
+<p>When naming icons for the conventional method the first part of the name describes the role of the icon. Right now the values are <code>shortcut</code>, <code>volume</code>, and <code>setup</code>. An icon of type <code>shortcut</code> will be the icon in the launcher, executable, taskbar, menu, or dock. An icon of type <code>volume</code> will be used for the MacOSX DMG folder icon. And an icon of type <code>setup</code> will appear in the corner of a Windows EXE setup wizard.</p>
+
+<p>The second part of the name is any random set of characters. You would do this to distinguish the various sizes of the icons. However multiple icons are only recommend for the <code>shortcut</code> and <code>volume</code> icon sets, since the <code>setup</code> icon is converted into a BMP by the plugin. For MacOSX you also need to pay attention to the icon sizes, since only certain sizes are used by the MacOSX ICNS file. Those size are 16, 32, 128, 256, and 512 square. Note that 64x64 is not in that list!</p>
+
+<p>The final part of the name is only relevant to MacOSX installers. If the file has &#8216;@2x&#8217; in it&#8217;s name anywhere, it is presumed to be a HDPI icon for that size. This means that the pixel dimensions are twice as large for that icon then the size it is considered to be. Right now the string can occur anywhere, but future versions of the plugin may require it to be at the end of the name.</p>
+
+<p>For example, a 16x16 icon named <code>shortcut.png</code> would be used as the shortcut icon. If there was another 512x512 icon named <code>shortcut-awesome.png</code> that icon would be used as well. And if a 1024x1024 icon was also in the correct directory and it was named <code>shortcutReallyAwesome@2x.png</code> then it would be a shortcut icon, at HDPI scale 2, used for the 512x512 icon. For a functional example of this see the <a href="https://bitbucket.org/shemnon/javafx-gradle/src/1bd371c2d4656d383636f84a37a5841e6894af23/samples/brickbreaker/src/deploy/package?at=master">brickbreaker</a> sample in the source code.</p>
+
+<p><strong>Icons by Configuration</strong></p>
+
+<p>If you want to have the build script configure the icons you can do that as well. This will allow the re-use of icons across different usage kinds. There are two methods of configuration both of which are supported when using the configuration option.</p>
+
+<p>The shorthand method involved adding an <code>icons</code> configuration setting inside the <code>javafx</code> configuration setting. Inside this configuration you set a value for each kind of icon you are using to either a string or list of strings. These strings will be resolved as files against the <code>src/deploy/package</code> directory. For example, from the <a href="https://bitbucket.org/shemnon/javafx-gradle/src/1bd371c2d465/samples/FullyExpressed/build.gradle?at=master#cl-92">FullyExpressed</a> sample (which is a junk project that turns every knob and flips every switch just to do it) the icons are configured like this:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>javafx {
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>    icons {
+</span><span class='line'>        shortcut = ['shortcut-16.png', 'shortcut-32.png', 
+</span><span class='line'>                    'shortcut-128.png', 'shortcut-256.png', 
+</span><span class='line'>                    'shortcut-16@2x.png', 'shortcut-32@2x.png', 
+</span><span class='line'>                    'shortcut-128@2x.png']
+</span><span class='line'>        volume = 'javafx-icon.png'
+</span><span class='line'>        setup = 'javafx-icon.png'
+</span><span class='line'>    }
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Like the conventional way the sizes of the icons are sniffed out and the HDPI icons all contain &#8216;@2x&#8217; at the end of their name. The icons also all must be PNG icons. Finally, remember that any text between the kind and the possible end of the name is not used by the plugin, unless it is the <code>@2x</code> at the end to tell the icon it is a HDPI icon.</p>
+
+<p>If you need total control over the JNLP descriptor you can specify each one in an <code>icon</code> setting. You repeat the setting for each icon. You can then set each attribute individually. For example, form the same <a href="https://bitbucket.org/shemnon/javafx-gradle/src/bbe9d6ebe08d/samples/FullyExpressed/build.gradle?at=master#cl-99">FullyExpressed</a> sample the splash and selected icons are configured manually.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>javafx {
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>    icon {
+</span><span class='line'>        href = 'src/main/resources/javafx-icon.png'
+</span><span class='line'>        kind = 'splash'
+</span><span class='line'>        width = 128
+</span><span class='line'>        height = 128
+</span><span class='line'>    }
+</span><span class='line'>    icon {
+</span><span class='line'>        href = 'shortcut-32@2x.png'
+</span><span class='line'>        kind = 'selected'
+</span><span class='line'>        width = 16
+</span><span class='line'>        height = 16
+</span><span class='line'>        scale = 1
+</span><span class='line'>    }
+</span><span class='line'>    /*. . . snip . . .*/
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Packager Defaults</strong></p>
+
+<p>The defaults provided buy the JavaFX packaging library were not changed.  So if you see a grey embossed java coffee cup then the default for that icon has not been changed.</p>
+
+<p>If you want to use the current code, you can add <code>apply from: 'https://repository-javafx-gradle-plugin.forge.cloudbees.com/snapshot/javafx.plugin</code> to the top of your gradle file.  Or you can wait a few days until I push the bits to BinTray.</p>
+]]></description>
+				<pubDate>Mon, 28 Jan 2013 14:57:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[JavaFX Gradle Plugin 0.1.0 Released]]></title>
 				<description><![CDATA[<p>I just spun and released the 0.1.0 version of my JavaFX Gradle plugin.  There is only one new feature: ScenicView integration.  The rest is behind the scenes work where I am moving away from the Ant tasks.  I also updated some of the web scripts to launch it.</p>
 
