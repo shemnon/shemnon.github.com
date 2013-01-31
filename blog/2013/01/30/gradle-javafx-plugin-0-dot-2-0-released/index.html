@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Starting a JavaFX Gradle Plugin - ...and they shall know me by my speling errors.</title>
+  <title>Gradle JavaFX Plugin 0.2.0 Released - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras. I have a longer blog post &hellip;">
+  <meta name="description" content="The 0.2.0 release of the Gradle JavaFX Plugin is now live on BinTray. Get it while it&#8217;s hot! More things changed in this release than the lat &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Starting a JavaFX Gradle Plugin</h1>
+      <h1 class="entry-title">Gradle JavaFX Plugin 0.2.0 Released</h1>
     
     
       <p class="meta">
@@ -83,29 +83,53 @@
   
 
 
-<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-01-30T19:57:00-07:00" pubdate data-updated="true">Jan 30<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
-
-<p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don&#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
+<div class="entry-content"><p>The 0.2.0 release of the Gradle JavaFX Plugin is now live on <a href="http://l.aunch.us/fOjm">BinTray</a>. Get it while it&#8217;s hot! More things changed in this release than the lat time around. First there has been a lot of work automating the use of icons in the packaged resource. My <a href="http://speling.shemnon.com/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">previous post</a> has all the details. Second, the interaction between the Maven and Eclipse plugin has been improved. Finally, the distribution has move to BinTray for the release artifacts.</p>
 
 <!-- more -->
 
 
-<p>There are two samples in the repo demonstrating the build.  I pulled from the JavaFX 2.2.0 Samples brickbreaker and Ensemble2 which represents a small and large project. I moved the files around into a conventional layout, and provided the barest of Gradle scripts I could, with the help of the plugin.  The script for <a href="https://bitbucket.org/shemnon/javafx-gradle/src/4f1f197a845d5fccc4408ad3c49167e65421b1df/brickbreaker/build.gradle?at=master">brickbreaker</a> is awesomely short.  And <a href="https://bitbucket.org/shemnon/javafx-gradle/src/955cc9b99dc86c3b384b40157801ffd3c1adfe94/Ensemble2/build.gradle?at=master">Ensemble2</a> is a bit longer because of the custom build work it is doing to bring the source of the samples into the jar.  When you run &#8216;gradle assemble` it will actually create the Mac OSX .app and .dmg files.  It probably does the correct thing on Linux and Windows but I haven&#8217;t tried yet.  But first you need to install the plugin via &#8216;gradle install&#8217; in the plugin dir.</p>
+<p><strong>Changed Conventions</strong></p>
 
-<p><strong>Conventions</strong></p>
+<p>There is one notable change that needs to be called out. Previously package specific resources went under <code>src/main/resources</code>. I have moved them to <code>src/deploy/resources</code> to clarify that they are used for deployment and not at runtime. This was needed for the gradle eclipse plugin to create sensible projects. The sample applications have been adjusted appropriately.</p>
 
-<p>My main purpose in this exercise is to try and nail down a set of file layout conventions that Gradle and Maven can use to create a shippable app with a minimum of configuration.  Layouts that match the Maven way for the most part.  And Ant scripts can be written to these conventions.  If, you know, Ant is your thing.</p>
+<p><strong>Changed Deployment Info</strong></p>
 
-<p>The only out there conventions would be the bundle resources, which I am placing in <code>src/main/resources</code>.  I also intend to add some other standard files, like <code>src/main/resources/icon.png</code> and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world&#8217;s most awesome password.</p>
+<p>The plugin is no longer deployed to the webdav repository on CloudBees, but instead has migrated over to <a href="http://l.aunch.us/fOjm">BinTray</a>. The new recommend release scripts for the most recent version of the plugin, regardless of version:</p>
 
-<p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/javafx.plugin'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For a version locked script you can use this script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/0.2.0/javafx.plugin'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The repository location and co-ordinates also have changed. If you are using a direct build script dependency you will to use this co-ordinate</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>org.bitbucket.shemnon.javafxplugin:gradle-javafx-plugin:0.2.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will likely want to look at the <a href="http://dl.bintray.com/content/shemnon/javafx-gradle/0.2.0/javafx.plugin">apply script</a> anyway since there are also some other build time dependencies. <em>I wish gradle just had a way to apply plugins from a maven co-ordinate, with dependencies.</em></p>
+
+<p><strong> Examples </strong></p>
+
+<p>If you would like to see some samples built with the plugin you can download them from <a href="http://repository-javafx-gradle-plugin.forge.cloudbees.com/release/0.2.0/">the CloudBees repository</a>. Only the single file installers are available. The <a href="https://bitbucket.org/shemnon/javafx-gradle/src/009e6d4d2487/samples?at=release_0.2.0">source</a> is available at the <a href="https://bitbucket.org/shemnon/javafx-gradle/">bitbucket project</a>.</p>
+
+<p><strong> Future Plans </strong></p>
+
+<p>For the next release I am planning on spending more time focusing on making the per-platform packaging top notch. I will add in hooks and allowances so that the end user can build any of the packaged platforms without conflict. One example is that the <code>appId</code> means different, incompatible, things on Windows and Mac. Windows wants a GUID whereas Mac wants a CFBundleIdentifier (which is close to a package name). Then there is the issue of gatekeeper and other smaller details.</p>
+
+<p>In the mean time, if you find any bugs please be sure to <a href="https://bitbucket.org/shemnon/javafx-gradle/issues?status=new&amp;status=open">report them</a>. I can also be found on twitter as <a href="http://twitter.com/shemnon">@shemnon</a>.</p>
 </div>
 
 
@@ -128,7 +152,7 @@
   
 
 
-<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
+<time datetime="2013-01-30T19:57:00-07:00" pubdate data-updated="true">Jan 30<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -142,7 +166,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/" >Tweet</a>
   
   
   
@@ -151,10 +175,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/10/09/mirroring-openjfx-on-bitbucket/" title="Previous Post: Mirroring OpenJFX on BitBucket">&laquo; Mirroring OpenJFX on BitBucket</a>
+        <a class="basic-alignment left" href="/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/" title="Previous Post: Adding Icons with the Gradle JavaFX Plugin">&laquo; Adding Icons with the Gradle JavaFX Plugin</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/10/23/conventions-and-configurations/" title="Next Post: Conventions and Configuratons">Conventions and Configuratons &raquo;</a>
       
     </p>
   </footer>
@@ -307,8 +329,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/';
         var disqus_script = 'embed.js';
       
     (function () {

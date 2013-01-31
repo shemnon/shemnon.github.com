@@ -65,12 +65,18 @@
         <lastmod>2013-01-28T12:20:02-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/
+        </loc>
+        <lastmod>2013-01-30T20:52:49-07:00</lastmod>
+    </url>
+    <url>
         <loc>http://speling.shemnon.com//all.rss</loc>
         <lastmod>2012-10-19T07:51:57-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2013-01-28T12:23:54-07:00</lastmod>
+        <lastmod>2013-01-30T20:52:49-07:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//feed.xml</loc>
@@ -78,6 +84,6 @@
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2013-01-28T12:23:54-07:00</lastmod>
+        <lastmod>2013-01-30T20:52:49-07:00</lastmod>
     </url>
 </urlset>

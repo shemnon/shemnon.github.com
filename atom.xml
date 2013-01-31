@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-01-30T20:51:40-07:00</updated>
+  <updated>2013-01-30T20:52:52-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle JavaFX Plugin 0.2.0 Released]]></title>
+    <link href="http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/"/>
+    <updated>2013-01-30T19:57:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released</id>
+    <content type="html"><![CDATA[<p>The 0.2.0 release of the Gradle JavaFX Plugin is now live on <a href="http://l.aunch.us/fOjm">BinTray</a>. Get it while it&#8217;s hot! More things changed in this release than the lat time around. First there has been a lot of work automating the use of icons in the packaged resource. My <a href="http://speling.shemnon.com/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">previous post</a> has all the details. Second, the interaction between the Maven and Eclipse plugin has been improved. Finally, the distribution has move to BinTray for the release artifacts.</p>
+
+<!-- more -->
+
+
+<p><strong>Changed Conventions</strong></p>
+
+<p>There is one notable change that needs to be called out. Previously package specific resources went under <code>src/main/resources</code>. I have moved them to <code>src/deploy/resources</code> to clarify that they are used for deployment and not at runtime. This was needed for the gradle eclipse plugin to create sensible projects. The sample applications have been adjusted appropriately.</p>
+
+<p><strong>Changed Deployment Info</strong></p>
+
+<p>The plugin is no longer deployed to the webdav repository on CloudBees, but instead has migrated over to <a href="http://l.aunch.us/fOjm">BinTray</a>. The new recommend release scripts for the most recent version of the plugin, regardless of version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/javafx.plugin'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For a version locked script you can use this script</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/0.2.0/javafx.plugin'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The repository location and co-ordinates also have changed. If you are using a direct build script dependency you will to use this co-ordinate</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>org.bitbucket.shemnon.javafxplugin:gradle-javafx-plugin:0.2.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You will likely want to look at the <a href="http://dl.bintray.com/content/shemnon/javafx-gradle/0.2.0/javafx.plugin">apply script</a> anyway since there are also some other build time dependencies. <em>I wish gradle just had a way to apply plugins from a maven co-ordinate, with dependencies.</em></p>
+
+<p><strong> Examples </strong></p>
+
+<p>If you would like to see some samples built with the plugin you can download them from <a href="http://repository-javafx-gradle-plugin.forge.cloudbees.com/release/0.2.0/">the CloudBees repository</a>. Only the single file installers are available. The <a href="https://bitbucket.org/shemnon/javafx-gradle/src/009e6d4d2487/samples?at=release_0.2.0">source</a> is available at the <a href="https://bitbucket.org/shemnon/javafx-gradle/">bitbucket project</a>.</p>
+
+<p><strong> Future Plans </strong></p>
+
+<p>For the next release I am planning on spending more time focusing on making the per-platform packaging top notch. I will add in hooks and allowances so that the end user can build any of the packaged platforms without conflict. One example is that the <code>appId</code> means different, incompatible, things on Windows and Mac. Windows wants a GUID whereas Mac wants a CFBundleIdentifier (which is close to a package name). Then there is the issue of gatekeeper and other smaller details.</p>
+
+<p>In the mean time, if you find any bugs please be sure to <a href="https://bitbucket.org/shemnon/javafx-gradle/issues?status=new&amp;status=open">report them</a>. I can also be found on twitter as <a href="http://twitter.com/shemnon">@shemnon</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Adding Icons with the Gradle JavaFX Plugin]]></title>
