@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-01-30T20:52:52-07:00</updated>
+  <updated>2013-05-03T22:40:33-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,39 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[A Touch and Gesture JavaFX Demonstration]]></title>
+    <link href="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/"/>
+    <updated>2013-05-03T22:04:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration</id>
+    <content type="html"><![CDATA[<p>A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work.  Being a developer, you could probably guess the kind of software I installed on it.  For the record I have yet to attempt to use stuff like the Finance and Travel App, and only opened the Maps app out of idle curiosity. The first thing I did was install JDK 8 and IntelliJ, so I could get down to business: figuring out how to best use  touch screens and gestures.</p>
+
+<!-- more -->
+
+
+<p>To help me, I wrote a small sample app I called <a href="https://bitbucket.org/shemnon/touchyfxy">Touchy FXy</a>.  I did this so I could get a realtime feel of how the gesture events work. Basically it gives you graphic and textual feedback as you perform gestures on the main center area (the one with the helpful instructions).</p>
+
+<p><img src="http://speling.shemnon.com//images/touchyfxymac.png"></p>
+
+<p>One of the main reasons I wrote this is to get a feel for some of the quirks on the various platforms that JavaFX runs on.  Already I have some issues in mind, but I want to get a good survey of the problem space before I propose anything.  The reasons why some tasks are problems on one platform may have to do with other platforms.</p>
+
+<p>So please, give this app a whirl, and leave me your comments.  I am particularly interested in platforms I don&#8217;t have immediate access to, which basically includes a boring windows 7 laptop, a Surface Pro, and a MacBook air.  How does this work on Ubuntu touch screens (do they even work?)  How about RasPi touch screens?  Fancy Wacom digitizers?  Let me know in the comments below or mail me at <a href="mailto:danno.ferrin@shemnon.com">danno.ferrin@shemnon.com</a>, or leave a bug in the bitbucket project.</p>
+
+<p>In case you are not interested in building this yourself, but do want to run it, I have the following packages on <a href="http://bintray.com/">BinTray</a>:</p>
+
+<ul>
+<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.jar?direct">Executable Jar</a></li>
+<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.0.msi?direct">Windows .msi</a></li>
+<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy.dmg?direct">Mac .dmg</a></li>
+<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.deb?direct">Linux .deb</a></li>
+<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0-1.i386.rpm?direct">Linux .rpm</a></li>
+</ul>
+
+
+<p>In case you are wondering, each executable package embeds Java 7u21.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Gradle JavaFX Plugin 0.2.0 Released]]></title>
