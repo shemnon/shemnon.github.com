@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>JavaFX Gradle Plugin 0.3.0 Released - ...and they shall know me by my speling errors.</title>
+  <meta name="author" content="Danno Ferrin">
+
+  
+  <meta name="description" content="Today I pushed the fourth rerelease of my JavaFX Plugin for Gradle to bintray, version 0.3.0 (real software engineers count from zero). New in this &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="...and they shall know me by my speling errors." type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">...and they shall know me by my speling errors.</a></h1>
+  
+    <h2>Danno Ferrin (aka shemnon) on stuff that matters to him.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:speling.shemnon.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">JavaFX Gradle Plugin 0.3.0 Released</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T10:42:00-06:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Today I pushed the fourth rerelease of my JavaFX Plugin for Gradle to bintray, <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.3.0">version 0.3.0</a> (real software engineers count from zero).  New in this release is the ability to specify a particular JVM to package with your native bundles and the ability to customize platform-specific build options. Some configuration options and conventions also moved around to support these two features, most notably the plugin no longer automatically self-signs the code.</p>
+
+<p>To use the plugin in your gradle script, you can apply the plugin from the following URL:</p>
+
+<pre><code>apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
+</code></pre>
+
+<p>Or, you can include the content of that file anywhere in your build, either directly in build.gradle or included from your file path.</p>
+
+<!-- more -->
+
+
+<h1>Specifying the Java Runtime</h1>
+
+<p>In the more recent Java 8 builds they introduced the ability to specify which Java runtime to use in the Ant tasks via the <code>j2se</code> attribute on the <code>platform</code> tag.  Mysteriously enough, it is not available for the command line <code>javafxpacjager</code> tool.  To use it in the gradle plugin simply specify the <code>javaRuntime</code> value in the <code>javafx</code> block and point it at the file location of the JDK/JRE you want to ship, like so</p>
+
+<pre><code>javafx {
+    javaRuntime = '/Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/'
+}
+</code></pre>
+
+<p>Why would you want to specify a runtime other than the one you are compiling against?  Here are a few ideas: You build on Java 8 but ship on Java 7, you need to load some special native libraries or classes such as export restricted cryptography, or you are stripping out things you are not required to redistribute, such as rmid or cobra stuff, or you are adding something like tools.jar.  The biggest reason has yet to see wider distribution: you are shipping a Java 8 Compact Profile as the JRE.</p>
+
+<p>The most interesting value, however, is the <code>NO_RUNTIME</code> value (expressed as a string as <code>'&lt;NO RUNTIME&gt;'</code>, but the constant is better in case the value changes).  Your native packages will be built without a JVM and will instead use the JVM loaded on the local machine.  This is very useful for shipping Java 8 examples before it&#8217;s release in 2014.</p>
+
+<h1>Configuration Profiles</h1>
+
+<p>Some of you can probably guess why I am talking about profiles next.  By specifying a JRE location in the build file what have I done? I have effectively locked the build down to only work on Mac.  New in the 0.3.0 release is a <code>profiles</code> block underneath the <code>javafx</code> block.  In this block, you can create custom build profiles and change which ones are used at build time.  When looking up convention files the values stored in the profiles are always used before the other values, and they are used in the order the profiles are activated.  As a convention, the plugin always adds what platform you are building as the last profile activated.  Here is an example from the <a href="https://bitbucket.org/shemnon/javafx-gradle/src/9668620a1151bb0738c61b04c448b5bda15685c0/samples/FullyExpressed/build.gradle?at=master#cl-32">Fully Expressed</a> sample:</p>
+
+<pre><code>javafx {
+
+  profiles {
+  // not every possible platform override, but ones that have a known impact
+    windows {
+        id = 'c533f663-1efd-489f-b910-4c7ec20c7fd0'
+        category = 'JavaFX Demos'
+        javaRuntime = 'C:/Program Files (x86)/Java/jdk1.7.0_21'
+    }
+
+    macosx {
+        id = 'net.java.openjdk.openjfx.Ensemble2'
+        category = 'public.app-category.developer-tools'
+        javaRuntime = '/Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/'
+    }
+
+    linux {
+        // linux doesn't care about id, it goes un-used at the moment
+        category = 'Development'
+        // good luck finding a standard location for the JDK
+        //javaRuntime = '/usr/lib/jvm/java-7-oracle'
+    }
+  }
+  //---8&amp;lt; snip &amp;gt8---
+}
+</code></pre>
+
+<p>I&#8217;ll plan on doing a post later for profiles in more detail, but for now it is sufficient to say that the <code>windows</code>, <code>macosx</code>, and <code>linux</code> profiles magically turn on based on where you do the build.  No, you cannot use profiles to build a RaspberryPi deb package on a linux box yet, I tried. The problems are deeper than JRE selection.</p>
+
+<h1>Convention changes</h1>
+
+<p>I also took the opportunity to change some of the conventions.  First and foremost I turned off the automatic generation and use of self signed certificates.  The 7u21 changes have made those certs next to useless.  You can still use the plugin to sign your application with a real certificate, you just have to explicitly do it.</p>
+
+<p>If there is anyone within the sound of my voice that uses the plugin or would want to use the plugin to do real signing of their applications, <strong>let me know</strong> and I&#8217;ll write up some documentation.  Until then just know that it can be done.</p>
+
+<p>The next set of conventions has to do with the <code>jfxDeploy</code> task.  Every single parameter has been moved into the <code>javafx</code> block and the preferred way to configure those is to use that block.  You can still configure them in the task, but the convention block is the preferred location.  The <code>FullyExpressed</code> example reflects those changes</p>
+
+<p>Finally, I am dropping the magic auto-updating url.  All plugin URLs are version encoded.  Really, this is a good idea to avoid surprise breakages and has nothing to do with bintray not letting me delete releases over 30 days old.  Honest.</p>
+
+<h1>Summary</h1>
+
+<p>My aim is to make the JavaFX Gradle Plugin a one stop shop for all your JavaFX build needs. If you have any complaints, concerns, requests, code to contribute, or other comments, please let me know by posting an <a href="https://bitbucket.org/shemnon/javafx-gradle/issues">issue on bintray</a>, mail (danno.ferrin@shemnon.com), Twitter (@shemnon), pull request <a href="https://bitbucket.org/shemnon/javafx-gradle/">at bitbucket</a> or by leaving a comment in this blog.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T10:42:00-06:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/" title="Previous Post: A Touch and Gesture JavaFX Demonstration">&laquo; A Touch and Gesture JavaFX Demonstration</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/">JavaFX Gradle Plugin 0.3.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/">A Touch and Gesture JavaFX Demonstration</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/">Gradle JavaFX Plugin 0.2.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">Adding Icons with the Gradle JavaFX Plugin</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/">JavaFX Gradle Plugin 0.1.0 Released</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Bitbucket Repos</h1>
+  <ul id="bb_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://bitbucket.org/shemnon">@shemnon</a> on Bitbucket
+  
+
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        bitbucket.showRepos({
+            user: 'shemnon',
+            password: '',
+            count: 4,
+            require_wiki: false,
+            target: '#bb_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/bitbucket.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shemnon">@shemnon</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shemnon',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shemnon", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shemnon" class="twitter-follow-button" data-show-count="false">Follow @shemnon</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/107563042277462358434?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Danno Ferrin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'andtheyshallknowmebymyspelingerrors';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
