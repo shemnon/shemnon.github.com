@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>NPEs: Permission vs. Forgiveness - ...and they shall know me by my speling errors.</title>
+  <title>Insubstantial Needs a New Maintainer - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="Is it better to ask for permission or forgiveness? That is a question that always depends on the context. For one shot events forgiveness is always &hellip;">
+  <meta name="description" content="When I first started the maintenance branch of Kirill Grouchnikov&#8217;s Substance and Flamingo Libraries over two and a half years ago I had one &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">NPEs: Permission vs. Forgiveness</h1>
+      <h1 class="entry-title">Insubstantial Needs a New Maintainer</h1>
     
     
       <p class="meta">
@@ -83,48 +83,27 @@
   
 
 
-<time datetime="2012-02-20T17:52:00-07:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+<time datetime="2013-06-08T11:31:00-06:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Is it better to ask for permission or forgiveness? That is a question that always depends on the context.</p>
+<div class="entry-content"><p>When I first started the maintenance branch of Kirill Grouchnikov&#8217;s Substance and Flamingo Libraries over two and a half years ago I had one important overriding reason to do so: we were using his libraries at my day job. That is one of the greatest things about an open source project, when one the original author moves on to newer and shinier things the community can step in and take over the project.</p>
 
+<p>That time has come again. Since I am no longer working on the project that is using those libraries I no longer have the daytime hours to spend on bug fixes and releases. I also would rather spend evenings and weekends playing laser tag, swimming with the family, or working on JavaFX. I haven&#8217;t really touched it in any significant way in over six months. Nor do I see myself processing another Insubstantial release. Do you want to be the maintainer?</p>
 
 <!-- more -->
 
 
-<p>For one shot events forgiveness is always less of a hassle. For example, if your motivational speaker for your group at work performs stunts like juggling flaming batons and swallowing swords, it&#8217;s best not to get HR involved. From your perspective it is a onetime deal and if nothing goes wrong it will just be an uncomfortable e-mail thread when the responsible adults in the company find out. And that is assuming HR isn&#8217;t dealing with any real issues (like making sure everyone has finished their sensitivity training). However, the speaker will likely have been through this process before. A true professional who does these stunts all the time will insist on signed releases from the company, especially from anyone authorized to sue.</p>
+<p></p>
 
+<p>I&#8217;m not just going to hand the keys to the maintenance branch over to whoever say&#8217;s &#8216;me first.&#8217; I&#8217;m going to hand them over to the first competent contributor who says &#8216;me first.&#8217; How will I judge competence? First, they must either submit a good patch or have submitted a good patch. Second, I want to see a distribution rolled up somewhere. Some FTP site, whatever. And I want to see it in a format Sonatype will accept, with signatures and the whole nine yards. If it seems daunting, it isn&#8217;t. <a href="https://github.com/Insubstantial/insubstantial/blob/master/README.markdown">I left instructions.</a></p>
 
-<p>Another context is programming. Instead of lawsuits we have exceptions. And instead of juggling flaming batons and swallowing swords we dereference pointers, a truly dangerous practice. When writing code to deal with these pointers there are two broad approaches: guard blocks where you check for null before dereferencing, and attempting it without the guard and catching the inevitable exception.</p>
+<p>What will I give you? I will make you the administrator of the <a href="https://github.com/Insubstantial/">insubstantial group</a> over at GitHub. I will tell Sonatype to add you as a user to the <a href="https://oss.sonatype.org/index.html">deployment repository</a>. I will also try and hand over the CloudBees build instance I have set up for insubstantial. No promises on that one since I see no instructions, but I will do my best.</p>
 
-
-<p>Old school C and C++ coders will always use guard blocks. This is primarily for two reasons, (a) null dereferences were almost always fatal, and (b) they didn&#8217;t always have fancy things like exception handling&#8230;&nbsp;<em>and they liked it!</em>&nbsp;Permission was the only reliable approach (now get off my lawn you script kiddie).</p>
-
-
-<p>New generation languages like Java and later incarnations of C++ standardized exception catching. If you make a mistake you can pick up the pieces and move on. Forgiveness became an option. And for a lot of code it is easier to read and write forgiving code rather than permission seeking code.</p>
-
-
-<p>But easier to read and write is a very subjective criteria. Whether permission or forgiveness is better has no hard metric. But which is more efficient and faster? That is a hard metric! Time of execution. So I&nbsp;<a href="https://gist.github.com/1871252">coded up an experiment</a>&nbsp;to get cold hard numbers.</p>
-
-
-<p>But before we conduct this experiment we should predict the outcome. Can forgiveness ever be faster than permission? If we get rid of all of the null checks those are less cycles to burn on every execution through a loop. If the overhead of an exception is low enough then with infrequent enough exceptions it should be faster. Kind of like a parking ticket. If it&#8217;s 5 cents a minute to park and for every 4 hours you are parked you will get a $20 ticket (with no other consequences) should you feed the meter? Never! you can save about a dollar an our just paying the parking ticket. But if the fine is $24 then it&#8217;s a wash, and you depend on beating the parking enforcement officer to make any gains. So if the exception overhead is low enough eventually forgiveness makes sense. Right?</p>
-
-
-<p><img style="border-style: initial; border-color: initial;" src="http://chart.apis.google.com/chart?chxl=0:|-5|-10|-15|-20|1:|1ms|0.5ms|0.3ms|0.2ms|0.1ms&amp;chxp=0,5,10,15,20|1,1,0.5,0.3,0.2,0.1&amp;chxr=0,4,20|1,0,1&amp;chxs=1,676767,11.5,0,lt,676767&amp;chxt=x,y&amp;chs=440x220&amp;cht=lxy&amp;chco=3072F3,FF0000&amp;chds=5,20,0,1,5,20,0,1&amp;chd=t:-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|0.109,0.098,0.098,0.094,0.092,0.092,0.093,0.093,0.092,0.093,0.095,0.098,0.095,0.093,0.092,0.095,0.094,0.094,0.094|-1,-1,-1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20|-1,-1,-1,0.998,0.55,0.331,0.213,0.151,0.127,0.11,0.104,0.098,0.097,0.096,0.095,0.105,0.116,0.094,0.093&amp;chdl=Permission|Forgiveness&amp;chg=0,20,4,9&amp;chls=2|1&amp;chma=5,0,5,25|0,5&amp;chtt=Permission+vs+Forgiveness" alt="Permission vs Forgiveness" width="440" height="220" /></p>
-
-
-<p>Well, it looks like forgiveness is not very rewarding on the JVM. For this chart the Y axis is the average time through my test call, and the X axis is the increasing rarity of the exception, a probability of between 2<sup>-4</sup> and 2<sup>-20</sup>, or 1 in 16 to over 1 in a million (so your saying there&#8217;s a chance!). Forgiveness is&nbsp;<em>at best</em>&nbsp;nearly as good as permission, and at worst over two magnitudes of order worse (it&#8217;s like 147x at 100% forgiveness).</p>
-
-
-<p>So that motivational speaker may really be awesome, but it is almost always better to ask for permission. Especially when he sets the carpet on fire.</p>
-
-
-<p>&nbsp;</p>
-
+<p>Now I am not delusional, I don&#8217;t expect a race to grab the project. In fact, no one may ever ask for the keys. But if someone some day feels the need to take up the mantle of insubstantial maintainer, the keys are here for the taking.</p>
 </div>
 
 
@@ -147,21 +126,15 @@
   
 
 
-<time datetime="2012-02-20T17:52:00-07:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+<time datetime="2013-06-08T11:31:00-06:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/exceptions/'>Exceptions</a>, <a class='category' href='/blog/categories/java/'>Java</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/" >Tweet</a>
   
   
   
@@ -170,8 +143,8 @@
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" title="Previous Post: JavaFX Gradle Plugin 0.3.0 Released">&laquo; JavaFX Gradle Plugin 0.3.0 Released</a>
       
-        <a class="basic-alignment right" href="/blog/2012/08/28/the-life-and-times-of-a-javafx-skin/" title="Next Post: The Life and Times of a JavaFX Skin">The Life and Times of a JavaFX Skin &raquo;</a>
       
     </p>
   </footer>
@@ -324,8 +297,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/';
         var disqus_script = 'embed.js';
       
     (function () {

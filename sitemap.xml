@@ -80,7 +80,13 @@
         <loc>
             http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/
         </loc>
-        <lastmod>2013-05-18T19:12:04-06:00</lastmod>
+        <lastmod>2013-05-18T20:48:22-06:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/
+        </loc>
+        <lastmod>2013-06-08T11:57:16-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//all.rss</loc>
@@ -88,7 +94,7 @@
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2013-05-18T19:12:04-06:00</lastmod>
+        <lastmod>2013-06-08T11:57:16-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//feed.xml</loc>
@@ -96,6 +102,6 @@
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2013-05-18T19:12:04-06:00</lastmod>
+        <lastmod>2013-06-08T11:57:16-06:00</lastmod>
     </url>
 </urlset>

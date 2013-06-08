@@ -8,6 +8,30 @@
 		
 			
 			<item>
+				<title><![CDATA[Insubstantial Needs a New Maintainer]]></title>
+				<description><![CDATA[<p>When I first started the maintenance branch of Kirill Grouchnikov&#8217;s Substance and Flamingo Libraries over two and a half years ago I had one important overriding reason to do so: we were using his libraries at my day job. That is one of the greatest things about an open source project, when one the original author moves on to newer and shinier things the community can step in and take over the project.</p>
+
+<p>That time has come again. Since I am no longer working on the project that is using those libraries I no longer have the daytime hours to spend on bug fixes and releases. I also would rather spend evenings and weekends playing laser tag, swimming with the family, or working on JavaFX. I haven&#8217;t really touched it in any significant way in over six months. Nor do I see myself processing another Insubstantial release. Do you want to be the maintainer?</p>
+
+<!-- more -->
+
+
+<p></p>
+
+<p>I&#8217;m not just going to hand the keys to the maintenance branch over to whoever say&#8217;s &#8216;me first.&#8217; I&#8217;m going to hand them over to the first competent contributor who says &#8216;me first.&#8217; How will I judge competence? First, they must either submit a good patch or have submitted a good patch. Second, I want to see a distribution rolled up somewhere. Some FTP site, whatever. And I want to see it in a format Sonatype will accept, with signatures and the whole nine yards. If it seems daunting, it isn&#8217;t. <a href="https://github.com/Insubstantial/insubstantial/blob/master/README.markdown">I left instructions.</a></p>
+
+<p>What will I give you? I will make you the administrator of the <a href="https://github.com/Insubstantial/">insubstantial group</a> over at GitHub. I will tell Sonatype to add you as a user to the <a href="https://oss.sonatype.org/index.html">deployment repository</a>. I will also try and hand over the CloudBees build instance I have set up for insubstantial. No promises on that one since I see no instructions, but I will do my best.</p>
+
+<p>Now I am not delusional, I don&#8217;t expect a race to grab the project. In fact, no one may ever ask for the keys. But if someone some day feels the need to take up the mantle of insubstantial maintainer, the keys are here for the taking.</p>
+]]></description>
+				<pubDate>Sat, 08 Jun 2013 11:31:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[JavaFX Gradle Plugin 0.3.0 Released]]></title>
 				<description><![CDATA[<p>Today I pushed the fourth rerelease of my JavaFX Plugin for Gradle to bintray, <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.3.0">version 0.3.0</a> (real software engineers count from zero).  New in this release is the ability to specify a particular JVM to package with your native bundles and the ability to customize platform-specific build options. Some configuration options and conventions also moved around to support these two features, most notably the plugin no longer automatically self-signs the code.</p>
 
@@ -61,7 +85,7 @@
         //javaRuntime = '/usr/lib/jvm/java-7-oracle'
     }
   }
-  //---8&amp;lt; snip &amp;gt8---
+  //---8&lt;-- snip --&gt;8---
 }
 </code></pre>
 
