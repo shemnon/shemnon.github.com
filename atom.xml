@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-06-08T18:05:47-06:00</updated>
+  <updated>2013-06-08T18:08:10-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -22,7 +22,7 @@
 
 <p>That time has come again. Since I am no longer working on the project that is using those libraries I no longer have the daytime hours to spend on bug fixes and releases. I also would rather spend evenings and weekends playing laser tag, swimming with the family, or working on JavaFX. I haven&#8217;t really touched it in any significant way in over six months. Nor do I see myself processing another Insubstantial release.</p>
 
-<p>Do you want to be the maintainer? <!-- more --> I&#8217;m not just going to hand the keys to the maintenance branch over to whoever say&#8217;s &#8216;me first.&#8217; I&#8217;m going to hand them over to the first competent contributor who says &#8216;me first.&#8217; How will I judge competence? First, they must either submit a good patch or have submitted a good patch. Second, I want to see a distribution rolled up somewhere. Some FTP site, whatever. And I want to see it in a format Sonatype will accept, with signatures and the whole nine yards. If it seems daunting, it isn&#8217;t. <a href="https://github.com/Insubstantial/insubstantial/blob/master/README.markdown">I left instructions.</a></p>
+<p>Do you want to be the maintainer? <!-- more --> I&#8217;m not just going to hand the keys to the maintenance branch over to whoever says &#8216;me first.&#8217; I&#8217;m going to hand them over to the first competent contributor who says &#8216;me first.&#8217; How will I judge competence? First, they must either submit a good patch or have submitted a good patch. Second, I want to see a distribution rolled up somewhere. Some FTP site, whatever. And I want to see it in a format Sonatype will accept, with signatures and the whole nine yards. If it seems daunting, it isn&#8217;t. <a href="https://github.com/Insubstantial/insubstantial/blob/master/README.markdown">I left instructions.</a></p>
 
 <p>What will I give you? I will make you the administrator of the <a href="https://github.com/Insubstantial/">insubstantial group</a> over at GitHub. I will tell Sonatype to add you as a user to the <a href="https://oss.sonatype.org/index.html">deployment repository</a>. I will also try and hand over the CloudBees build instance I have set up for insubstantial. No promises on that one since I see no instructions, but I will do my best.</p>
 
