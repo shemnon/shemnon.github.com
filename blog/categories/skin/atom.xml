@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Skin | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/skin/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-06-08T18:58:20-06:00</updated>
+  <updated>2013-09-24T11:45:40-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[The Life and Times of a JavaFX Skin]]></title>
     <link href="http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/"/>
-    <updated>2012-08-28T21:06:00-06:00</updated>
+    <updated>2012-08-28T21:06:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin</id>
     <content type="html"><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I've been wanting to create a real "Deck" control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the "back" metaphor but the path forward isn't fixed, like a Wizard.</p>
 
