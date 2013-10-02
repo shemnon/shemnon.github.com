@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gradle | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/gradle/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-09-24T11:45:40-07:00</updated>
+  <updated>2013-10-01T22:11:22-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Gradle JavaFX Plugin 0.2.0 Released]]></title>
     <link href="http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/"/>
-    <updated>2013-01-30T19:57:00-08:00</updated>
+    <updated>2013-01-30T19:57:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released</id>
     <content type="html"><![CDATA[<p>The 0.2.0 release of the Gradle JavaFX Plugin is now live on <a href="http://l.aunch.us/fOjm">BinTray</a>. Get it while it's hot! More things changed in this release than the lat time around. First there has been a lot of work automating the use of icons in the packaged resource. My <a href="http://speling.shemnon.com/blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/">previous post</a> has all the details. Second, the interaction between the Maven and Eclipse plugin has been improved. Finally, the distribution has move to BinTray for the release artifacts.</p>
 
@@ -64,7 +64,7 @@ org.bitbucket.shemnon.javafxplugin:gradle-javafx-plugin:0.2.0
   <entry>
     <title type="html"><![CDATA[Adding Icons with the Gradle JavaFX Plugin]]></title>
     <link href="http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/"/>
-    <updated>2013-01-28T14:57:00-08:00</updated>
+    <updated>2013-01-28T14:57:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin</id>
     <content type="html"><![CDATA[<p>The 0.2.0 release of the Gradle JavaFX Plugin is just around the corner. I want to spend some time building all the samples on all of the platforms and making sure smoke doesn't come out. Expect it in a day or two.</p>
 
@@ -149,7 +149,7 @@ icon {
   <entry>
     <title type="html"><![CDATA[Scenic View in the Gradle JavaFX Plugin]]></title>
     <link href="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/"/>
-    <updated>2012-11-25T13:42:00-08:00</updated>
+    <updated>2012-11-25T13:42:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin</id>
     <content type="html"><![CDATA[<p>While I really like the <a href="http://fxexperience.com/scenic-view/">Scenic View</a> application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of a struggle.  But like most things I wind up blogging about this is something that can be fixed with a little bit of magical Gradle dust.</p>
 
@@ -191,7 +191,7 @@ icon {
   <entry>
     <title type="html"><![CDATA[JavaFX Gradle Plugin 0.0.0 Released]]></title>
     <link href="http://speling.shemnon.com//blog/2012/11/07/javafx-gradle-plugin-0.0.0-released/"/>
-    <updated>2012-11-07T20:21:00-08:00</updated>
+    <updated>2012-11-07T20:21:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2012/11/07/javafx-gradle-plugin-0.0.0-released</id>
     <content type="html"><![CDATA[<p>I haven't' done much to promote it yet, but I feel I have written enough to announce that I have written a JavaFX 2.0 Plugin for Gradle.  Better documentation will follow, but this is the announcement getting it out there,  After all this is just an oh dot oh dot oh.</p>
 
@@ -933,7 +933,7 @@ I think you should use an
   <entry>
     <title type="html"><![CDATA[Conventions and Configuratons]]></title>
     <link href="http://speling.shemnon.com//blog/2012/10/23/conventions-and-configurations/"/>
-    <updated>2012-10-23T22:13:00-07:00</updated>
+    <updated>2012-10-23T22:13:00-06:00</updated>
     <id>http://speling.shemnon.com//blog/2012/10/23/conventions-and-configurations</id>
     <content type="html"><![CDATA[<p>Creating an app in any new framework can sometimes be a bit of a chore.  Have you looked at the files that come form a new Hello World JavaFX app from NetBeans?  Not very dry at all and a lot of esoteric stuff in side directories is created, you know just in case you want to customize it.  And the problem isn't NetBeans, they are doing the best they can with Ant.</p>
 

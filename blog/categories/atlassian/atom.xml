@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Atlassian | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/atlassian/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-09-24T11:45:40-07:00</updated>
+  <updated>2013-10-01T22:11:22-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Mirroring OpenJFX on BitBucket, an Update]]></title>
     <link href="http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/"/>
-    <updated>2012-12-20T20:18:00-08:00</updated>
+    <updated>2012-12-20T20:18:00-07:00</updated>
     <id>http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update</id>
     <content type="html"><![CDATA[<p>This is a quick update on my mirrors of OpenJFX on BitBucket.  I've moved some stuff around and automated it a bit.  I am also retiring my "combined" repo that would merge the master, graphics, and controls scrums together.  It got messy with multiple heads and bookmarks, and given the weekly merging the two scrums do wasn't really adding any value.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/css/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-09-24T11:45:40-07:00</updated>
+  <updated>2013-10-01T22:11:22-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Fashion Forward: Styling your Controls in JavaFX 2.2]]></title>
     <link href="http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/"/>
-    <updated>2012-09-13T08:02:00-07:00</updated>
+    <updated>2012-09-13T08:02:00-06:00</updated>
     <id>http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2</id>
     <content type="html"><![CDATA[<p>JavaFX is finally delivering on it's promise (made 5 years) to open source JavaFX. It started last December with the controls code. And now that the <a href="http://hg.openjdk.java.net/openjfx/8/master/">JavaFX 8 repos</a> are open we can now look at the internals of JavaFX in a format much more readable than <code>javap</code> decompilations. (The previous statement is not an admission, wink wink nod nod).</p>
 

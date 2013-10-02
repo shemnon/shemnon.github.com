@@ -2,110 +2,116 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/02/20/npes-permission-vs-forgiveness/</loc>
-        <lastmod>2012-10-10T04:01:22-07:00</lastmod>
+        <lastmod>2012-10-10T05:01:22-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/
         </loc>
-        <lastmod>2012-10-10T03:58:00-07:00</lastmod>
+        <lastmod>2012-10-10T04:58:00-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/09/04/javafx-groovy-and-griffon/</loc>
-        <lastmod>2012-10-10T03:54:29-07:00</lastmod>
+        <lastmod>2012-10-10T04:54:29-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2012/09/13/fashion-forward-styling-your-controls-in-javafx-2-dot-2/
         </loc>
-        <lastmod>2012-10-10T03:50:58-07:00</lastmod>
+        <lastmod>2012-10-10T04:50:58-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/</loc>
-        <lastmod>2012-10-10T20:49:39-07:00</lastmod>
+        <lastmod>2012-10-10T21:49:39-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/10/17/javafx-gradle-plugin/</loc>
-        <lastmod>2012-10-17T22:17:35-07:00</lastmod>
+        <lastmod>2012-10-17T23:17:35-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/10/23/conventions-and-configurations/</loc>
-        <lastmod>2012-10-23T21:16:23-07:00</lastmod>
+        <lastmod>2012-10-23T22:16:23-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2012/11/07/javafx-gradle-plugin-0.0.0-released/
         </loc>
-        <lastmod>2012-11-08T08:24:06-08:00</lastmod>
+        <lastmod>2012-11-08T09:24:06-07:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/</loc>
-        <lastmod>2012-11-25T13:54:55-08:00</lastmod>
+        <lastmod>2012-11-25T14:54:55-07:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2012/12/10/textflow-for-fun-and-profit/</loc>
-        <lastmod>2012-12-20T20:10:10-08:00</lastmod>
+        <lastmod>2012-12-20T21:10:10-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2012/12/20/mirroring-openjfx-on-bitbucket-an-update/
         </loc>
-        <lastmod>2012-12-20T20:11:03-08:00</lastmod>
+        <lastmod>2012-12-20T21:11:03-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/
         </loc>
-        <lastmod>2013-01-28T11:23:54-08:00</lastmod>
+        <lastmod>2013-01-28T12:23:54-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/01/28/adding-icons-with-the-gradle-javafx-plugin/
         </loc>
-        <lastmod>2013-01-28T11:20:02-08:00</lastmod>
+        <lastmod>2013-01-28T12:20:02-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/
         </loc>
-        <lastmod>2013-01-30T19:52:49-08:00</lastmod>
+        <lastmod>2013-01-30T20:52:49-07:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/
         </loc>
-        <lastmod>2013-05-03T21:39:30-07:00</lastmod>
+        <lastmod>2013-05-03T22:39:30-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/
         </loc>
-        <lastmod>2013-05-18T19:48:22-07:00</lastmod>
+        <lastmod>2013-05-18T20:48:22-06:00</lastmod>
     </url>
     <url>
         <loc>
             http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/
         </loc>
-        <lastmod>2013-06-08T17:58:13-07:00</lastmod>
+        <lastmod>2013-06-08T18:58:13-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/2013/09/24/oracle-javaone-2013/</loc>
-        <lastmod>2013-09-24T11:45:12-07:00</lastmod>
+        <lastmod>2013-09-24T12:45:12-06:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/
+        </loc>
+        <lastmod>2013-10-01T22:09:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//all.rss</loc>
-        <lastmod>2012-10-19T06:51:57-07:00</lastmod>
+        <lastmod>2012-10-19T07:51:57-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2013-09-24T11:45:12-07:00</lastmod>
+        <lastmod>2013-10-01T22:09:54-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//feed.xml</loc>
-        <lastmod>2012-10-19T06:24:48-07:00</lastmod>
+        <lastmod>2012-10-19T07:24:48-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2013-09-24T11:45:12-07:00</lastmod>
+        <lastmod>2013-10-01T22:09:54-06:00</lastmod>
     </url>
 </urlset>

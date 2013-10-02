@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Scenic View in the Gradle JavaFX Plugin - ...and they shall know me by my speling errors.</title>
+  <title>JavaOne 2013: Dogfooding the Future Java - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="While I really like the Scenic View application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of &hellip;">
+  <meta name="description" content="Last week I presented two talks at JavaOne 2013. The first talk I gave on Monday was &#8220;Styling Your Custom Components with CSS in JavaFX.&#8221 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Scenic View in the Gradle JavaFX Plugin</h1>
+      <h1 class="entry-title">JavaOne 2013: Dogfooding the Future Java</h1>
     
     
       <p class="meta">
@@ -83,47 +83,30 @@
   
 
 
-<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+<time datetime="2013-10-01T19:10:00-06:00" pubdate data-updated="true">Oct 1<span>st</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>While I really like the <a href="http://fxexperience.com/scenic-view/">Scenic View</a> application that Jasper, Richard, and Jonathan have put together I do have to say getting it working is a bit of a struggle.  But like most things I wind up blogging about this is something that can be fixed with a little bit of magical Gradle dust.</p>
+<div class="entry-content"><p>Last week I presented two talks at JavaOne 2013.  The first talk I gave on Monday was &#8220;Styling Your Custom Components with CSS in JavaFX.&#8221;  My second talk on Tuesday was &#8220;Building and Deploying JavaFX Applications with Gradle or Maven (or Ant!).&#8221; Since these two sessions were very technical in nature I created demo applications for both and the source for these are on Bitbucket.  One repo for the <a href="https://bitbucket.org/shemnon/jfxcustomcss">custom CSS presentation</a> and another one for the <a href="https://bitbucket.org/shemnon/jfxdeployment">deployment build tools</a> talk. Since each talk dealt with different perspectives in the same talk I created a separate git branch for one, so keep your eye out for the branches.</p>
 
-<!-- more -->
+<h3>Dogfood</h3>
 
+<p>Not only were my samples written for JavaFX, but the presentation itself was written with JavaFX and used JavaFX technologies for every pixel the presentation put on the screen. <!--more--> The whole dogfood slide deck thing isn&#8217;t new (it&#8217;s been <a href="http://artifacts.griffon-framework.org/plugin/slideware/installation">done before</a> and will not doubt be done again) but it is an important milestone for a graphics stack that it is capable of running an essential task for a conference presentation.</p>
 
-<p><strong>Skinning the Cat</strong></p>
+<p>I made this decision 5 days before I was supposed to present, mostly because I really like the style that GitHub has for the markdown highlighting of code based text. I couldn&#8217;t find an acceptable Keynote template that replicated that, so I realized that I had already written code for the two most basic parts: a markdown renderer and a deck control. Combine those with Java 8 Lambda syntax and the end result clocks in at only <a href="https://bitbucket.org/shemnon/jfxdeployment/src/1e2f5865df62ef5b3d35a5a171a3f1d7ee77429b/src/main/java/org/bitbucket/shemnon/preso/deploy/Preso.java?at=preso">313 lines of code</a> (the whole build is in the <code>preso</code> branch of each repo). Not that we are playing golf or anything, but I estimate the lambda free code would clock in somewhere between 350-400 lines of code for a lines of code code savings of 10-20%. I know, I know, Groovy could do it in fewer lines and if I used tabs instead of spaces I could save even more space on my hard drive. But those are left as an exercise to the reader.</p>
 
-<p>Getting Scenic view to work shouldn&#8217;t be a struggle since there are three ways to start it up.  Well the fact there are three ways may be part of the problem actually.  The first is to rely on auto-discovery.  This is the same thing that JVisualVM relies on.  However this doesn&#8217;t work for me since I do my personal hacking on a MacBook Air, and the auto-discovery isn&#8217;t as reliable as it is on Windows machines.  I.e. you get the mac experience of it &#8216;just working&#8217; on windows but no mac.  To be fair, this is option number three on the list and they openly admit it&#8217;s not the best choice currently.</p>
+<h3>New and Exciting JavaFX 8 Features</h3>
 
-<p>Another option is to bundle in the jar and explicitly start the scenic view.  The code is incredibly terse and has no real dependencies on your application code, except that the code needs to be run and the node to view.  The downside here is that you always need the code available to compile and you always need the line in your code.  You can hide the invocation with bear-claw clicks and keystrokes but the burden remains on you to either properly hide it or strip the code before you publish.</p>
+<p>The whole stack also includes the features I talked about as well as new JavaFX 8 features (some are both). The <a href="https://bitbucket.org/shemnon/deckcontrol">deck control</a> uses the newly exposed CSS styling APIs. The <a href="https://bitbucket.org/shemnon/flowdown">Markdown node</a> uses the new TextFlow API (which interestingly enough had no conference coverage I could see). I packaged the apps up into runtime-free applications, so you will need to install a current build of Java 8. The CSS Presentation is available as a Windows <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2935%20-%20CSS%20for%20Custom%20JavaFX%20Controls-0.0.0.exe">EXE</a> <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2935%20-%20CSS%20for%20Custom%20JavaFX%20Controls-0.0.0.msi">MSI</a> and <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2935%20-%20CSS%20for%20Custom%20JavaFX%20Controls.zip">zip</a> and as a MacOSX <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2935%20-%20CSS%20for%20Custom%20JavaFX%20Controls.dmg">DMG</a>. The deployment presentation is also available as a Windows <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2106%20-%20Building%20and%20Deploying%20JavaFX%20Applications%20with%20Gradle%20or%20Maven%20or%20Ant-0.0.0.exe">EXE</a>, <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2106%20-%20Building%20and%20Deploying%20JavaFX%20Applications%20with%20Gradle%20or%20Maven%20or%20Ant-0.0.0.msi">MSI</a>, <a href="CON2106%20-%20Building%20and%20Deploying%20JavaFX%20Applications%20with%20Gradle%20or%20Maven%20or%20Ant.zip">zip</a>, and Mac <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2106%20-%20Building%20and%20Deploying%20JavaFX%20Applications%20with%20Gradle%20or%20Maven%20%40or%20Ant!%41.dmg">DMG</a>.  Don&#8217;t forget to install a <a href="https://jdk8.java.net/download.html">Java 8 Early access build</a> first.</p>
 
-<p>The last option, and the preferable one according to the docs, is to add the scenic view code as a java agent to your JVM.  This is very reliable method but it has a very specific incantation you need to add to your launch command.  And to add on to the troubles, there is no standard place this jar files live, it lives where you drop it.  And old man Murphy says that you cannot depend on others placing it in the same place, unless you do it for them.</p>
+<p>One last surprise came when I attempted to upload my slides to the speaker portal. Apparently it only accepts PDF files and not markdown files. So this presented another opportunity to use yet another new feature in JavaFX 8: printing. Over the course of an afternoon I wired up a print button and printed my slides out to PDF. So now I have a PDF version of my slides generated from JavaFX (<a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2935_ferrin.pdf">CSS</a> and <a href="http://dl.bintray.com/shemnon/Presentations/JavaOne2013/CON2106_Ferrin.pdf">deployment</a>). Talk about dogfood.</p>
 
-<p><strong>Integrations with Gradle</strong></p>
+<h3>Buzz is the Word</h3>
 
-<p>The first problem is that this program is not released into Maven Central.  With gradle we can punt on running a maven repository and just upload it to an ivy repository.  In this case I am doubling up with the <a href="https://repository-javafx-gradle-plugin.forge.cloudbees.com/release/">Gradle JavaFX Plugin</a> repository.  Unlike the FXExperience Tools the code isn&#8217;t in a public repo so I cannot guess the license.  I&#8217;ll err on the side of sharing.</p>
-
-<p>The next problem is getting the jar local.  I tried several approaches.  I don&#8217;t need the jar at build time for the plugin.  And adding it to the plugin dependencies creates some unneeded weirdness for application build scripts.  Finally what I settled on was to dynamically alter the gradle script via the DSL.  As <a href="https://bitbucket.org/shemnon/javafx-gradle/changeset/4dd2ff67e69410802306948ef097caf4#Lplugin/src/main/groovy/com/bitbucket/shemnon/javafxplugin/JavaFXPlugin.groovyT233">part of the task</a> I create a new configuration, add a new repository, and add a dependency to that configuration,  Then I find all the tasks that are considered execution tasks and I prepend the needed agent string with the local cached copy of the scenic view jar.  Did you catch and understand all of that?  Don&#8217;t worry, you don&#8217;t need to understand the magic to use it.</p>
-
-<p>This task will be part of the next release of the plugin.  If you are using the snapshot script you already have it.</p>
-
-<p><strong>Too Long; Didn&#8217;t Read</strong></p>
-
-<p>To use scenic view with the gradle plugin just add the task <code>scenicview</code> before your execution task.  Really you have two options.  If you are not attaching a debugger:</p>
-
-<pre><code>gradle scenicview run
-</code></pre>
-
-<p>if you are attaching a debugger:</p>
-
-<pre><code>gradle scenicview debug
-</code></pre>
-
-<p>There will be no random jars added into your released code as long as you stick with the above incantations.  And it will magically work.</p>
+<p>So, in summary, the source files for my JavaOne persecutions are on <a href="https://bitbucket.org/">BitBucket</a>, the binaries are on <a href="https://bintray.com/">Bintray</a> (congrats on the Duke&#8217;s Choice award). And there are lots of neat new Java 8 features used: Lambdas, JavaFX Printing, TextFlow, CSSMetaData, javafxpackager, and a MarkDown renderer. And of course it is all built with my Gradle plugin.</p>
 </div>
 
 
@@ -146,12 +129,12 @@
   
 
 
-<time datetime="2012-11-25T13:42:00-07:00" pubdate data-updated="true">Nov 25<span>th</span>, 2012</time>
+<time datetime="2013-10-01T19:10:00-06:00" pubdate data-updated="true">Oct 1<span>st</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/gradle/'>Gradle</a>, <a class='category' href='/blog/categories/javafx/'>JavaFX</a>, <a class='category' href='/blog/categories/scenicview/'>ScenicView</a>
+    <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
   
 </span>
 
@@ -160,7 +143,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/" >Tweet</a>
   
   
   
@@ -169,10 +152,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2012/11/07/javafx-gradle-plugin-0.0.0-released/" title="Previous Post: JavaFX Gradle Plugin 0.0.0 Released">&laquo; JavaFX Gradle Plugin 0.0.0 Released</a>
+        <a class="basic-alignment left" href="/blog/2013/09/24/oracle-javaone-2013/" title="Previous Post: Oracle JavaOne 2013">&laquo; Oracle JavaOne 2013</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2012/12/10/textflow-for-fun-and-profit/" title="Next Post: TextFlow for Fun and Profit">TextFlow for Fun and Profit &raquo;</a>
       
     </p>
   </footer>
@@ -325,8 +306,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2012/11/25/scenic-view-in-the-gradle-plugin/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/10/01/javaone-2013-dogfooding-the-future-java/';
         var disqus_script = 'embed.js';
       
     (function () {
