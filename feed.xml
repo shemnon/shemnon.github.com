@@ -9,7 +9,7 @@
 			
 			<item>
 				<title><![CDATA[JavaFX Gradle Plugin 0.4.0 Released]]></title>
-				<description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+				<description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to BinTray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
 
 <p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
 

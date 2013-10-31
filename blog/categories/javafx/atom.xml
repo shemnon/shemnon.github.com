@@ -4,7 +4,7 @@
   <title><![CDATA[Category: JavaFX | ...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//blog/categories/javafx/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2013-10-30T21:32:20-06:00</updated>
+  <updated>2013-10-30T21:33:59-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -18,7 +18,7 @@
     <link href="http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/"/>
     <updated>2013-10-29T18:36:00-06:00</updated>
     <id>http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released</id>
-    <content type="html"><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+    <content type="html"><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to BinTray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
 
 <p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
 
