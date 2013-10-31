@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Touch and Gesture JavaFX Demonstration - ...and they shall know me by my speling errors.</title>
+  <title>JavaFX Gradle Plugin 0.4.0 Released - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work. Being a developer, you could probably guess the &hellip;">
+  <meta name="description" content="Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version 0.3.0. (Who came up wit the idea of zero indexed arrays &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">A Touch and Gesture JavaFX Demonstration</h1>
+      <h1 class="entry-title">JavaFX Gradle Plugin 0.4.0 Released</h1>
     
     
       <p class="meta">
@@ -83,38 +83,59 @@
   
 
 
-<time datetime="2013-05-03T22:04:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
+<time datetime="2013-10-29T18:36:00-06:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work.  Being a developer, you could probably guess the kind of software I installed on it.  For the record I have yet to attempt to use stuff like the Finance and Travel App, and only opened the Maps app out of idle curiosity. The first thing I did was install JDK 8 and IntelliJ, so I could get down to business: figuring out how to best use  touch screens and gestures.</p>
+<div class="entry-content"><p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.3.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+
+<p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
+
+<pre><code>http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin
+</code></pre>
+
+<p>and then load it in your <code>build.gradle</code> file like so:</p>
+
+<pre><code>apply from: ‘javafx.plugin’
+</code></pre>
+
+<p>This is a change from previous releases where I recommended you apply the script directly from the internet.  But that doesn’t works so well on an airplane or other similarly air-gapped networks, particularly in places with poor wifi reception.</p>
 
 <!-- more -->
 
 
-<p>To help me, I wrote a small sample app I called <a href="https://bitbucket.org/shemnon/touchyfxy">Touchy FXy</a>.  I did this so I could get a realtime feel of how the gesture events work. Basically it gives you graphic and textual feedback as you perform gestures on the main center area (the one with the helpful instructions).</p>
+<h1>Specifying the Packaged Source Set</h1>
 
-<p><img src="/images/touchyfxymac.png"></p>
+<p>Sometimes your gradle project may have a large number of source sets you compile your java code from (where large is larger than 2).  Often that means that the source set with the main class isn’t <code>main</code>.  In previous versions of the plugin I assumed that <code>main</code> was the source set to use for packaging, now you can specify a different source set in the <code>javafx</code> block:</p>
 
-<p>One of the main reasons I wrote this is to get a feel for some of the quirks on the various platforms that JavaFX runs on.  Already I have some issues in mind, but I want to get a good survey of the problem space before I propose anything.  The reasons why some tasks are problems on one platform may have to do with other platforms.</p>
+<pre><code>sourceSets {
+  main 
+  samples {
+    java {
+      compileClasspath += main.output
+      runtimeClasspath += main.output
+      runtimeClasspath += javadocJar.output
+    }
+  }
+}
 
-<p>So please, give this app a whirl, and leave me your comments.  I am particularly interested in platforms I don&#8217;t have immediate access to, which basically includes a boring windows 7 laptop, a Surface Pro, and a MacBook air.  How does this work on Ubuntu touch screens (do they even work?)  How about RasPi touch screens?  Fancy Wacom digitizers?  Let me know in the comments below or mail me at <a href="mailto:danno.ferrin@shemnon.com">danno.ferrin@shemnon.com</a>, or leave a bug in the bitbucket project.</p>
+javafx {
+    sourceSet = ‘samples’
+} 
+</code></pre>
 
-<p>In case you are not interested in building this yourself, but do want to run it, I have the following packages on <a href="http://bintray.com/">BinTray</a>:</p>
+<p>But to be honest, I strongly recommend that your samples be placed in a separate sub project following the maven conventional tree structure.  However since I am a strong advocate of choice in build tooling, you are now free to choose a different path than the opinion expressed by the build tool.  But these opinions exist for your own good, trust us. ;) P</p>
 
-<ul>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.jar?direct">Executable Jar</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.0.msi?direct">Windows .msi</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy.dmg?direct">Mac .dmg</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.deb?direct">Linux .deb</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0-1.i386.rpm?direct">Linux .rpm</a></li>
-</ul>
+<h1>Bug fixes</h1>
 
+<p>Nearly all of the other changes revolve around bug fixes, mostly from ones I learned about in the <a href="https://bitbucket.org/shemnon/javafx-gradle/issues">bug queue</a>. Keep them coming!  One dealt with playing nicely with the gradle <code>application</code> plugin, one with specifying manifest entries, and there were some unreported ones I fixed in relation to jar files in the 7u40 java updates</p>
 
-<p>In case you are wondering, each executable package embeds Java 7u21.</p>
+<h1>Summary</h1>
+
+<p>If the plugin isn’t addressing your needs be sure to drop me a line on twitter at <a href="https://twitter.com/shemnon">@shemnon</a> or via <a href="https://plus.google.com/107563042277462358434">Google+</a>.  Oh yea, there is still that e-mail thing too: danno dot ferrin at gmail or shemnon dot com.  If my responses aren’t quick that is likely because I am playing LEGO Marvel Super Heroes on my legacy XBox 360 (which I won filling out conference surveys at JavaOne 5 years ago).</p>
 </div>
 
 
@@ -137,15 +158,21 @@
   
 
 
-<time datetime="2013-05-03T22:04:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
+<time datetime="2013-10-29T18:36:00-06:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javafx/'>JavaFX</a>
+  
+</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/" >Tweet</a>
   
   
   
@@ -154,10 +181,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/" title="Previous Post: Gradle JavaFX Plugin 0.2.0 Released">&laquo; Gradle JavaFX Plugin 0.2.0 Released</a>
+        <a class="basic-alignment left" href="/blog/2013/10/01/javaone-2013-dogfooding-the-future-java/" title="Previous Post: JavaOne 2013: Dogfooding the Future Java">&laquo; JavaOne 2013: Dogfooding the Future Java</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" title="Next Post: JavaFX Gradle Plugin 0.3.0 Released">JavaFX Gradle Plugin 0.3.0 Released &raquo;</a>
       
     </p>
   </footer>
@@ -310,8 +335,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/';
         var disqus_script = 'embed.js';
       
     (function () {

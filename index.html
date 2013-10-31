@@ -9,7 +9,7 @@
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="Last week I presented two talks at JavaOne 2013. The first talk I gave on Monday was &#8220;Styling Your Custom Components with CSS in JavaFX.&#8221 &hellip;">
+  <meta name="description" content="Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version 0.3.0. (Who came up wit the idea of zero indexed arrays &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,59 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/">JavaFX Gradle Plugin 0.4.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T18:36:00-06:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.3.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+
+<p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
+
+<pre><code>http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin
+</code></pre>
+
+<p>and then load it in your <code>build.gradle</code> file like so:</p>
+
+<pre><code>apply from: ‘javafx.plugin’
+</code></pre>
+
+<p>This is a change from previous releases where I recommended you apply the script directly from the internet.  But that doesn’t works so well on an airplane or other similarly air-gapped networks, particularly in places with poor wifi reception.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -448,49 +501,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/10/textflow-for-fun-and-profit/">TextFlow for Fun and Profit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-10T21:10:00-07:00" pubdate data-updated="true">Dec 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of the newer features for JavaFX is the new <a href="https://wikis.oracle.com/display/OpenJDK/Rich+Text+API+Samples">TextFlow</a> node.  Revealed at JavaOne San Francisco this is the generel solution to a rich text component in JavaFX.</p>
-
-<p>This also happens to fit in nicely with my planned hobby project for the next few months.  The deck control was one part, and the ability to take MarkDown into a JavaFX node is another important part of the equation.  To prototype this I wrote a little toy app I call <a href="https://bitbucket.org/shemnon/flowdown">FlowDown</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/12/10/textflow-for-fun-and-profit/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -506,6 +516,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/">JavaFX Gradle Plugin 0.4.0 Released</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/01/javaone-2013-dogfooding-the-future-java/">JavaOne 2013: Dogfooding the Future Java</a>
       </li>
     
@@ -519,10 +533,6 @@
     
       <li class="post">
         <a href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/">JavaFX Gradle Plugin 0.3.0 Released</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/">A Touch and Gesture JavaFX Demonstration</a>
       </li>
     
   </ul>

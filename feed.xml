@@ -8,6 +8,62 @@
 		
 			
 			<item>
+				<title><![CDATA[JavaFX Gradle Plugin 0.4.0 Released]]></title>
+				<description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.3.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+
+<p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
+
+<pre><code>http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin
+</code></pre>
+
+<p>and then load it in your <code>build.gradle</code> file like so:</p>
+
+<pre><code>apply from: ‘javafx.plugin’
+</code></pre>
+
+<p>This is a change from previous releases where I recommended you apply the script directly from the internet.  But that doesn’t works so well on an airplane or other similarly air-gapped networks, particularly in places with poor wifi reception.</p>
+
+<!-- more -->
+
+
+<h1>Specifying the Packaged Source Set</h1>
+
+<p>Sometimes your gradle project may have a large number of source sets you compile your java code from (where large is larger than 2).  Often that means that the source set with the main class isn’t <code>main</code>.  In previous versions of the plugin I assumed that <code>main</code> was the source set to use for packaging, now you can specify a different source set in the <code>javafx</code> block:</p>
+
+<pre><code>sourceSets {
+  main 
+  samples {
+    java {
+      compileClasspath += main.output
+      runtimeClasspath += main.output
+      runtimeClasspath += javadocJar.output
+    }
+  }
+}
+
+javafx {
+    sourceSet = ‘samples’
+} 
+</code></pre>
+
+<p>But to be honest, I strongly recommend that your samples be placed in a separate sub project following the maven conventional tree structure.  However since I am a strong advocate of choice in build tooling, you are now free to choose a different path than the opinion expressed by the build tool.  But these opinions exist for your own good, trust us. ;) P</p>
+
+<h1>Bug fixes</h1>
+
+<p>Nearly all of the other changes revolve around bug fixes, mostly from ones I learned about in the <a href="https://bitbucket.org/shemnon/javafx-gradle/issues">bug queue</a>. Keep them coming!  One dealt with playing nicely with the gradle <code>application</code> plugin, one with specifying manifest entries, and there were some unreported ones I fixed in relation to jar files in the 7u40 java updates</p>
+
+<h1>Summary</h1>
+
+<p>If the plugin isn’t addressing your needs be sure to drop me a line on twitter at <a href="https://twitter.com/shemnon">@shemnon</a> or via <a href="https://plus.google.com/107563042277462358434">Google+</a>.  Oh yea, there is still that e-mail thing too: danno dot ferrin at gmail or shemnon dot com.  If my responses aren’t quick that is likely because I am playing LEGO Marvel Super Heroes on my legacy XBox 360 (which I won filling out conference surveys at JavaOne 5 years ago).</p>
+]]></description>
+				<pubDate>Tue, 29 Oct 2013 18:36:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[JavaOne 2013: Dogfooding the Future Java]]></title>
 				<description><![CDATA[<p>Last week I presented two talks at JavaOne 2013.  The first talk I gave on Monday was &#8220;Styling Your Custom Components with CSS in JavaFX.&#8221;  My second talk on Tuesday was &#8220;Building and Deploying JavaFX Applications with Gradle or Maven (or Ant!).&#8221; Since these two sessions were very technical in nature I created demo applications for both and the source for these are on Bitbucket.  One repo for the <a href="https://bitbucket.org/shemnon/jfxcustomcss">custom CSS presentation</a> and another one for the <a href="https://bitbucket.org/shemnon/jfxdeployment">deployment build tools</a> talk. Since each talk dealt with different perspectives in the same talk I created a separate git branch for one, so keep your eye out for the branches.</p>
 
