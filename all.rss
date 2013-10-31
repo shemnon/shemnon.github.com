@@ -6,17 +6,17 @@
     <link>http://speling.shemnon.com/</link>
     <atom:link href="http://speling.shemnon.com//all.rss" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <pubDate>Wed, 30 Oct 2013 21:25:53 -0600</pubDate>
-    <lastBuildDate>Wed, 30 Oct 2013 21:25:53 -0600</lastBuildDate>
+    <pubDate>Wed, 30 Oct 2013 21:30:28 -0600</pubDate>
+    <lastBuildDate>Wed, 30 Oct 2013 21:30:28 -0600</lastBuildDate>
     
       
     <item>
       <title><![CDATA[JavaFX Gradle Plugin 0.4.0 Released]]></title>
-      <description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.3.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
+      <description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to bintray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
 
 <p>To use the plugin in your gradle script copy the following script into your root build directory:</p>
 
-<pre><code>http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin
+<pre><code>http://dl.bintray.com/content/shemnon/javafx-gradle/0.4.0/javafx.plugin
 </code></pre>
 
 <p>and then load it in your <code>build.gradle</code> file like so:</p>
@@ -59,7 +59,7 @@ javafx {
 
 <p>If the plugin isn’t addressing your needs be sure to drop me a line on twitter at <a href="https://twitter.com/shemnon">@shemnon</a> or via <a href="https://plus.google.com/107563042277462358434">Google+</a>.  Oh yea, there is still that e-mail thing too: danno dot ferrin at gmail or shemnon dot com.  If my responses aren’t quick that is likely because I am playing LEGO Marvel Super Heroes on my legacy XBox 360 (which I won filling out conference surveys at JavaOne 5 years ago).</p>
 ]]></description>
-      <pubDate>Tue, 29 Oct 2013 18:36:00 -0600</pubDate>
+      <pubDate>Tue, 29 Oct 2013 18:37:00 -0600</pubDate>
       <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
       <link>http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/</link>
       <guid isPermaLink="true">http://speling.shemnon.com//blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/</guid>
