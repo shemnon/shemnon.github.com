@@ -8,6 +8,56 @@
 		
 			
 			<item>
+				<title><![CDATA[Tech Predictions for the Year of the Horse]]></title>
+				<description><![CDATA[<p>This year I’ve decided to do tech predictions on the Chinese New Year instead of the Solar New Year.  Now the cynical reader may presume that I am merely finishing a blog post I started before Christmas before I started playing with Lego Mindstorms EV3 robots, but I actually worked the week between Christmas and New Years.  To be precise it is the year of the Wood Horse.  Not to be confused with the Trojan horse.</p>
+
+<h2>The Worm Starts to Turn for Google</h2>
+
+<p>Google and Apple are occupying positions in the tech sphere that were occupied twenty to twenty-five years ago by Microsoft and, well, Apple.  Apple is and still will be Apple and Google is the new Microsoft.  Clearly they are on top of their domain, looking to grow, and they are rustling some feathers in the process.</p>
+
+<p>The phrase Google is often associated with is “Do No Evil.”  But that is a mis-quote.  The phrase is actually <a href="http://www.google.com/about/company/philosophy/">“You can make money without doing evil.”</a> Combining that with one of their other philosophies that “It’s best to do one thing really, really well” we will see even more spring cleaning.  Beloved properties will continue to close because the good idea fairy can’t do everything it wants to.  And some of those money based decisions will rub users the wrong way.</p>
+
+<p>I don’t know if they are set up to be the next Yahoo, but I predict this year you will start to see reactions to stuff Google does and announces change from what would have been awe and wonder to a “meets expectation” apathy and in some cases outright antagonism.  There is only one place to go from the top of a mountain, and that is to the top of another mountain.  But first you have to go down to the saddle between the peaks.  We will see evidence that is where they are headed.</p>
+
+<h2>Crypto Currency will Stop Hearts</h2>
+
+<p>No doubt crypto currencies like BitCoin are the darling of the hype cycle right now.  As it comes out of the shadows of six million dollar pizzas and illicit trade it will move into different shadows of regulation and speculation.  And where there is money there is crime.  Technically crypto coin isn’t money, so technically it isn’t crime, but technically there will still be moral outrage at something someone does.  With billions in “market cap” if there was some technical way to control the flow of coin and the generation of coin then controls the universe.  Wait, that was the world of Dune and it was the Spice that must flow.</p>
+
+<p>But that’s just it.  To the world of crypto coin the protocol, algorithm, and the network are the three legs of the stool upon which the whole seat of power rests.  Take out one leg and the whole stool cannot stand without active and continual effort.</p>
+
+<p>I predict that someone this year will mount a major attack against one of the three legs of the stool against either BitCoin or one of the major alt-currencies ($5 million fiat dollars in available market cap or more makes an alt-currency major in my book).  The attack will be clever and innovative, and won’t target the hard targets like the SHA hashing or public key transactions.  There will be a collective freak out and then a solid solution will be found because too many people have too much power invested in crypto coin that is too big for it to fail for them.  And the ironic part?  The attack will fail, but will demonstrate an attack that could work in 5 years time.  Keep your eyes ahead of you before the future runs right into you.</p>
+
+<h2>Java 8 Reduces the Java Hate</h2>
+
+<p>The start of this decade saw a good deal of what could best be described as “Java Hate.”  Between the Sun set and Oracle buying up Sun a lot of people presumed the worst.  But Oracle has realized that the value of Java isn’t direct revenue but the indirect halo effect.  Oracle’s Fusion products live and breath on Java and their strength is that Java is more than a proprietary language, but is seeded by ideas from the greater community.</p>
+
+<p>Java 8 is a perfect example of that.  If it wasn’t for community involvement and “near community” effort from the likes of Groovy, Scala, and JRuby then the core Java team would have never been able to sell stuff like Lambdas, Default Methods, and the Streams API to the bean counters who fund the development of new features.  And they are pushing these for the benefit of the community as a whole, not just for Oracle’s benefit.  Although Oracle does benefit from a strengthened community and public innovation.  If it was simply Oracle doing this for their own benefit we would have seen stuff like XML literals and embedded SQL, and pay per call method metering.  A faster horse drawn carriage instead of a horseless carriage.</p>
+
+<p>My prediction for the Year of the Horse is that the release of Java 8 will result in a measurable uptick in the interest of Java the language (as well as Java the platform).  Some of this will be at the expense of other JVM and non JVM language interest, and some of it will be genuine growth.  But this will be almost entirely because of the interest in the new features like Lambdas, Method References, Default Methods, and the Streams API.</p>
+
+<h2>Quick Hits</h2>
+
+<p>I’ll finish off with some quick hits.</p>
+
+<ul>
+<li><p>NSA gets nerfed.  But that will actually make them better at their mission.  Their real value lies in their analytical abilities, not the force of government power to get the data and manipulate standards. Reigning them back inside their constitutional limits will make them focus on what they should be doing: analysis.</p></li>
+<li><p>Marissa Mayer will almost be able to turn Yahoo around, but not quite enough.  The problems with Yahoo are not as much leadership, which Marissa is capable of solving, but heritage and what it means to be Yahoo.  What they need is an IBM like metamorphosis into something else, but that would likely kill Yahoo in the process.  Marissa provides the best controlled descent into terrain Yahoo could hope for, unless she doubles down (but the dealer is showing a 2).</p></li>
+<li><p>Some second tier cable company will begin offering al-a-carte cable.  ESPN will cancel their contract rather than be forced to show what it would really cost each home to get their service.</p></li>
+<li><p>China will launch an official crypto currency.  In an attempt to reign in the use of BitCoin and DogeCoin use outside of the special economic zones China will launch it’s own crypto currency for it’s own citizens, backed by algorithms that it owns the keys to.  But this will open Pandora’s box and backfire.</p></li>
+<li><p>Speaking of Pandora’s box, some major online subscription service like Pandora will start accepting subscription fees in BitCoin.  Attach a sound card to your mining rig and you really will have free music!</p></li>
+</ul>
+
+
+<p>So when the year of the Goat comes around, you will see why I write software instead of prognosticating the future.  I estimate half of these will not come true, I’m just not sure which half it is.</p>
+]]></description>
+				<pubDate>Wed, 29 Jan 2014 21:10:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[JavaFX Gradle Plugin 0.4.0 Released]]></title>
 				<description><![CDATA[<p>Yesterday I pushed the fifth rerelease of my JavaFX Plugin for Gradle to BinTray, version <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.4.0">0.4.0</a>. (Who came up wit the idea of zero indexed arrays anyway?) New in this release is the ability to specify a particular source set from which to package your runtime classes from. There were also a large number of bug fixes.</p>
 
