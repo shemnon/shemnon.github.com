@@ -9,7 +9,7 @@
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="This year I’ve decided to do tech predictions on the Chinese New Year instead of the Solar New Year. Now the cynical reader may presume that I am &hellip;">
+  <meta name="description" content="Lambda expressions are one of the coolest features of Java 8 so far. But I think there is a (not so) secret weapon that shows just how powerful such &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,51 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/11/8-cool-things-about-java-streams/">8 Cool Things About Java Streams</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-11T23:14:00-07:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Lambda expressions are one of the coolest features of Java 8 so far.  But I think there is a (not so) secret weapon that shows just how powerful such &#8220;syntactic sugar&#8221; can be in increasing code readability and writeability.  When you increase the expressiveness of code it unlocks a higher level of understanding that can make the most obtuse of tasks simple.</p>
+
+<p>That secret weapon? The Java Streams API.  Recently <a href="https://github.com/shemnon/hashpan">I entered</a> an <a href="https://www.clover.com/challenge">online contest</a> simply to use the Streams in a more performance oriented environment.  My surprise was that the API made development of the <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L52-L60">principal loop</a> very simple, and very malleable to the many changes I would make.  Here are 8 cool things I learned.</p>
+
+<h3>1. Streams don&#8217;t require lambda expressions</h3>
+
+<p>Even though this API really shines with Lambdas, you don&#8217;t have to use them. </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/02/11/8-cool-things-about-java-streams/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -460,47 +505,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/">JavaFX Gradle Plugin 0.1.0 Released</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-08T22:24:00-07:00" pubdate data-updated="true">Jan 8<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I just spun and released the 0.1.0 version of my JavaFX Gradle plugin.  There is only one new feature: ScenicView integration.  The rest is behind the scenes work where I am moving away from the Ant tasks.  I also updated some of the web scripts to launch it.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/01/08/javafx-gradle-plugin-0-dot-1-0-released/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -516,6 +520,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/11/8-cool-things-about-java-streams/">8 Cool Things About Java Streams</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/">Tech Predictions for the Year of the Horse</a>
       </li>
     
@@ -529,10 +537,6 @@
     
       <li class="post">
         <a href="/blog/2013/09/24/oracle-javaone-2013/">Oracle JavaOne 2013</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/06/08/insubstantial-needs-a-new-maintainer/">Insubstantial Needs a New Maintainer</a>
       </li>
     
   </ul>

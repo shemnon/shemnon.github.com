@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Touch and Gesture JavaFX Demonstration - ...and they shall know me by my speling errors.</title>
+  <title>8 Cool Things About Java Streams - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work. Being a developer, you could probably guess the &hellip;">
+  <meta name="description" content="Lambda expressions are one of the coolest features of Java 8 so far. But I think there is a (not so) secret weapon that shows just how powerful such &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">A Touch and Gesture JavaFX Demonstration</h1>
+      <h1 class="entry-title">8 Cool Things About Java Streams</h1>
     
     
       <p class="meta">
@@ -83,38 +83,54 @@
   
 
 
-<time datetime="2013-05-03T22:04:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
+<time datetime="2014-02-11T23:14:00-07:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work.  Being a developer, you could probably guess the kind of software I installed on it.  For the record I have yet to attempt to use stuff like the Finance and Travel App, and only opened the Maps app out of idle curiosity. The first thing I did was install JDK 8 and IntelliJ, so I could get down to business: figuring out how to best use  touch screens and gestures.</p>
+<div class="entry-content"><p>Lambda expressions are one of the coolest features of Java 8 so far.  But I think there is a (not so) secret weapon that shows just how powerful such &#8220;syntactic sugar&#8221; can be in increasing code readability and writeability.  When you increase the expressiveness of code it unlocks a higher level of understanding that can make the most obtuse of tasks simple.</p>
 
-<!-- more -->
+<p>That secret weapon? The Java Streams API.  Recently <a href="https://github.com/shemnon/hashpan">I entered</a> an <a href="https://www.clover.com/challenge">online contest</a> simply to use the Streams in a more performance oriented environment.  My surprise was that the API made development of the <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L52-L60">principal loop</a> very simple, and very malleable to the many changes I would make.  Here are 8 cool things I learned.</p>
 
+<h3>1. Streams don&#8217;t require lambda expressions</h3>
 
-<p>To help me, I wrote a small sample app I called <a href="https://bitbucket.org/shemnon/touchyfxy">Touchy FXy</a>.  I did this so I could get a realtime feel of how the gesture events work. Basically it gives you graphic and textual feedback as you perform gestures on the main center area (the one with the helpful instructions).</p>
+<p>Even though this API really shines with Lambdas, you don&#8217;t have to use them. <!-- more --> You could always fall back to anonymous classes, but why would you?  More likely scenarios are using a method reference (such as <code>Integer::valueOf</code>), or an instance object.  Using a method reference allows you to put complex multiline logic out of the main stream loop, like when <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L59">you are optimizing a hash set lookup away</a>.  The instance object allows for implementation of the Gang of Four <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</a>.  But please, don&#8217;t use anonymous classes unless you have to.</p>
 
-<p><img src="/images/touchyfxymac.png"></p>
+<h3>2. Peek into the stream to debug it.</h3>
 
-<p>One of the main reasons I wrote this is to get a feel for some of the quirks on the various platforms that JavaFX runs on.  Already I have some issues in mind, but I want to get a good survey of the problem space before I propose anything.  The reasons why some tasks are problems on one platform may have to do with other platforms.</p>
+<p>At any point in your stream where you would add an intermediate operator, you can add one called <code>peek</code>.  This operation takes a consumer and expects no result, which is basically a lambda that returns void.  My favorite use of peek is to send debugging information to the system, such as</p>
 
-<p>So please, give this app a whirl, and leave me your comments.  I am particularly interested in platforms I don&#8217;t have immediate access to, which basically includes a boring windows 7 laptop, a Surface Pro, and a MacBook air.  How does this work on Ubuntu touch screens (do they even work?)  How about RasPi touch screens?  Fancy Wacom digitizers?  Let me know in the comments below or mail me at <a href="mailto:danno.ferrin@shemnon.com">danno.ferrin@shemnon.com</a>, or leave a bug in the bitbucket project.</p>
+<pre><code>.peek(System.out::println)
+.peek(it -&gt; System.out.printf("it is %s%n", it)
+</code></pre>
 
-<p>In case you are not interested in building this yourself, but do want to run it, I have the following packages on <a href="http://bintray.com/">BinTray</a>:</p>
+<h3>3. Random stuff can be streamed</h3>
 
-<ul>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.jar?direct">Executable Jar</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.0.msi?direct">Windows .msi</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy.dmg?direct">Mac .dmg</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0.deb?direct">Linux .deb</a></li>
-<li><a href="http://dl.bintray.com/content/shemnon/javafx/touchyfxy-0.0-1.i386.rpm?direct">Linux .rpm</a></li>
-</ul>
+<p>Streams are not limited to collections or arrays of stuff, or even fixed lists of stuff.  If you can create an <code>Iterator</code> or a <code>Supplier</code> lambda that creates the values of the stream then you can create a stream with the methods on the <code>java.util.stream.StreamSupport</code> class.  Imagine a stream driven by constant measurements such as memory consumption or network throughput&#8230;</p>
 
+<h3>4. Random numbers can be streamed</h3>
 
-<p>In case you are wondering, each executable package embeds Java 7u21.</p>
+<p>If you are looking for plain old randomness, such as from a <code>java.util.Random</code> there are three new sets of methods on that class to stream <code>ints()</code>, <code>longs()</code>, and <code>doubles()</code>.  Overloaded versions of those methods let you set the bounds, seed, and total amount of random numbers streamed.</p>
+
+<h3>5. Streaming readers</h3>
+
+<p>Another common task for java developers is parsing a file line by line.  Now we have a <code>lines()</code> method on <code>java.io.BufferedReader</code> that will turn that I/O stream in to a stream of strings, fit for stream processing.</p>
+
+<h3>6. Streaming file trees</h3>
+
+<p>If walking through the content of the files isn&#8217;t your thing, how about walking a file tree?  <code>java.nio.file.Files</code> has several methods that return Streams.  <code>list()</code> will list the files in one directory, <code>walk(...)</code> will do it recursively, and <code>filter(...)</code> will do it recursively with some attribute driven filtering (something that is convoluted when you just have a Path object).  You can still get at the contents via streams with the <code>lines(Path)</code> method.</p>
+
+<h3>7. Streaming complex text</h3>
+
+<p>If you are still fixated on text processing, but the content isn&#8217;t line based, you can use the <code>splitAsStream(CharSequence)</code> method on your <code>java.util.regex.Pattern</code> instance.  Useful for those million column CSV files, or your classpath.</p>
+
+<h3>8. Streaming zip files</h3>
+
+<p>Speaking of long classpath searches, you can also stream your <code>java.util.zip.ZipFile</code>s and <code>java.util.jar.JarFile</code>s with the conveniently named <code>stream()</code> method, returning a <code>ZipEntry</code> or <code>JarEntry</code> respectively.  Nothing like using Java 8 streams to mine your classpath for JavaBeans.</p>
+
+<p>If you&#8217;ve made it this far you surely realize that these aren&#8217;t the basic things you would do with streams.  I figure there will be more than enough blog posts walking through the basics of streams.  But I consider these to be some of the hidden gems that show the potential of streams.  But mining your classpath for jar declared JavaBeans, using lambdas and streams?  There&#8217;s an old/new juxtaposition worthy of a lunch hour hack!</p>
 </div>
 
 
@@ -137,7 +153,7 @@
   
 
 
-<time datetime="2013-05-03T22:04:00-06:00" pubdate data-updated="true">May 3<span>rd</span>, 2013</time>
+<time datetime="2014-02-11T23:14:00-07:00" pubdate data-updated="true">Feb 11<span>th</span>, 2014</time>
       
 
 
@@ -145,7 +161,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/" >Tweet</a>
   
   
   
@@ -154,10 +170,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/01/30/gradle-javafx-plugin-0-dot-2-0-released/" title="Previous Post: Gradle JavaFX Plugin 0.2.0 Released">&laquo; Gradle JavaFX Plugin 0.2.0 Released</a>
+        <a class="basic-alignment left" href="/blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/" title="Previous Post: Tech Predictions for the Year of the Horse">&laquo; Tech Predictions for the Year of the Horse</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" title="Next Post: JavaFX Gradle Plugin 0.3.0 Released">JavaFX Gradle Plugin 0.3.0 Released &raquo;</a>
       
     </p>
   </footer>
@@ -310,8 +324,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2013/05/03/a-touch-and-gesture-javafx-demonstration/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -8,6 +8,57 @@
 		
 			
 			<item>
+				<title><![CDATA[8 Cool Things About Java Streams]]></title>
+				<description><![CDATA[<p>Lambda expressions are one of the coolest features of Java 8 so far.  But I think there is a (not so) secret weapon that shows just how powerful such &#8220;syntactic sugar&#8221; can be in increasing code readability and writeability.  When you increase the expressiveness of code it unlocks a higher level of understanding that can make the most obtuse of tasks simple.</p>
+
+<p>That secret weapon? The Java Streams API.  Recently <a href="https://github.com/shemnon/hashpan">I entered</a> an <a href="https://www.clover.com/challenge">online contest</a> simply to use the Streams in a more performance oriented environment.  My surprise was that the API made development of the <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L52-L60">principal loop</a> very simple, and very malleable to the many changes I would make.  Here are 8 cool things I learned.</p>
+
+<h3>1. Streams don&#8217;t require lambda expressions</h3>
+
+<p>Even though this API really shines with Lambdas, you don&#8217;t have to use them. <!-- more --> You could always fall back to anonymous classes, but why would you?  More likely scenarios are using a method reference (such as <code>Integer::valueOf</code>), or an instance object.  Using a method reference allows you to put complex multiline logic out of the main stream loop, like when <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L59">you are optimizing a hash set lookup away</a>.  The instance object allows for implementation of the Gang of Four <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</a>.  But please, don&#8217;t use anonymous classes unless you have to.</p>
+
+<h3>2. Peek into the stream to debug it.</h3>
+
+<p>At any point in your stream where you would add an intermediate operator, you can add one called <code>peek</code>.  This operation takes a consumer and expects no result, which is basically a lambda that returns void.  My favorite use of peek is to send debugging information to the system, such as</p>
+
+<pre><code>.peek(System.out::println)
+.peek(it -&gt; System.out.printf("it is %s%n", it)
+</code></pre>
+
+<h3>3. Random stuff can be streamed</h3>
+
+<p>Streams are not limited to collections or arrays of stuff, or even fixed lists of stuff.  If you can create an <code>Iterator</code> or a <code>Supplier</code> lambda that creates the values of the stream then you can create a stream with the methods on the <code>java.util.stream.StreamSupport</code> class.  Imagine a stream driven by constant measurements such as memory consumption or network throughput&#8230;</p>
+
+<h3>4. Random numbers can be streamed</h3>
+
+<p>If you are looking for plain old randomness, such as from a <code>java.util.Random</code> there are three new sets of methods on that class to stream <code>ints()</code>, <code>longs()</code>, and <code>doubles()</code>.  Overloaded versions of those methods let you set the bounds, seed, and total amount of random numbers streamed.</p>
+
+<h3>5. Streaming readers</h3>
+
+<p>Another common task for java developers is parsing a file line by line.  Now we have a <code>lines()</code> method on <code>java.io.BufferedReader</code> that will turn that I/O stream in to a stream of strings, fit for stream processing.</p>
+
+<h3>6. Streaming file trees</h3>
+
+<p>If walking through the content of the files isn&#8217;t your thing, how about walking a file tree?  <code>java.nio.file.Files</code> has several methods that return Streams.  <code>list()</code> will list the files in one directory, <code>walk(...)</code> will do it recursively, and <code>filter(...)</code> will do it recursively with some attribute driven filtering (something that is convoluted when you just have a Path object).  You can still get at the contents via streams with the <code>lines(Path)</code> method.</p>
+
+<h3>7. Streaming complex text</h3>
+
+<p>If you are still fixated on text processing, but the content isn&#8217;t line based, you can use the <code>splitAsStream(CharSequence)</code> method on your <code>java.util.regex.Pattern</code> instance.  Useful for those million column CSV files, or your classpath.</p>
+
+<h3>8. Streaming zip files</h3>
+
+<p>Speaking of long classpath searches, you can also stream your <code>java.util.zip.ZipFile</code>s and <code>java.util.jar.JarFile</code>s with the conveniently named <code>stream()</code> method, returning a <code>ZipEntry</code> or <code>JarEntry</code> respectively.  Nothing like using Java 8 streams to mine your classpath for JavaBeans.</p>
+
+<p>If you&#8217;ve made it this far you surely realize that these aren&#8217;t the basic things you would do with streams.  I figure there will be more than enough blog posts walking through the basics of streams.  But I consider these to be some of the hidden gems that show the potential of streams.  But mining your classpath for jar declared JavaBeans, using lambdas and streams?  There&#8217;s an old/new juxtaposition worthy of a lunch hour hack!</p>
+]]></description>
+				<pubDate>Tue, 11 Feb 2014 23:14:00 -0700</pubDate>
+				<link>http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[Tech Predictions for the Year of the Horse]]></title>
 				<description><![CDATA[<p>This year I’ve decided to do tech predictions on the Chinese New Year instead of the Solar New Year.  Now the cynical reader may presume that I am merely finishing a blog post I started before Christmas before I started playing with Lego Mindstorms EV3 robots, but I actually worked the week between Christmas and New Years.  To be precise it is the year of the Wood Horse.  Not to be confused with the Trojan horse.</p>
 

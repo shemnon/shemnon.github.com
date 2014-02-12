@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2014-01-30T16:52:40-07:00</updated>
+  <updated>2014-02-11T23:46:36-07:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[8 Cool Things About Java Streams]]></title>
+    <link href="http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams/"/>
+    <updated>2014-02-11T23:14:00-07:00</updated>
+    <id>http://speling.shemnon.com//blog/2014/02/11/8-cool-things-about-java-streams</id>
+    <content type="html"><![CDATA[<p>Lambda expressions are one of the coolest features of Java 8 so far.  But I think there is a (not so) secret weapon that shows just how powerful such &#8220;syntactic sugar&#8221; can be in increasing code readability and writeability.  When you increase the expressiveness of code it unlocks a higher level of understanding that can make the most obtuse of tasks simple.</p>
+
+<p>That secret weapon? The Java Streams API.  Recently <a href="https://github.com/shemnon/hashpan">I entered</a> an <a href="https://www.clover.com/challenge">online contest</a> simply to use the Streams in a more performance oriented environment.  My surprise was that the API made development of the <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L52-L60">principal loop</a> very simple, and very malleable to the many changes I would make.  Here are 8 cool things I learned.</p>
+
+<h3>1. Streams don&#8217;t require lambda expressions</h3>
+
+<p>Even though this API really shines with Lambdas, you don&#8217;t have to use them. <!-- more --> You could always fall back to anonymous classes, but why would you?  More likely scenarios are using a method reference (such as <code>Integer::valueOf</code>), or an instance object.  Using a method reference allows you to put complex multiline logic out of the main stream loop, like when <a href="https://github.com/shemnon/hashpan/blob/master/src/main/java/com/shemnon/hashpan/SearchHashesForPANs.java#L59">you are optimizing a hash set lookup away</a>.  The instance object allows for implementation of the Gang of Four <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</a>.  But please, don&#8217;t use anonymous classes unless you have to.</p>
+
+<h3>2. Peek into the stream to debug it.</h3>
+
+<p>At any point in your stream where you would add an intermediate operator, you can add one called <code>peek</code>.  This operation takes a consumer and expects no result, which is basically a lambda that returns void.  My favorite use of peek is to send debugging information to the system, such as</p>
+
+<pre><code>.peek(System.out::println)
+.peek(it -&gt; System.out.printf("it is %s%n", it)
+</code></pre>
+
+<h3>3. Random stuff can be streamed</h3>
+
+<p>Streams are not limited to collections or arrays of stuff, or even fixed lists of stuff.  If you can create an <code>Iterator</code> or a <code>Supplier</code> lambda that creates the values of the stream then you can create a stream with the methods on the <code>java.util.stream.StreamSupport</code> class.  Imagine a stream driven by constant measurements such as memory consumption or network throughput&#8230;</p>
+
+<h3>4. Random numbers can be streamed</h3>
+
+<p>If you are looking for plain old randomness, such as from a <code>java.util.Random</code> there are three new sets of methods on that class to stream <code>ints()</code>, <code>longs()</code>, and <code>doubles()</code>.  Overloaded versions of those methods let you set the bounds, seed, and total amount of random numbers streamed.</p>
+
+<h3>5. Streaming readers</h3>
+
+<p>Another common task for java developers is parsing a file line by line.  Now we have a <code>lines()</code> method on <code>java.io.BufferedReader</code> that will turn that I/O stream in to a stream of strings, fit for stream processing.</p>
+
+<h3>6. Streaming file trees</h3>
+
+<p>If walking through the content of the files isn&#8217;t your thing, how about walking a file tree?  <code>java.nio.file.Files</code> has several methods that return Streams.  <code>list()</code> will list the files in one directory, <code>walk(...)</code> will do it recursively, and <code>filter(...)</code> will do it recursively with some attribute driven filtering (something that is convoluted when you just have a Path object).  You can still get at the contents via streams with the <code>lines(Path)</code> method.</p>
+
+<h3>7. Streaming complex text</h3>
+
+<p>If you are still fixated on text processing, but the content isn&#8217;t line based, you can use the <code>splitAsStream(CharSequence)</code> method on your <code>java.util.regex.Pattern</code> instance.  Useful for those million column CSV files, or your classpath.</p>
+
+<h3>8. Streaming zip files</h3>
+
+<p>Speaking of long classpath searches, you can also stream your <code>java.util.zip.ZipFile</code>s and <code>java.util.jar.JarFile</code>s with the conveniently named <code>stream()</code> method, returning a <code>ZipEntry</code> or <code>JarEntry</code> respectively.  Nothing like using Java 8 streams to mine your classpath for JavaBeans.</p>
+
+<p>If you&#8217;ve made it this far you surely realize that these aren&#8217;t the basic things you would do with streams.  I figure there will be more than enough blog posts walking through the basics of streams.  But I consider these to be some of the hidden gems that show the potential of streams.  But mining your classpath for jar declared JavaBeans, using lambdas and streams?  There&#8217;s an old/new juxtaposition worthy of a lunch hour hack!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tech Predictions for the Year of the Horse]]></title>
@@ -1728,53 +1777,6 @@ I think you should use an
 
 
 <p>There are a lot of moving parts in getting a high quality JavaFX application written.  But Griffon makes a point to hide the mechanical details so that you can focus on what matters: the application itself.  Do you know how to convert a 64x64 PNG file into a Mac Application Icon?  Griffon does, and you don&#8217;t need to.</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[The Life and Times of a JavaFX Skin]]></title>
-    <link href="http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin/"/>
-    <updated>2012-08-28T21:06:00-06:00</updated>
-    <id>http://speling.shemnon.com//blog/2012/08/28/the-life-and-times-of-a-javafx-skin</id>
-    <content type="html"><![CDATA[<p>As a consequence of the <a href="http://gr8conf.us/Presentations/Groovy-plus-JavaFX-equals-Grif">talk</a> I gave at <a href="http://gr8conf.us/">Gr8Conf US</a> I&#8217;ve been wanting to create a real &#8220;Deck&#8221; control. Basically it is a stack of nodes that can be added to and navigated arbitrarily. And it displays these nodes in interesting ways. Something like a Powerpoint deck or a deck of cards. Also useful for UIs that use the &#8220;back&#8221; metaphor but the path forward isn&#8217;t fixed, like a Wizard.</p>
-
-
-<p>Last evening I finally got around to coding some stuff up. My work is currently on github under my craftily named <a href="https://github.com/shemnon/DeckControl/">DeckControl</a> project. Nothing earth shattering (yet). So there will be no screenshots or demos in this post. What I do want to talk about is the Skin model JavaFX is using. These tidbits I have yet to find in any documentation. But that also may be because I haven&#8217;t really read the documentation beyond a cursory level, or any of the books for that matter.  I still haven&#8217;t finished reading the Wheel of Time, so it&#8217;s not too surprising.</p>
-
-
-<!-- more -->
-
-
-<p>Skins in JavaFX provide something Swing never could fully arrive at: total separation between the abstract control and the literal representation of the control on the screen. There were always ways to subvert and abuse the PLAF mechanisms. While a poorly constructed control can still present problems the architecture is there for a complete look and structure separation.</p>
-
-
-<p><strong>Structure of a Skin</strong></p>
-
-
-<p>A Skin is mostly a class that extends <code>javafx.scene.control.Skin</code>. I say mostly because there are two caveats. First, the <code>Skin</code> interface is a generic interface. The type parameter must be the same type as the control you are skinning. Second you must provide a constructor that takes a single argument of the type of the generic parameter. A piece of trivia is that the Skin need not be a <code>javafx.scene.Node</code>, although they often are a <code>StackPane</code>.  Just to prove my point my skin didn&#8217;t extend from <code>Node</code>.</p>
-
-
-<p><strong>Lifecycle of a Skin</strong></p>
-
-
-<p>The lifecycle of the skin is fairly straight forward. Simplified by the fact that skins are created for only one control, ever. No double dipping or reuse here. Garbage Collection has come a long way in the last 15 years.</p>
-
-
-<ol>
-<li><strong>Construct the Skin</strong><br />First the single argument constructor is called. If you are subclassing a skin pass the argument to the super. If not, stash the node you are passed in. You will need it later.<br />Next you will need to prepare everything you need. The constructor is a good place, although lazily in the next step is an option. But I think initializing in the constructor is the best place.</li>
-<li><strong>Stuff Happens</strong><br />Stuff in the world will now happen. Some of this may or may not affect your control you are skinning. It&#8217;s hard to tell, unless you attached listeners to the parts of the world you care about.</li>
-<li><strong>Node and Control Queried</strong><br />Two of the interface methods may now get called. They may get called multiple times, or once. Or not at all in pathological cases. (The kind of pathological cases QA departments are paid to find).<br />First for <code>getSkinnable()</code> you must return the control passed into your constructor.  If you subclassed an existing skin you are in the clear.<br />Second, <code>getNode()</code> will be called to get the <em>singular</em> node you are using to represent the control.  If you extend a Node class and it is the representation, return <code>this</code>.  Otherwise return the node you are using.  But whatever you do you must always return the same value (until you don&#8217;t have to, see step 6).</li>
-<li><strong>More Stuff Happens</strong><br />This is much like step 2.  Except now that your node is in the wild anything in the world that changes that you need to reflect in the skin node tree must be reflected in that node.  In my case I have to pay attention to what nodes are being added to the deck and what node in the deck is showing.  This step repeats with step 3 for an indeterminate number of cycles, zero or more times.  Make sure you play nicely with repetition</li>
-<li><strong>Disposal</strong><br />Finally, <code>dispose()</code> is called.  This is JavaFX saying &#8220;we&#8217;re through&#8221; and storming out the door, never(?) to be seen again.  There is no getting back together, if a new skin of the same kind is needed it will be created anew.<br />All that is left to do now is to clean up whatever messes you made.  Most importantly this includes any listeners you have attached outside the world of your Skin.  So keep track of listeners you attach.  And if you are not sure if the listener left your little world then cut it off, just to be sure.</li>
-<li><strong>Afterlife</strong><br />There is a chance that JavaFX may drunk-dial you and <code>getNode()</code> and <code>getSkinnable()</code> may be called again.  Don&#8217;t get excited, things won&#8217;t be like they were before, this was an accident.  You can return null at this point as long as you immediately start returning null after <code>dispose()</code> is called.</li>
-</ol>
-
-
-<p><strong>Clean up after yourself</strong></p>
-
-
-<p>If there is one thing to point out in the lifecycle, it is that you should clean up after yourself. The listeners you attach don&#8217;t always fall away magically. And you should design for on the fly skin changes. This isn&#8217;t like Swing where changing the PLAF after the controls were shown was the exception to the rule, and formally dissed by core developers in conference sessions. Skins will change at runtime and they will result in magical effects, so plan accordingly.</p>
 
 ]]></content>
   </entry>
