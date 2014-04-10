@@ -115,12 +115,18 @@
         <lastmod>2014-02-11T23:46:19-07:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/
+        </loc>
+        <lastmod>2014-04-10T12:16:25-06:00</lastmod>
+    </url>
+    <url>
         <loc>http://speling.shemnon.com//all.rss</loc>
         <lastmod>2012-10-19T07:51:57-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2014-02-11T23:46:19-07:00</lastmod>
+        <lastmod>2014-04-10T12:16:25-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//feed.xml</loc>
@@ -128,6 +134,6 @@
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2014-02-11T23:46:19-07:00</lastmod>
+        <lastmod>2014-04-10T12:16:25-06:00</lastmod>
     </url>
 </urlset>

@@ -8,6 +8,97 @@
 		
 			
 			<item>
+				<title><![CDATA[Getting your Java 8 App in the Mac App Store]]></title>
+				<description><![CDATA[<p>Good news everyone!</p>
+
+<p><img src="http://img2.wikia.nocookie.net/__cb20090731021518/en.futurama/images/thumb/a/ad/GoodNewsEveryone.jpg/317px-GoodNewsEveryone.jpg" alt="Professor Farnsworth" /></p>
+
+<p>You can now put your Java 8 applications onto the mac app store.  How do I know?  Because I put a little hackathon app I wrote <a href="https://itunes.apple.com/us/app/follow-the-bitcoin/id854219288?mt=12">on the Mac App Store</a>.  The better news is that Oracle is working on making this very simple with the JavaFX packager.  You can get some of the early bits in the open source repo for OpenJFX <a href="http://hg.openjdk.java.net/openjfx/8u-dev/rt/">here</a> (building and using open source code is left as an exercise for the reader).</p>
+
+<p>If you don&#8217;t want to wait for the code to get an official release and you are comfortable doing stuff by hand then here are the steps you will need to follow.  <!-- more --></p>
+
+<h3>Prepare your Environment</h3>
+
+<p>First you will need to be signed up as part of the Mac Develoer program at [developer.apple.com].  For this tutorial I will presume your name is <code>Alice Duke</code>, that your Team ID is <code>JJJJJJJJJJ</code> and that the app you are shipping is titled <code>AwesomeJavaApp</code>.  You will of course need to change these to real values.</p>
+
+<p>Download your signing keys if you haven&#8217;t done so already (<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW6">here&#8217;s how</a>).  You will need both the Mac App Distribution and Mac Installer Distribution, and they should automatically be placed in your keychain under the names <code>3rd Party Mac Developer Application: Alice Duke (JJJJJJJJJJ)</code> and <code>3rd Party Mac Developer Installer: Alice Duke (JJJJJJJJJJ)</code>.</p>
+
+<p>You will also need an entitlements file.  Read all about them at the <a href="https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW1">Mac Developer Library</a>.  You will have to turn on the app-sandbox entitlement as well as any of the other entitlements you will be using.  Be sure to keep track of what entitlements you grand and why they are needed.  Apple will be asking you to justify every one of them.</p>
+
+<h1>Prepare the Application</h1>
+
+<p>Next, create your Mac <code>.app</code> bundle the normal way you are doing with the javafxpackager, Ant, Maven, or Gradle build.  Make sure this app works as it is what we will be bundling up.</p>
+
+<p>Next, you will need to copy the info.plist from the existing JDK or JRE into the embedded JRE in your app.  It should be either at <code>/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Info.plist</code> or <code>/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Info.plist</code>, but it is likely to be the first one.  Copy this file to <code>AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Info.plist</code>.</p>
+
+<pre><code>cp /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Info.plist AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Info.plist
+</code></pre>
+
+<p>Now we need to strip a library.  The Mac App Store doesn&#8217;t accept apps that even mention the deprecated Quicktime API, so we will need to remove the media capabilities tom JavaFX.  If your app uses the JavaFX media apis you are out of luck for the time being.  There is a <a href="https://javafx-jira.kenai.com/browse/RT-34893">bug</a> to fix this in a future release.</p>
+
+<p>The good news is that the Java 8 license lets us fix the problem, at least when it comes to JavaFX.  Remove the file <code>libjfxmedia.dylib</code>.</p>
+
+<pre><code>rm AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Home/jre/lib/libjfxmedia.dylib
+</code></pre>
+
+<h1>Sign the Application</h1>
+
+<p>Signing the app (in may different places) is next. Apple loves their cryptographic hashes.</p>
+
+<p>First, you may need to make the JDK in the app bundle writeable.  The <code>codesign</code> program won&#8217;t sign read-only binaries.  <code>chmod -R +w AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk</code> should do the trick.</p>
+
+<p>You need to sign all jars, dylibs, and executable files in the bundle (with one exception).  Enumerating them is left as an exercise to the reader.  Any decent build tool can do it for you.  You will need to sign it with both the identity you have and the entitlements you want</p>
+
+<pre><code>codesign -f -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; &lt;the_libary_jar_or_executable&gt;
+</code></pre>
+
+<p>There is <em>one</em> caveat.  Don&#8217;t sign the main excitable of the app bundle.  It is in <code>Contents/MacOS</code> and has the name of your application, for example it would be <code>AwesomeJavaApp.app/Contents/MacOS/AwesomeJavaApp</code>.  We will get that signed another way.</p>
+
+<p>Another quirk is that you can give different entitlements to each file.  In the javafxpackger we sign with an entitlements file that contains only the <code>app-sandbox</code> and
+<code>inherit</code> entitlements, so they inherit all the entitlements from the main application.</p>
+
+<p>Next, you will want to sign the Java directory itself. Actually you need to sign all plugins and frameworks in your app, but the overwhelming majority of java apps will only have one plugin: Java.</p>
+
+<pre><code>codesign -f --deep -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; AwesomeJavaApp.app/PlugIns/jdk1.8.0.jdk
+</code></pre>
+
+<p>Finally, we can sign the application itself.  Yes, we can actually shave the yak at this point.</p>
+
+<pre><code>codesign -f --deep -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; AwesomeJavaApp.app
+</code></pre>
+
+<p>You may or may not need all of the flags I&#8217;ve show with <code>codesign</code>, as I have not exhaustively tested them in all the possibly combinations.  You may not need the <code>--deep</code> flag, but adding it will not get you out of signing all the interior jars and libraries.  You may not need the <code>-f</code> flag but it insures that your signature will be the only one.  Finally, you may want to add a <code>--verbose=4</code> flag to see all the gory details.  Or not.</p>
+
+<h1>Packaging for Install</h1>
+
+<p>I bet you thought you were done?  Now we need to create an installer package to send to the app store.  Use the <code>productbuld</code> too to generate the need file</p>
+
+<pre><code>productbuild --component AwesomeJavaApp.app /Applications -s "3rd Party Mac Developer Installer: Alice Duke" AwesomeJavaApp.pkg
+</code></pre>
+
+<p>Note that you are signing this with the second key you downloaded: the one for installers.</p>
+
+<p>If you feel the need you can test the install:</p>
+
+<pre><code>sudo installer -store -pkg AwesomeJavaApp.pkg
+</code></pre>
+
+<p>Now you can load it into the Mac App store using the Application Loader tool.  You will first need to go to iTunes Connect and set things up.  But we have now left the Java specific part of the assembly so there are many other blog posts out there by more qualified and experienced Mac App Store developers.</p>
+
+<h1>Last Words</h1>
+
+<p>There are many other potholes that you could run into.  Two I hit were not having a 512x512@2x icon, and another was a dispute about copyright on an icon.  I changed the icon rather than wade through the appeals process to prove that the icon was in the public domain.</p>
+
+<p>I plan on keeping this post up to date with any changes or corrections, so feel free to bookmark this page.</p>
+]]></description>
+				<pubDate>Thu, 10 Apr 2014 10:04:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[8 Cool Things About Java Streams]]></title>
 				<description><![CDATA[<p>Lambda expressions are one of the coolest features of Java 8 so far.  But I think there is a (not so) secret weapon that shows just how powerful such &#8220;syntactic sugar&#8221; can be in increasing code readability and writeability.  When you increase the expressiveness of code it unlocks a higher level of understanding that can make the most obtuse of tasks simple.</p>
 

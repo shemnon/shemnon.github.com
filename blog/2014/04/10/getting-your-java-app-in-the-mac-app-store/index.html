@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Getting your Java 8 App in the Mac App Store - ...and they shall know me by my speling errors.</title>
+  <meta name="author" content="Danno Ferrin">
+
+  
+  <meta name="description" content="Good news everyone! You can now put your Java 8 applications onto the mac app store. How do I know? Because I put a little hackathon app I wrote on &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="...and they shall know me by my speling errors." type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">...and they shall know me by my speling errors.</a></h1>
+  
+    <h2>Danno Ferrin (aka shemnon) on stuff that matters to him.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:speling.shemnon.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Getting Your Java 8 App in the Mac App Store</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-10T10:04:00-06:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Good news everyone!</p>
+
+<p><img src="http://img2.wikia.nocookie.net/__cb20090731021518/en.futurama/images/thumb/a/ad/GoodNewsEveryone.jpg/317px-GoodNewsEveryone.jpg" alt="Professor Farnsworth" /></p>
+
+<p>You can now put your Java 8 applications onto the mac app store.  How do I know?  Because I put a little hackathon app I wrote <a href="https://itunes.apple.com/us/app/follow-the-bitcoin/id854219288?mt=12">on the Mac App Store</a>.  The better news is that Oracle is working on making this very simple with the JavaFX packager.  You can get some of the early bits in the open source repo for OpenJFX <a href="http://hg.openjdk.java.net/openjfx/8u-dev/rt/">here</a> (building and using open source code is left as an exercise for the reader).</p>
+
+<p>If you don&#8217;t want to wait for the code to get an official release and you are comfortable doing stuff by hand then here are the steps you will need to follow.  <!-- more --></p>
+
+<h3>Prepare your Environment</h3>
+
+<p>First you will need to be signed up as part of the Mac Develoer program at [developer.apple.com].  For this tutorial I will presume your name is <code>Alice Duke</code>, that your Team ID is <code>JJJJJJJJJJ</code> and that the app you are shipping is titled <code>AwesomeJavaApp</code>.  You will of course need to change these to real values.</p>
+
+<p>Download your signing keys if you haven&#8217;t done so already (<a href="https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/MaintainingCertificates/MaintainingCertificates.html#//apple_ref/doc/uid/TP40012582-CH31-SW6">here&#8217;s how</a>).  You will need both the Mac App Distribution and Mac Installer Distribution, and they should automatically be placed in your keychain under the names <code>3rd Party Mac Developer Application: Alice Duke (JJJJJJJJJJ)</code> and <code>3rd Party Mac Developer Installer: Alice Duke (JJJJJJJJJJ)</code>.</p>
+
+<p>You will also need an entitlements file.  Read all about them at the <a href="https://developer.apple.com/library/mac/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/EnablingAppSandbox.html#//apple_ref/doc/uid/TP40011195-CH4-SW1">Mac Developer Library</a>.  You will have to turn on the app-sandbox entitlement as well as any of the other entitlements you will be using.  Be sure to keep track of what entitlements you grand and why they are needed.  Apple will be asking you to justify every one of them.</p>
+
+<h1>Prepare the Application</h1>
+
+<p>Next, create your Mac <code>.app</code> bundle the normal way you are doing with the javafxpackager, Ant, Maven, or Gradle build.  Make sure this app works as it is what we will be bundling up.</p>
+
+<p>Next, you will need to copy the info.plist from the existing JDK or JRE into the embedded JRE in your app.  It should be either at <code>/Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Info.plist</code> or <code>/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Info.plist</code>, but it is likely to be the first one.  Copy this file to <code>AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Info.plist</code>.</p>
+
+<pre><code>cp /Library/Java/JavaVirtualMachines/jdk1.8.0.jdk/Contents/Info.plist AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Info.plist
+</code></pre>
+
+<p>Now we need to strip a library.  The Mac App Store doesn&#8217;t accept apps that even mention the deprecated Quicktime API, so we will need to remove the media capabilities tom JavaFX.  If your app uses the JavaFX media apis you are out of luck for the time being.  There is a <a href="https://javafx-jira.kenai.com/browse/RT-34893">bug</a> to fix this in a future release.</p>
+
+<p>The good news is that the Java 8 license lets us fix the problem, at least when it comes to JavaFX.  Remove the file <code>libjfxmedia.dylib</code>.</p>
+
+<pre><code>rm AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk/Contents/Home/jre/lib/libjfxmedia.dylib
+</code></pre>
+
+<h1>Sign the Application</h1>
+
+<p>Signing the app (in may different places) is next. Apple loves their cryptographic hashes.</p>
+
+<p>First, you may need to make the JDK in the app bundle writeable.  The <code>codesign</code> program won&#8217;t sign read-only binaries.  <code>chmod -R +w AwesomeJavaApp.app/Contents/PlugIns/jdk1.8.0.jdk</code> should do the trick.</p>
+
+<p>You need to sign all jars, dylibs, and executable files in the bundle (with one exception).  Enumerating them is left as an exercise to the reader.  Any decent build tool can do it for you.  You will need to sign it with both the identity you have and the entitlements you want</p>
+
+<pre><code>codesign -f -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; &lt;the_libary_jar_or_executable&gt;
+</code></pre>
+
+<p>There is <em>one</em> caveat.  Don&#8217;t sign the main excitable of the app bundle.  It is in <code>Contents/MacOS</code> and has the name of your application, for example it would be <code>AwesomeJavaApp.app/Contents/MacOS/AwesomeJavaApp</code>.  We will get that signed another way.</p>
+
+<p>Another quirk is that you can give different entitlements to each file.  In the javafxpackger we sign with an entitlements file that contains only the <code>app-sandbox</code> and
+<code>inherit</code> entitlements, so they inherit all the entitlements from the main application.</p>
+
+<p>Next, you will want to sign the Java directory itself. Actually you need to sign all plugins and frameworks in your app, but the overwhelming majority of java apps will only have one plugin: Java.</p>
+
+<pre><code>codesign -f --deep -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; AwesomeJavaApp.app/PlugIns/jdk1.8.0.jdk
+</code></pre>
+
+<p>Finally, we can sign the application itself.  Yes, we can actually shave the yak at this point.</p>
+
+<pre><code>codesign -f --deep -s "3rd Party Mac Developer Application: Alice Duke" --entitlements &lt;your_entitlements_file&gt; AwesomeJavaApp.app
+</code></pre>
+
+<p>You may or may not need all of the flags I&#8217;ve show with <code>codesign</code>, as I have not exhaustively tested them in all the possibly combinations.  You may not need the <code>--deep</code> flag, but adding it will not get you out of signing all the interior jars and libraries.  You may not need the <code>-f</code> flag but it insures that your signature will be the only one.  Finally, you may want to add a <code>--verbose=4</code> flag to see all the gory details.  Or not.</p>
+
+<h1>Packaging for Install</h1>
+
+<p>I bet you thought you were done?  Now we need to create an installer package to send to the app store.  Use the <code>productbuld</code> too to generate the need file</p>
+
+<pre><code>productbuild --component AwesomeJavaApp.app /Applications -s "3rd Party Mac Developer Installer: Alice Duke" AwesomeJavaApp.pkg
+</code></pre>
+
+<p>Note that you are signing this with the second key you downloaded: the one for installers.</p>
+
+<p>If you feel the need you can test the install:</p>
+
+<pre><code>sudo installer -store -pkg AwesomeJavaApp.pkg
+</code></pre>
+
+<p>Now you can load it into the Mac App store using the Application Loader tool.  You will first need to go to iTunes Connect and set things up.  But we have now left the Java specific part of the assembly so there are many other blog posts out there by more qualified and experienced Mac App Store developers.</p>
+
+<h1>Last Words</h1>
+
+<p>There are many other potholes that you could run into.  Two I hit were not having a 512x512@2x icon, and another was a dispute about copyright on an icon.  I changed the icon rather than wade through the appeals process to prove that the icon was in the public domain.</p>
+
+<p>I plan on keeping this post up to date with any changes or corrections, so feel free to bookmark this page.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-10T10:04:00-06:00" pubdate data-updated="true">Apr 10<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/11/8-cool-things-about-java-streams/" title="Previous Post: 8 Cool Things About Java Streams">&laquo; 8 Cool Things About Java Streams</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/">Getting your Java 8 App in the Mac App Store</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/11/8-cool-things-about-java-streams/">8 Cool Things About Java Streams</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/">Tech Predictions for the Year of the Horse</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/29/javafx-gradle-plugin-0-dot-4-0-released/">JavaFX Gradle Plugin 0.4.0 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/01/javaone-2013-dogfooding-the-future-java/">JavaOne 2013: Dogfooding the Future Java</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Bitbucket Repos</h1>
+  <ul id="bb_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://bitbucket.org/shemnon">@shemnon</a> on Bitbucket
+  
+
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        bitbucket.showRepos({
+            user: 'shemnon',
+            password: '',
+            count: 4,
+            require_wiki: false,
+            target: '#bb_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/bitbucket.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shemnon">@shemnon</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shemnon',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shemnon", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shemnon" class="twitter-follow-button" data-show-count="false">Follow @shemnon</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/107563042277462358434?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Danno Ferrin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'andtheyshallknowmebymyspelingerrors';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
