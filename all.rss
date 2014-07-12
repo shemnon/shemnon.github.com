@@ -6,8 +6,59 @@
     <link>http://speling.shemnon.com/</link>
     <atom:link href="http://speling.shemnon.com//all.rss" rel="self" type="application/rss+xml" />
     <language>en-us</language>
-    <pubDate>Thu, 10 Apr 2014 12:41:03 -0600</pubDate>
-    <lastBuildDate>Thu, 10 Apr 2014 12:41:03 -0600</lastBuildDate>
+    <pubDate>Fri, 11 Jul 2014 18:51:36 -0600</pubDate>
+    <lastBuildDate>Fri, 11 Jul 2014 18:51:36 -0600</lastBuildDate>
+    
+      
+    <item>
+      <title><![CDATA[Gradle and Maven Plugins for 8u20 Update]]></title>
+      <description><![CDATA[<p>The first feature maintenance release of Java 8, known as 8u20, is scheduled for release <a href="http://openjdk.java.net/projects/jdk8u/releases/8u20.html">sometime in August</a> (this could change, don&#8217;t get offended if it does).  There are a number of changes coming to how the Java Packager works, a lot of them under the hood to aid the tooling of build tools and IDEs.  I&#8217;de like to take some time to provide some updates.</p>
+
+<!-- more -->
+
+
+<h1>Compatibility</h1>
+
+<p>Don&#8217;t worry, your old build tool integration will still work.  If something breaks tell me and I&#8217;ll fix it&#8230; in 8u40.  That&#8217;s just how it goes with large projects like the JDK.</p>
+
+<p>There are new features that will require updates of the existing plugins.  The Maven and Gradle plugins will be released after 8u20 comes out and will be released in their normal channels.  Ant will still be integrated in the same jar it comes with in the JDK.</p>
+
+<h1>Version Number - 8.1.0</h1>
+
+<p>For the version numbering I have decided to somewhat synchronize it with the JDK releases.  This next release wil be 8.1.0, and the release for 8u40 will be 8.2.0, and so on.  The first digit will be the main JDK number, the second increments for each major maintenance release, and the last number will increment with each release I have to do.  This will be the case with the Gradle plugin as well as the Maven plugin.</p>
+
+<h1>Maven Plugin</h1>
+
+<p>I&#8217;ve taken over maintenance of the Maven Plugin from Daniel Zwolenski.  The key word being maintenance.  I don&#8217;t intend on adding any new features that the core Java Packager doesn&#8217;t support directly.  But I do intend for it to integrate with everything the Java Packager does provice (just not all at once).  The main feature add will be integrating the new APIs provided in 8u20 and exposing the bundler arguments for configuration.</p>
+
+<h1>Gradle Plugin</h1>
+
+<p>Did you see they are getting a new plugin portal for Gradle 2.1?  Just as soon as I get some free time I&#8217;ll try configuring it.  But that&#8217;s my issue, my free time is so horribly fragmented at the moment.</p>
+
+<h1>Betas are Out</h1>
+
+<p>I&#8217;ve released the beta jars for the 8.1.0 version of the Maven and Gradle plugins.  Maven is on the <a href="https://oss.sonatype.org/content/repositories/snapshots/">Sonatype OSS Snapshot Repository</a> as 8.1.0-SNAPSHOT and Gradle is over at <a href="https://bintray.com/shemnon/javafx-gradle/gradle-javafx-plugin/8.1.0-beta/view">bintray</a> with a version of 8.1.0-beta.  Expect these to disappear soon after the final release is pushed.</p>
+
+<h1>More Posts Later</h1>
+
+<p>I will post more on some of the features at a later date.  The main highlights are</p>
+
+<ul>
+<li>You can create Mac App Store bundles</li>
+<li>You can create Mac PKG Bundles</li>
+<li>You can configure lots more stuff via Bundler Arguments</li>
+<li>IDE integration will be easier</li>
+</ul>
+
+
+<p>I&#8217;ll also be talking about these at JavaOne in September, in one Technical Session and one Birds of a Feather.</p>
+]]></description>
+      <pubDate>Fri, 11 Jul 2014 18:21:00 -0600</pubDate>
+      <author>Danno Ferrin &lt;danno.ferrin@shemnon.com&gt;</author>
+      <link>http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/</link>
+      <guid isPermaLink="true">http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/</guid>
+    </item>
+      
     
       
     <item>

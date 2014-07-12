@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Insubstantial Needs a New Maintainer - ...and they shall know me by my speling errors.</title>
+  <title>Gradle and Maven Plugins for 8u20 Update - ...and they shall know me by my speling errors.</title>
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="When I first started the maintenance branch of Kirill Grouchnikov&#8217;s Substance and Flamingo Libraries over two and a half years ago I had one &hellip;">
+  <meta name="description" content="The first feature maintenance release of Java 8, known as 8u20, is scheduled for release sometime in August (this could change, don&#8217;t get &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/">
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,7 +67,7 @@
   
   <header>
     
-      <h1 class="entry-title">Insubstantial Needs a New Maintainer</h1>
+      <h1 class="entry-title">Gradle and Maven Plugins for 8u20 Update</h1>
     
     
       <p class="meta">
@@ -83,22 +83,53 @@
   
 
 
-<time datetime="2013-06-08T11:31:00-06:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+<time datetime="2014-07-11T18:21:00-06:00" pubdate data-updated="true">Jul 11<span>th</span>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>When I first started the maintenance branch of Kirill Grouchnikov&#8217;s Substance and Flamingo Libraries over two and a half years ago I had one important overriding reason to do so: we were using his libraries at my day job. That is one of the greatest things about an open source project, when the original author moves on to newer and shinier things the community can step in and take over the project.</p>
+<div class="entry-content"><p>The first feature maintenance release of Java 8, known as 8u20, is scheduled for release <a href="http://openjdk.java.net/projects/jdk8u/releases/8u20.html">sometime in August</a> (this could change, don&#8217;t get offended if it does).  There are a number of changes coming to how the Java Packager works, a lot of them under the hood to aid the tooling of build tools and IDEs.  I&#8217;de like to take some time to provide some updates.</p>
 
-<p>That time has come again. Since I am no longer working on the project that is using those libraries I no longer have the daytime hours to spend on bug fixes and creating releases. I also would rather spend evenings and weekends playing laser tag, swimming with the family, or working on JavaFX. I haven&#8217;t really touched it in any significant way in over six months. Nor do I see myself processing another Insubstantial release.</p>
+<!-- more -->
 
-<p>Do you want to be the maintainer? <!-- more --> I&#8217;m not just going to hand the keys to the maintenance branch over to whoever says &#8216;me first.&#8217; I&#8217;m going to hand them over to the first competent contributor who says &#8216;me first.&#8217; How will I judge competence? First, they must either submit a good patch or have submitted a good patch. Second, I want to see a distribution rolled up somewhere. Some FTP site, whatever. And I want to see it in a format Sonatype will accept, with signatures and the whole nine yards. If it seems daunting, it isn&#8217;t. <a href="https://github.com/Insubstantial/insubstantial/blob/master/README.markdown">I left instructions.</a></p>
 
-<p>What will I give you? I will make you the administrator of the <a href="https://github.com/Insubstantial/">insubstantial group</a> over at GitHub. I will tell Sonatype to add you as a user to the <a href="https://oss.sonatype.org/index.html">deployment repository</a>. I will also try and hand over the CloudBees build instance I have set up for insubstantial. No promises on that one since I see no instructions, but I will do my best.</p>
+<h1>Compatibility</h1>
 
-<p>Now I am not delusional, I don&#8217;t expect a race to grab the project. In fact, no one may ever ask for the keys. But if someone some day feels the need to take up the mantle of insubstantial maintainer, the keys are here for the taking.</p>
+<p>Don&#8217;t worry, your old build tool integration will still work.  If something breaks tell me and I&#8217;ll fix it&#8230; in 8u40.  That&#8217;s just how it goes with large projects like the JDK.</p>
+
+<p>There are new features that will require updates of the existing plugins.  The Maven and Gradle plugins will be released after 8u20 comes out and will be released in their normal channels.  Ant will still be integrated in the same jar it comes with in the JDK.</p>
+
+<h1>Version Number - 8.1.0</h1>
+
+<p>For the version numbering I have decided to somewhat synchronize it with the JDK releases.  This next release wil be 8.1.0, and the release for 8u40 will be 8.2.0, and so on.  The first digit will be the main JDK number, the second increments for each major maintenance release, and the last number will increment with each release I have to do.  This will be the case with the Gradle plugin as well as the Maven plugin.</p>
+
+<h1>Maven Plugin</h1>
+
+<p>I&#8217;ve taken over maintenance of the Maven Plugin from Daniel Zwolenski.  The key word being maintenance.  I don&#8217;t intend on adding any new features that the core Java Packager doesn&#8217;t support directly.  But I do intend for it to integrate with everything the Java Packager does provice (just not all at once).  The main feature add will be integrating the new APIs provided in 8u20 and exposing the bundler arguments for configuration.</p>
+
+<h1>Gradle Plugin</h1>
+
+<p>Did you see they are getting a new plugin portal for Gradle 2.1?  Just as soon as I get some free time I&#8217;ll try configuring it.  But that&#8217;s my issue, my free time is so horribly fragmented at the moment.</p>
+
+<h1>Betas are Out</h1>
+
+<p>I&#8217;ve released the beta jars for the 8.1.0 version of the Maven and Gradle plugins.  Maven is on the <a href="https://oss.sonatype.org/content/repositories/snapshots/">Sonatype OSS Snapshot Repository</a> as 8.1.0-SNAPSHOT and Gradle is over at <a href="https://bintray.com/shemnon/javafx-gradle/gradle-javafx-plugin/8.1.0-beta/view">bintray</a> with a version of 8.1.0-beta.  Expect these to disappear soon after the final release is pushed.</p>
+
+<h1>More Posts Later</h1>
+
+<p>I will post more on some of the features at a later date.  The main highlights are</p>
+
+<ul>
+<li>You can create Mac App Store bundles</li>
+<li>You can create Mac PKG Bundles</li>
+<li>You can configure lots more stuff via Bundler Arguments</li>
+<li>IDE integration will be easier</li>
+</ul>
+
+
+<p>I&#8217;ll also be talking about these at JavaOne in September, in one Technical Session and one Birds of a Feather.</p>
 </div>
 
 
@@ -121,7 +152,7 @@
   
 
 
-<time datetime="2013-06-08T11:31:00-06:00" pubdate data-updated="true">Jun 8<span>th</span>, 2013</time>
+<time datetime="2014-07-11T18:21:00-06:00" pubdate data-updated="true">Jul 11<span>th</span>, 2014</time>
       
 
 
@@ -129,7 +160,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/" >Tweet</a>
   
   
   
@@ -138,10 +169,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/" title="Previous Post: JavaFX Gradle Plugin 0.3.0 Released">&laquo; JavaFX Gradle Plugin 0.3.0 Released</a>
+        <a class="basic-alignment left" href="/blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/" title="Previous Post: Getting your Java 8 App in the Mac App Store">&laquo; Getting your Java 8 App in the Mac App Store</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/09/24/oracle-javaone-2013/" title="Next Post: Oracle JavaOne 2013">Oracle JavaOne 2013 &raquo;</a>
       
     </p>
   </footer>
@@ -294,8 +323,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/';
-        var disqus_url = 'http://speling.shemnon.com//blog/2013/06/08/insubstantial-needs-a-new-maintainer/';
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/';
         var disqus_script = 'embed.js';
       
     (function () {
