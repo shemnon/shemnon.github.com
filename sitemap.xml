@@ -127,12 +127,16 @@
         <lastmod>2014-07-11T18:50:49-06:00</lastmod>
     </url>
     <url>
+        <loc>http://speling.shemnon.com//blog/2014/07/16/word-crimes/</loc>
+        <lastmod>2014-07-16T10:30:43-06:00</lastmod>
+    </url>
+    <url>
         <loc>http://speling.shemnon.com//all.rss</loc>
         <lastmod>2012-10-19T07:51:57-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//blog/archives/</loc>
-        <lastmod>2014-07-11T18:50:49-06:00</lastmod>
+        <lastmod>2014-07-16T10:30:43-06:00</lastmod>
     </url>
     <url>
         <loc>http://speling.shemnon.com//feed.xml</loc>
@@ -140,6 +144,6 @@
     </url>
     <url>
         <loc>http://speling.shemnon.com//</loc>
-        <lastmod>2014-07-11T18:50:49-06:00</lastmod>
+        <lastmod>2014-07-16T10:30:43-06:00</lastmod>
     </url>
 </urlset>

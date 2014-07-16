@@ -4,7 +4,7 @@
   <title><![CDATA[...and they shall know me by my speling errors.]]></title>
   <link href="http://speling.shemnon.com//atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
-  <updated>2014-07-11T18:51:36-06:00</updated>
+  <updated>2014-07-16T10:31:50-06:00</updated>
   <id>http://speling.shemnon.com//</id>
   <author>
     <name><![CDATA[Danno Ferrin]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Word Crimes]]></title>
+    <link href="http://speling.shemnon.com//blog/2014/07/16/word-crimes/"/>
+    <updated>2014-07-16T10:24:00-06:00</updated>
+    <id>http://speling.shemnon.com//blog/2014/07/16/word-crimes</id>
+    <content type="html"><![CDATA[<p>If you judge my blog form the title or its content it is clear I am a habitiual word criminal.  So of course I have to share this. Because U will C how awesome <a href="http://english.stackexchange.com/questions/500/is-there-some-rule-against-ending-a-sentence-with-the-contraction-its">it&#8217;s</a>.</p>
+
+<iframe width="560" height="315" src="http://speling.shemnon.com///www.youtube.com/embed/8Gv0H-vPoDc" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Gradle and Maven Plugins for 8u20 Update]]></title>
@@ -1619,68 +1631,6 @@ I think you should use an
 <p>The only out there conventions would be the bundle resources, which I am placing in <code>src/main/resources</code>.  I also intend to add some other standard files, like <code>src/main/resources/icon.png</code> and associated files and directories being loaded into the proper place for native bundling.  I also need to figure out what to do about signing keys.  Likely this will have to be a configuration thing since checking in your signing key to source control would be a bad idea, even if you have the world&#8217;s most awesome password.</p>
 
 <p>Finally, I have zero intention of writing this hypothetical Maven plugin. Gradle is what I do for fun. I&#8217;de rather write Perl scripts than Maven plugins, no offense to the Perl crowd. But being part of the conversation to set the conventions is something I intend to be a part of.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Mirroring OpenJFX on BitBucket]]></title>
-    <link href="http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket/"/>
-    <updated>2012-10-09T21:16:00-06:00</updated>
-    <id>http://speling.shemnon.com//blog/2012/10/09/mirroring-openjfx-on-bitbucket</id>
-    <content type="html"><![CDATA[<p>I&#8217;ve started mirroring the OpenJFX repositories over at <a href="http://bitbucket.org/shemnon/">bitbucket</a>.  Viewing the repos on bitbucket has several advantages:</p>
-
-<ol>
-<li>It has an easier on the eyes user interface.  Really, I could stop here.</li>
-<li>The push request mechanism encourages social coding</li>
-<li>It has a code review feature</li>
-</ol>
-
-
-<p>This last point is the most recent one.  You can comment on commits and comment at specific lines in the commit.  Useful when you have to send a pull request back.</p>
-
-<p><strong>Repos</strong></p>
-
-<p>As for the repositories I have four repos right now.</p>
-
-<!-- more -->
-
-
-<p>The first three are direct mirrors of their <code>rt</code> counterparts in the JavaFX portion of the <a href="http://hg.openjdk.java.net/">official OpenJDK Mercurial repository</a>.</p>
-
-<ul>
-<li><a href="http://hg.openjdk.java.net/openjfx/8/master/rt/">master/rt</a> -> <a href="https://bitbucket.org/shemnon/openjfx-8-rt-master-branch">openjfx-rt-master-branch</a></li>
-<li><a href="http://hg.openjdk.java.net/openjfx/8/controls/rt/">controls/rt</a> -> <a href="https://bitbucket.org/shemnon/openjfx-8-rt-controls-branch">openjfx-rt-controls-branch</a></li>
-<li><a href="http://hg.openjdk.java.net/openjfx/8/graphics/rt/">graphics/rt</a> -> <a href="https://bitbucket.org/shemnon/openjfx-8-rt-graphics-branch">openjfx-rt-graphics-branch</a></li>
-</ul>
-
-
-<p>I am not mirroring the parent repo nor the <code>test</code> repo.  The parent repo is just a holder for the <code>rt</code> repo and (presumed) binary repos.  The <code>test</code> repo contains jemmy and a smoke test driven off of ensemble, i.e. parts needed for a professional build but not needed for the casual hack.  The casual hack is why I am doing this.</p>
-
-<p>The fourth repo is my <a href="https://bitbucket.org/shemnon/openjfx-rt/">openfx-rt</a> repo.  This is a merger of the three previous repos.  Instead of keeping a branch for each I am pushing the bookmark for <code>controls</code>, <code>graphics</code>, and <code>master</code> to match the current tip of each of the real repos.  Bookmarks in Mercurial are more like branches in Git, just pointers to a change list.  Branches in mercurial embed themselves in the commit message, so you cannot retroactively create them without rewriting history.</p>
-
-<p>This is also the repo where I do my hacks.  Look for the stray tips.</p>
-
-<p><strong>Builds</strong></p>
-
-<p>Also, as best as I can tell the open source build is currently broken.  The instructions pre-date the JRE integration of JavaFX, and also predate the addition of some of the more interesting sub projects, like FXML.  So to fix that I threw together some Gradle builds <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/46b2f08c0a3cb40c12a1e67184ba0b05c70d5596">here</a> and <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/a5a78c8ed2c4f287d2525ddf2231ea05f3659a99">here</a> that will compile the code and the tests.  Some of the tests even run. To completion. Successfully.  But it doesn&#8217;t create a usable <code>jfxrt.jar</code> at the end.  Until the while kit and caboodle is released I don&#8217;t think it&#8217;s worth going that far.  i.e. not fit for production use.  But perfect for casual hacking.</p>
-
-<p>To run it you need to either</p>
-
-<ul>
-<li>Run Gradle with a <a href="http://jdk8.java.net/download.html">current JDK8 build</a></li>
-<li>Point the env var <code>JFXRT_HOME</code> to the directory <code>jfxrt.jar</code> lives from a <a href="http://jdk8.java.net/download.html">current JDK8 build</a> before running Gradle.</li>
-</ul>
-
-
-<p>Then do something like <code>gradle assemble</code>, <code>gradle test</code>, <code>gradle compileJava</code>, <code>gradle compileTest</code>.  Be careful with the <code>test</code> task, it will go into an infinite loop in <code>javafx-concurrent</code>, I&#8217;m sure I don&#8217;t have something set up right.</p>
-
-<p><strong>Casual Hacking</strong></p>
-
-<p>I did this to aid my casual hacking, or as I like to call it &#8220;random acts of coding.&#8221;  You will note that I hooked up the JIRA bugs to the <a href="http://javafx-jira.kenai.com/">OpenJFX bug database</a>, and that <a href="https://bitbucket.org/shemnon/openjfx-rt/changeset/ab6e4c5150e45a92391bd2bf4c6a78255c283535">my first random act of code</a> is hooked up to the <a href="http://javafx-jira.kenai.com/browse/RT-25559">associated JIRA</a>.  It is a feature request I tweeted to Jonathan Giles several months ago, and was too lazy to write up a JIRA specifying what I want. The problem was that it seemed like a long loop of (a) landing in someone&#8217;s bug queue then (b) they have the bandwidth to do it and (c) that they do it the way I intended it to work.  If (c) fails it is another giant loop with the jiras to iterate (a), (b), and (c) again.  That and I&#8217;ve always been the type of person who would rather jump in and do it. I do have to say thug, that this has been quite a bit of yak shaving for 10 lines of code. And my <a href="http://preshavedyak.com/">pre shaved yak hoodie</a> I got at JavaOne only helps me with web apps.</p>
-
-<p>If we want to make OpenJFX more accessible to casual hacking then some of the barriers need to be removed.  A &#8216;blessed&#8217; repo on BitBucket would make sandbox hacking more accessible.  A build that requires nothing more that a current Java 8 build and the build tool installed would be another great step.  With this casual hackers could push changes and a quick yes/no/maybe on the hack could be said in the pull queue before they fire up a JIRA and make sure their contributor paperwork is in order. In my opinion a hack then shave the yak ordering will get a lot more interest than a shave the yak then hack ordering.</p>
-
-<p>But all of this only holds for the Java portions of the build.  When it comes to the native libraries I really don&#8217;t think you can wander too far from your yak shaving shears.</p>
 ]]></content>
   </entry>
   

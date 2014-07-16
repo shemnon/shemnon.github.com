@@ -8,6 +8,20 @@
 		
 			
 			<item>
+				<title><![CDATA[Word Crimes]]></title>
+				<description><![CDATA[<p>If you judge my blog form the title or its content it is clear I am a habitiual word criminal.  So of course I have to share this. Because U will C how awesome <a href="http://english.stackexchange.com/questions/500/is-there-some-rule-against-ending-a-sentence-with-the-contraction-its">it&#8217;s</a>.</p>
+
+<iframe width="560" height="315" src="http://speling.shemnon.com///www.youtube.com/embed/8Gv0H-vPoDc" frameborder="0" allowfullscreen></iframe>
+
+]]></description>
+				<pubDate>Wed, 16 Jul 2014 10:24:00 -0600</pubDate>
+				<link>http://speling.shemnon.com//blog/2014/07/16/word-crimes/</link>
+				<guid isPermaLink="true">http://speling.shemnon.com//blog/2014/07/16/word-crimes/</guid>
+			</item>
+			
+		
+			
+			<item>
 				<title><![CDATA[Gradle and Maven Plugins for 8u20 Update]]></title>
 				<description><![CDATA[<p>The first feature maintenance release of Java 8, known as 8u20, is scheduled for release <a href="http://openjdk.java.net/projects/jdk8u/releases/8u20.html">sometime in August</a> (this could change, don&#8217;t get offended if it does).  There are a number of changes coming to how the Java Packager works, a lot of them under the hood to aid the tooling of build tools and IDEs.  I&#8217;de like to take some time to provide some updates.</p>
 
