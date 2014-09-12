@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: javafx | ...and they shall know me by my speling errors.]]></title>
-  <link href="http://speling.shemnon.com//blog/categories/javafx/atom.xml" rel="self"/>
+  <title><![CDATA[Category: maven, | ...and they shall know me by my speling errors.]]></title>
+  <link href="http://speling.shemnon.com//blog/categories/maven-/atom.xml" rel="self"/>
   <link href="http://speling.shemnon.com//"/>
   <updated>2014-09-12T14:32:33-06:00</updated>
   <id>http://speling.shemnon.com//</id>

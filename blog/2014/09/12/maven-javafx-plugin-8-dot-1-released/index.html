@@ -1,0 +1,374 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Maven JavaFX Plugin 8.1 Released - ...and they shall know me by my speling errors.</title>
+  <meta name="author" content="Danno Ferrin">
+
+  
+  <meta name="description" content="Deadlines on a shortened schedule are bad enough. Preparing multiple conference talks is also similarly time consuming. What happens when you combine &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://speling.shemnon.com//blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="...and they shall know me by my speling errors." type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">...and they shall know me by my speling errors.</a></h1>
+  
+    <h2>Danno Ferrin (aka shemnon) on stuff that matters to him.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:speling.shemnon.com/" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Maven JavaFX Plugin 8.1 Released</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-12T13:13:00-06:00" pubdate data-updated="true">Sep 12<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Deadlines on a shortened schedule are bad enough.  Preparing multiple conference talks is also similarly time consuming.  What happens when you combine them both?  Lower priority items like making release announcements for your outside-of-work open source projects don&#8217;t happen on time.</p>
+
+<p>Today I am announcing the release of the Maven JavaFX Plugin version 8.1.  Actually, it happened three weeks ago. The current version is already 8.1.2.  The Maven co-ordinates for the plugin are <code>com.zenjava:javafx-maven-plugin:8.1.2</code>, same as before just with an updated version number.  This release provides compatibility with JDK 8u20, exposes new 8u20 features, and represents a change in maintainer.  Docs are little sketchy since I need to find a new place to host them.  Existing docs at <a href="http://zenjava.com/javafx/maven/">http://zenjava.com/javafx/maven/</a> are still mostly accurate.</p>
+
+<!-- more -->
+
+
+<h1>New Maintainer</h1>
+
+<p>Effective with the 8.x series of the Maven JavaFX Plugin, and with the consent of Daniel Zwolenski, I am now maintaining the project.  That means I am responsible for getting the binary bits onto Maven central.  It does not mean that I am the only one allowed to write code.  Already a lot of the changes in this release come from community members.  Please, <a href="https://github.com/zonski/javafx-maven-plugin/pulls">keep the pull requests coming</a>.</p>
+
+<p>This also represents a change in philosophy for the plugin.  This plugin now exists as a means for Maven to access the features of the Java Packager, which started life as the JavaFX Packager.  The Java Packager can still be used to package JavaFX applications, but it can also package SWT applicaitons, AWT applicaitons, headless applications, and good old Swing applications.  In fact, it can help you put <a href="https://itunes.apple.com/us/app/3d-map-master/id833802595?mt=12">Swing applications on the Mac App Store</a>.  Patches that move the plugin from this lean-and-mean approach will be politely declined.  I think there is enough space for packaging plugins that don&#8217;t make self-contained native applications and JNLP packages.  On the same note, patches that help the plugin live together with other plugins will be favorably considered.</p>
+
+<h1>Support for 8u20</h1>
+
+<p>The major feature of this release is compatibility with the changes done in Java 8u20.  A lot of internal structure was changed to make sure that the java packager could be used directly by IDEs and other build tools, and as a consequence some binary compatibility was broken.  Since this plugin is dependant on &#8216;internal&#8217; Java APIs, e.g. packages in the JavaFX modules that start with <code>com.sun</code> and <code>com.oracle</code> such breakage should not be suprising as Sun, and then Oracle, has expressly reserved that right.</p>
+
+<p>This means that some lineages of the plugin will become &#8216;version-locked&#8217; with the particular versions of the JDK.  The 2.0 line works with Java 7 and Java 8, 8u5, and 8u11.  The 8.1 series will work with 8u20 through any version less than 8u40.  When 8u40 comes out, a new 8.2 version will be released, so on with 8.3 and 8u60 and so on.  The 8.1 and 8.2 versions may work with each other, and they may not.  I honestly don&#8217;t know at this point.  But the 8.1 version of the plugin and anything less than 8u20 doesn&#8217;t work, similarly with 2.0 and anything after 8u11.</p>
+
+<h1>Exposeing Configuration Options</h1>
+
+<p>There as some existing JavaFXPackager configuration options that have been exposed to the plugin in the config element.</p>
+
+<ul>
+<li>Added <code>needsShortcut</code> and <code>needsMenu</code> parameter to set the presence of a launch/start menu icon or a desktop icon for bundlers that support it</li>
+<li>Added an <code>appName</code> parameter so you can customize the app name independent of the Maven project name.</li>
+<li>Added a <code>userJvmArgs</code> parameter, following the Maven map conventions, so you can provide JVM arguments that can be adjusted by the application at runtime.</li>
+<li>Added a <code>bundleArguments</code> parameter, following the Maven map conventions, so you can pass arbitrary configurations to any of the bundlers.</li>
+</ul>
+
+
+<h1>Future Proof the Bundlers</h1>
+
+<p>This last parameter is the most relevant one for future-proofing the plugin.  This is used for things like your Mac App Store signing identities, and platform specific icon files.</p>
+
+<p>All of the named parameters can be mapped to <code>bundleArguments</code> configuration elements.  However, not everything useful to put into this parameter can be mapped to other parameters.  This exists for bundler specific configurations that are not relevant to other bundlers.  For example, Windows doesn&#8217;t care about the maintainer e-mail, but Debian bundlers have a space for it and Ubuntu cares very much about it.</p>
+
+<p>This also allows for new bundlers that we didn&#8217;t know about when we wrote the packager to ask for new configurations.  For example, if someone wrote a packager and loader for Lego Mindstorms EV3 then the bundler could require the name of the brick or the Bluetooth MAC to upload the pacakge.</p>
+
+<h1>Looking Forward</h1>
+
+<p>This plugin will continue to support newer versions of the Java Packager.  For example, work done for <a href="http://openjdk.java.net/jeps/208">JEP-208</a> will require plugin additions to support the features of Multiple Entry Points and File Associations, since there is no string-based mapping of the bundle arguments for those.</p>
+
+<p>As I mentioned earlier, the numbering conventions for the version string will mirror what version of the JDK it is designed to support.  There were no major changes in the FCS of Java 8, so there was no 8.0 release series.  The 8.1 release series will support 8u20 and security patches based off of it.  The 8.2 series of releases (expected to start around March 2015) will support 8u40 and security updates, so on and so forth with 8u60 and all other feature release versions that may happen.</p>
+
+<p>For Java 9 I may consider some more naming changes. Java 9 is scheduled to contain major modularization changes via Jigsaw (these are foward looking statements, safe harbor provisions apply, the surgeon general warns that you shouldn&#8217;t believe everything you read on the internet and in blogs, etc. etc.).  This repesents a major milestone for Java and a major rethinkning of the way the JRE is packaged.  Hence it may prompt a name change (to just the Maven Java Packager Plugin) as well as a group name change (to <code>com.example.not.sure.yet</code> or something else).  Then again, it may not.  I have over a year to decide.  But for the 8.x series I&#8217;m sticking with Maven JavaFX Plugin and <code>com.zenjava</code>.</p>
+
+<h1>Contributions Welcome</h1>
+
+<p>For this release I merged in every outstanding pull request that looked reasonable and was consistant with the philosophy.  I don&#8217;t have strong opinions about how the plugin should look since Maven isn&#8217;t my favorite build tool (but it easily outranks Ant, Make, SBT, and shell scripts) so the odd are that if you send a <a href="https://github.com/zonski/javafx-maven-plugin/pulls">halfway decent pull request</a> consistent with my &#8216;enable javapacakger in Maven&#8217; philosophy then it will be merged.  When I call myself the maintainer I really mean it in the sense I am rolling a bucket down the halls and mopping the floor after people use it.  The users of the plugin are the most important consideration, and I will take those needs in mind as I look at pull requests.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Danno Ferrin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-12T13:13:00-06:00" pubdate data-updated="true">Sep 12<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javafx/'>javafx</a>, <a class='category' href='/blog/categories/maven-/'>maven,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://speling.shemnon.com//blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/" data-via="shemnon" data-counturl="http://speling.shemnon.com//blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/07/16/word-crimes/" title="Previous Post: Word Crimes">&laquo; Word Crimes</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/">Maven JavaFX Plugin 8.1 Released</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/16/word-crimes/">Word Crimes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/07/11/gradle-and-maven-plugins-for-8u20-update/">Gradle and Maven Plugins for 8u20 Update</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/10/getting-your-java-app-in-the-mac-app-store/">Getting your Java 8 App in the Mac App Store</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/11/8-cool-things-about-java-streams/">8 Cool Things About Java Streams</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>Bitbucket Repos</h1>
+  <ul id="bb_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://bitbucket.org/shemnon">@shemnon</a> on Bitbucket
+  
+
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        bitbucket.showRepos({
+            user: 'shemnon',
+            password: '',
+            count: 4,
+            require_wiki: false,
+            target: '#bb_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/bitbucket.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/shemnon">@shemnon</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'shemnon',
+            count: 4,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("shemnon", 4, true);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/shemnon" class="twitter-follow-button" data-show-count="false">Follow @shemnon</a>
+  
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/107563042277462358434?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Danno Ferrin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'andtheyshallknowmebymyspelingerrors';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://speling.shemnon.com//blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/';
+        var disqus_url = 'http://speling.shemnon.com//blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

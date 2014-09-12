@@ -9,7 +9,7 @@
   <meta name="author" content="Danno Ferrin">
 
   
-  <meta name="description" content="A few weeks ago my day job bought me a Surface Pro to help me prototype some future product work. Being a developer, you could probably guess the &hellip;">
+  <meta name="description" content="Today I pushed the fourth rerelease of my JavaFX Plugin for Gradle to bintray, version 0.3.0 (real software engineers count from zero). New in this &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,54 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/">JavaFX Gradle Plugin 0.3.0 Released</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-18T10:42:00-06:00" pubdate data-updated="true">May 18<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Today I pushed the fourth rerelease of my JavaFX Plugin for Gradle to bintray, <a href="https://bintray.com/version/show/general/shemnon/javafx-gradle/gradle-javafx-plugin/0.3.0">version 0.3.0</a> (real software engineers count from zero).  New in this release is the ability to specify a particular JVM to package with your native bundles and the ability to customize platform-specific build options. Some configuration options and conventions also moved around to support these two features, most notably the plugin no longer automatically self-signs the code.</p>
+
+<p>To use the plugin in your gradle script, you can apply the plugin from the following URL:</p>
+
+<pre><code>apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
+</code></pre>
+
+<p>Or, you can include the content of that file anywhere in your build, either directly in build.gradle or included from your file path.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/05/18/javafx-gradle-plugin-0-dot-3-0-released/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -446,49 +494,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/10/17/javafx-gradle-plugin/">Starting a JavaFX Gradle Plugin</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-17T22:47:00-06:00" pubdate data-updated="true">Oct 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I wanted to get this out there early, since &#8220;release early release often&#8221; is one of the open source mantras.  I have a longer blog post planned on this subject, but I have so many balls in the air right now I&#8217;m not sure when I&#8217;ll get to write it.</p>
-
-<p>I am starting to write a <a href="https://bitbucket.org/shemnon/javafx-gradle">JavaFX 2.0 Gradle Plugin</a> over at bitbucket.  Right now it handles just the <code>fx:jar</code> and <code>fx:deploy</code> ant tasks.  And not completely. I don&#8217;t have the resources wired into the native bundles.  But that will come.  I also am not doing binary CSS or Jar signing.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/10/17/javafx-gradle-plugin/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -506,6 +511,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/12/maven-javafx-plugin-8-dot-1-released/">Maven JavaFX Plugin 8.1 Released</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/16/word-crimes/">Word Crimes</a>
       </li>
     
@@ -519,10 +528,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/11/8-cool-things-about-java-streams/">8 Cool Things About Java Streams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/29/tech-predictions-for-the-year-of-the-horse/">Tech Predictions for the Year of the Horse</a>
       </li>
     
   </ul>
